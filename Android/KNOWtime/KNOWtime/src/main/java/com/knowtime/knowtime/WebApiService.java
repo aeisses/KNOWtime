@@ -95,8 +95,14 @@ public class WebApiService {
         thread.start();
     }
 
-    public static void createNewUser(final int routeId)
+    private static void sendLocationToServer(String loccationURL)
     {
+
+    }
+
+    public static String createNewUser(final int routeId)
+    {
+        String returnString = "";
         Thread thread = new Thread(new Runnable()
         {
             @Override
@@ -104,21 +110,17 @@ public class WebApiService {
             {
                 try {
                     HttpClient client = new DefaultHttpClient();
-                    Log.i("URL: ",""+SANGSTERBASEURL+USERS+NEW+routeId);
                     HttpPost post = new HttpPost(SANGSTERBASEURL+USERS+NEW+routeId);
                     post.setHeader("Content-type", "application/json");
                     HttpResponse responsePOST = client.execute(post);
-                    Log.i("URL: ",""+responsePOST.getStatusLine().getStatusCode());
                     if (responsePOST.getStatusLine().getStatusCode() == 201)
                     {
                         Header[] h = responsePOST.getAllHeaders();
                         for (int i=0; i<h.length; i++)
                         {
-                            Log.d("Show: ","|"+h[i]);
-                            if (h[i].getValue().startsWith("Location"))
+                            if (h[i].getName().equals("Location"))
                             {
-                                Log.d("Show: ","Found Locations");
-//                                return h[4].getValue().replaceAll("buserver","api");
+                                WebApiService.sendLocationToServer(h[i].getValue().replaceAll("buserver", "api"));
                             }
                         }
                     }
@@ -128,6 +130,7 @@ public class WebApiService {
             }
         });
         thread.start();
+        return returnString;
     }
 
     public static void getRouteForIdent(final int ident)
@@ -208,18 +211,15 @@ public class WebApiService {
 
     private static String sendUrlRequest(String url)
     {
-        Log.i("URL: ",""+url);
         HttpClient client = new DefaultHttpClient();
         HttpGet post = new HttpGet(url);
         HttpResponse response;
         try {
             response = client.execute(post);
-            Log.i("Praeda",response.getStatusLine().toString());
             HttpEntity entity = response.getEntity();
             if (entity != null) {
                 InputStream instream = entity.getContent();
                 String result = convertStreamToString(instream);
-                Log.i("Praeda",result);
                 instream.close();
                 return result;
             }
@@ -259,7 +259,6 @@ public class WebApiService {
 
     private static String getResponseFromUrl(String url)
     {
-        Log.i("Networking","Url: "+url);
         InputStream is = null;
         String response = "";
 
@@ -294,7 +293,6 @@ public class WebApiService {
         } catch (Exception e) {
             Log.e("Buffer Error", "Error converting result " + e.toString());
         }
-        Log.i("Networking","Response: "+response);
         return response;
     }
 }
