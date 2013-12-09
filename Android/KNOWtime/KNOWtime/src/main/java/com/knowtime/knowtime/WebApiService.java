@@ -11,6 +11,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,6 +41,13 @@ public class WebApiService {
     private static final String USERS           = "users/";
     private static final String NEW             = "new/";
     private static final String ESTIMATE        = "estimates/";
+    private static final String POLLRATE        = "pollrate";
+
+    private static JSONArray routesJSONArray;
+    private static JSONArray stopsJSONArray;
+    private static Thread locationsThread;
+    private static int pollRate = 3;
+    private static Boolean sendingLocations = false;
 
     public static void fetchAllRoutes()
     {
@@ -50,7 +58,7 @@ public class WebApiService {
             {
                 try
                 {
-                    JSONArray result = getJSONArrayFromUrl(SANGSTERBASEURL + ROUTES + NAMES);
+                    routesJSONArray = getJSONArrayFromUrl(SANGSTERBASEURL + ROUTES + NAMES);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -68,7 +76,7 @@ public class WebApiService {
             {
                 try
                 {
-                    JSONArray result = getJSONArrayFromUrl(SANGSTERBASEURL+STOPS);
+                    stopsJSONArray = getJSONArrayFromUrl(SANGSTERBASEURL+STOPS);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -77,17 +85,28 @@ public class WebApiService {
         thread.start();
     }
 
-    public static void getEstimatesForRoute(final int routeId)
+    public static JSONArray getEstimatesForRoute(final int routeId)
+    {
+        try
+        {
+            return getJSONArrayFromUrl(SANGSTERBASEURL+ESTIMATE+SHORTS+routeId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static void getPollRate()
     {
         Thread thread = new Thread(new Runnable()
         {
             @Override
             public void run()
             {
-                try
-                {
-                    JSONArray result = getJSONArrayFromUrl(SANGSTERBASEURL+ESTIMATE+SHORTS+routeId);
-                } catch (Exception e) {
+                try {
+                    JSONObject returnObject = getJSONObjectFromUrl(SANGSTERBASEURL+POLLRATE);
+                    pollRate = returnObject.getInt("rate");
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
@@ -95,9 +114,37 @@ public class WebApiService {
         thread.start();
     }
 
-    private static void sendLocationToServer(String loccationURL)
+    private static void sendLocationToServer(final String locationURL)
     {
+        locationsThread = new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                while (sendingLocations)
+                {
+                    try {
+                        HttpClient client = new DefaultHttpClient();
+                        HttpPost post = new HttpPost(locationURL);
+                        post.setHeader("Accept", "application/json");
+                        post.setHeader("Content-type", "application/json");
+                        JSONObject jsonParam = new JSONObject();
 
+                        StringEntity se = new StringEntity(jsonParam.toString());
+                        post.setEntity(se);
+                        HttpResponse responsePost = client.execute(post);
+                        if (responsePost.getStatusLine().getStatusCode() != 200)
+                        {
+                            return;
+                        }
+                        locationsThread.sleep(pollRate*1000);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+        locationsThread.start();
     }
 
     public static String createNewUser(final int routeId)
@@ -120,6 +167,7 @@ public class WebApiService {
                         {
                             if (h[i].getName().equals("Location"))
                             {
+                                sendingLocations = true;
                                 WebApiService.sendLocationToServer(h[i].getValue().replaceAll("buserver", "api"));
                             }
                         }
@@ -294,5 +342,17 @@ public class WebApiService {
             Log.e("Buffer Error", "Error converting result " + e.toString());
         }
         return response;
+    }
+
+    public JSONArray getRoutesJSONArray() {
+        return routesJSONArray;
+    }
+
+    public JSONArray getStopsJSONArray() {
+        return stopsJSONArray;
+    }
+
+    public void setSendingLocations(Boolean _sendingLocations) {
+        sendingLocations = _sendingLocations;
     }
 }
