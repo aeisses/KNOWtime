@@ -7,8 +7,10 @@
     <uses-sdk
         android:minSdkVersion="7"
         android:targetSdkVersion="19" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -22,6 +24,26 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.knowtime.knowtime.AboutActivity"
+            android:label="@string/title_activity_about" >
+        </activity>
+        <activity
+            android:name="com.knowtime.knowtime.ShareMeActivity"
+            android:label="@string/title_activity_share_me" >
+        </activity>
+        <activity
+            android:name="com.knowtime.knowtime.FavouriteActivity"
+            android:label="@string/title_activity_favourite" >
+        </activity>
+        <activity
+            android:name="com.knowtime.knowtime.TwitterActivity"
+            android:label="@string/title_activity_twitter" >
+        </activity>
+        <activity
+            android:name="com.knowtime.knowtime.StopsActivity"
+            android:label="@string/title_activity_stops" >
         </activity>
     </application>
 
