@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.02"
         android:contentDescription="@string/back_button_contentDescription"
-        android:src="@drawable/backbutton" />
+        android:src="@drawable/backbutton"
+        android:onClick="touchBackButton" />
 
     <TextView
         android:id="@+id/aboutTextView"
