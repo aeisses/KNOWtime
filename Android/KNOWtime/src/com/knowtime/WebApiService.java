@@ -1,8 +1,7 @@
-package com.knowtime.knowtime;
+package com.knowtime;
 
 import android.text.format.DateFormat;
 import android.util.Log;
-import android.widget.EditText;
 
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -30,7 +29,6 @@ import java.util.Date;
 
 public class WebApiService {
     private static final String SANGSTERBASEURL = "http://api.knowtime.ca/alpha_1/";
-    private static final String ENDURL          = "&all_routes=yes";
     private static final String STOPS           = "stops";
     private static final String ROUTES          = "routes/";
     private static final String NAMES           = "names";
@@ -137,7 +135,7 @@ public class WebApiService {
                         {
                             return;
                         }
-                        locationsThread.sleep(pollRate*1000);
+                        Thread.sleep(pollRate*1000);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
