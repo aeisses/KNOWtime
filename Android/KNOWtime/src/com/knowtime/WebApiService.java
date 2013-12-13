@@ -179,60 +179,61 @@ public class WebApiService {
         return returnString;
     }
 
-    public static void getRouteForIdent(final int ident)
+    public static JSONArray getRouteForIdent(final int ident)
     {
-        Thread thread = new Thread(new Runnable()
+    	try
         {
-            @Override
-            public void run()
-            {
-                try
-                {
-                    JSONArray result = getJSONArrayFromUrl(SANGSTERBASEURL+STOPTIME+ident+"/"+DateFormat.format("yyyy-MM-dd", new Date()));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        thread.start();
+    		return getJSONArrayFromUrl(SANGSTERBASEURL+STOPTIME+ident+"/"+DateFormat.format("yyyy-MM-dd", new Date()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    	return null;
     }
 
-    public static void getPathForRouteId(final String routeId)
+    public static JSONArray getPathForRouteId(final String routeId)
     {
-        Thread thread = new Thread(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                try
-                {
-                    JSONArray result = getJSONArrayFromUrl(SANGSTERBASEURL+PATHS+DateFormat.format("yyyy-MM-dd", new Date())+"/"+routeId);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        thread.start();
+    	try
+    	{
+    		return getJSONArrayFromUrl(SANGSTERBASEURL+PATHS+DateFormat.format("yyyy-MM-dd", new Date())+"/"+routeId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    	return null;
     }
 
-    public static void loadPathForRoute(final String shortName)
+    public static JSONArray loadPathForRoute(final String shortName)
     {
-        Thread thread = new Thread(new Runnable()
+    	try
         {
-            @Override
-            public void run()
-            {
-                try
-                {
-                    JSONArray result = getJSONArrayFromUrl(SANGSTERBASEURL+ROUTES+SHORTS+shortName+"/"+HEADSIGNS+DateFormat.format("yyyy-MM-dd", new Date())+"/"+DateFormat.format("HH:MM", new Date()));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        thread.start();
+    		return getJSONArrayFromUrl(SANGSTERBASEURL+ROUTES+SHORTS+shortName+"/"+HEADSIGNS+DateFormat.format("yyyy-MM-dd", new Date())+"/"+DateFormat.format("HH:MM", new Date()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    	return null;
     }
 
+    public static String sendUrlRequest(String url)
+    {
+        HttpClient client = new DefaultHttpClient();
+        HttpGet post = new HttpGet(url);
+        HttpResponse response;
+        try {
+            response = client.execute(post);
+            HttpEntity entity = response.getEntity();
+            if (entity != null) {
+                InputStream instream = entity.getContent();
+                String result = convertStreamToString(instream);
+                instream.close();
+                return result;
+            }
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+    
     private static String convertStreamToString(InputStream is)
     {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
@@ -253,28 +254,6 @@ public class WebApiService {
             }
         }
         return sb.toString();
-    }
-
-    private static String sendUrlRequest(String url)
-    {
-        HttpClient client = new DefaultHttpClient();
-        HttpGet post = new HttpGet(url);
-        HttpResponse response;
-        try {
-            response = client.execute(post);
-            HttpEntity entity = response.getEntity();
-            if (entity != null) {
-                InputStream instream = entity.getContent();
-                String result = convertStreamToString(instream);
-                instream.close();
-                return result;
-            }
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "";
     }
 
     private static JSONObject getJSONObjectFromUrl(String url) {
