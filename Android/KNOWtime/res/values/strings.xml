@@ -5,6 +5,7 @@
     <string name="action_settings">Settings</string>
     <string name="back_button_contentDescription">backbutton</string>
     <string name="about">About</string>
+    <string name="hello_world">hello_world</string>
     <string name="about_label_contentDescription">about_label</string>
     <string name="about_textview_contentDescription">about_textview</string>
     <string name="about_view">Hi there, HRM: Does relying on public transit get you down?\n\n
