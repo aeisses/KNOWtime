@@ -19,5 +19,8 @@ You can also feel good about leaving your car at home, saving gas money, reducin
 KNOWtime runs on “crowd power” – the greater the crowd, the greater the power.\n\n
 So connect your friends, track your ride, and help us help you by growing our *live* local network.\n\n
 When you join our community, we’ll get you where you want to go in KNOWtime.\n\n</string>
+    <string name="twitter_button">twitterButton</string>
+    <string name="feedback_button">feedbackButton</string>
+    <string name="facebook_button">facebookButton</string>
 
 </resources>
