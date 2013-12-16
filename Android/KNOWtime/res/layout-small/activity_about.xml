@@ -9,8 +9,8 @@
         android:id="@+id/imageButton1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/backbutton"
         android:contentDescription="@string/back_button_contentDescription"
-        android:src="@drawable/backbutton"
         android:onClick="touchBackButton" />
 
     <TextView
@@ -26,11 +26,41 @@
     <TextView
         android:id="@+id/aboutBodyView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dip"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_weight="0.33"
         android:scrollbars="vertical"
         android:text="@string/about_view" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageButton
+            android:id="@+id/twitterButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/twitterbutton"
+            android:contentDescription="@string/twitter_button"
+            android:onClick="touchTwitterButton" />
+
+        <ImageButton
+            android:id="@+id/facebookButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/facebookbutton"
+            android:contentDescription="@string/facebook_button"
+            android:onClick="touchFacebookButton" />
+
+        <ImageButton
+            android:id="@+id/feedbackButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/feedbackbutton"
+            android:contentDescription="@string/feedback_button"
+            android:onClick="touchFeedbackButton" />
+    </LinearLayout>
+    
 </LinearLayout>
