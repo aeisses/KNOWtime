@@ -16,4 +16,19 @@ public class AboutActivity extends Activity {
 	{
 		this.finish();
 	}
+	
+	public void touchTwitterButton(View view)
+	{
+		
+	}
+	
+	public void touchFacebookButton(View view)
+	{
+		
+	}
+	
+	public void touchFeedbackButton(View view)
+	{
+		
+	}
 }
