@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/backbutton"
-        android:contentDescription="@string/back_button_contentDescription"
+        android:contentDescription="@string/back_button_contentdescription"
         android:onClick="touchBackButton" />
 
     <TextView

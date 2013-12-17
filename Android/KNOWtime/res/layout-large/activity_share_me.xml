@@ -3,6 +3,53 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
+
+    <ImageButton
+        android:id="@+id/backbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/backbutton"
+        android:contentDescription="@string/back_button_contentdescription"
+        android:onClick="touchBackButton" />
+
+    <ImageView
+        android:id="@+id/onmywayimage"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dip"
+        android:contentDescription="@string/onmy_image"
+        android:src="@drawable/onmywayimage" />
+
+    <ImageView
+        android:id="@+id/sendingimage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dip"
+        android:contentDescription="@string/sending_image"
+        android:src="@drawable/sending" />
+
+    <ImageView
+        android:id="@+id/sendinglineimage"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dip"
+        android:contentDescription="@string/sendingline_image"
+        android:src="@drawable/sendingline" />
+
+    <ImageButton
+        android:id="@+id/onmywaybutton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dip"
+        android:background="@drawable/onmyway_button"
+        android:contentDescription="@string/onmyway_button_image" />
+
+    <ImageView
+        android:id="@+id/connecttoserveriamge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dip"
+        android:contentDescription="@string/connect_to_server_image"
+        android:src="@drawable/conntectedtoserver" />
 
 </LinearLayout>

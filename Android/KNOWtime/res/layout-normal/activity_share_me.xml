@@ -2,7 +2,55 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@color/backgroundcolour" >
     
+    <ImageButton
+        android:id="@+id/backbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/backbutton"
+        android:contentDescription="@string/back_button_contentdescription"
+        android:onClick="touchBackButton" />
 
+    <ImageView
+        android:id="@+id/onmywayimage"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dip"
+        android:contentDescription="@string/onmy_image"
+        android:src="@drawable/onmywayimage" />
+
+    <ImageView
+        android:id="@+id/sendingimage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dip"
+        android:layout_marginTop="80dip"
+        android:contentDescription="@string/sending_image"
+        android:src="@drawable/sending" />
+        
+    <ImageView
+        android:id="@+id/sendinglineimage"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dip"
+        android:src="@drawable/sendingline"
+        android:contentDescription="@string/sendingline_image" />
+
+    <ImageButton
+        android:id="@+id/onmywaybutton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:background="@drawable/onmywaybutton"
+        android:contentDescription="@string/onmyway_button_image" />
+    
+    <ImageView
+        android:id="@+id/connecttoserveriamge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/connect_to_server_image"
+        android:src="@drawable/conntectedtoserver" />
+    
 </LinearLayout>
