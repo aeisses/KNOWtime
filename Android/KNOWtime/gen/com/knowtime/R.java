@@ -11,7 +11,9 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
-        public static final int backgroundcolour=0x7f040000;
+        public static final int colourstopred=0x7f040001;
+        public static final int colourtextgrey=0x7f040002;
+        public static final int colourwhite=0x7f040000;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -25,37 +27,53 @@ public final class R {
     }
     public static final class drawable {
         public static final int backbutton=0x7f020000;
-        public static final int backgroundonmyway=0x7f020001;
-        public static final int conntectedtoserver=0x7f020002;
-        public static final int facebookbutton=0x7f020003;
-        public static final int feedbackbutton=0x7f020004;
-        public static final int ic_launcher=0x7f020005;
-        public static final int onmyway_button=0x7f020006;
-        public static final int onmywaybutton=0x7f020007;
-        public static final int onmywayimage=0x7f020008;
-        public static final int sending=0x7f020009;
-        public static final int sendingline=0x7f02000a;
-        public static final int stop=0x7f02000b;
-        public static final int twitterbutton=0x7f02000c;
+        public static final int background=0x7f020001;
+        public static final int backgroundonmyway=0x7f020002;
+        public static final int conntectedtoserver=0x7f020003;
+        public static final int facebookbutton=0x7f020004;
+        public static final int feedbackbutton=0x7f020005;
+        public static final int ic_launcher=0x7f020006;
+        public static final int onmyway_button=0x7f020007;
+        public static final int onmywaybutton=0x7f020008;
+        public static final int onmywayimage=0x7f020009;
+        public static final int sending=0x7f02000a;
+        public static final int sendingline=0x7f02000b;
+        public static final int stop=0x7f02000c;
+        public static final int stopstablebackground=0x7f02000d;
+        public static final int twitterbutton=0x7f02000e;
     }
     public static final class id {
         public static final int aboutBodyView=0x7f090002;
         public static final int aboutTextView=0x7f090001;
-        public static final int action_settings=0x7f090011;
+        public static final int action_settings=0x7f09001f;
         public static final int backButton=0x7f090006;
-        public static final int backbutton=0x7f09000a;
-        public static final int connecttoserveriamge=0x7f090010;
+        public static final int backbutton=0x7f09000e;
+        public static final int connecttoserveriamge=0x7f090014;
         public static final int facebookButton=0x7f090004;
         public static final int feedbackButton=0x7f090005;
         public static final int imageButton1=0x7f090000;
         public static final int imageButton2=0x7f090007;
         public static final int imageButton3=0x7f090008;
         public static final int imageButton4=0x7f090009;
-        public static final int map1=0x7f09000b;
-        public static final int onmywaybutton=0x7f09000f;
-        public static final int onmywayimage=0x7f09000c;
-        public static final int sendingimage=0x7f09000d;
-        public static final int sendinglineimage=0x7f09000e;
+        public static final int map1=0x7f09000f;
+        public static final int myTableRow=0x7f090015;
+        public static final int onmywaybutton=0x7f090013;
+        public static final int onmywayimage=0x7f090010;
+        public static final int routenumber=0x7f09001e;
+        public static final int scheduletime=0x7f09001a;
+        public static final int sendingimage=0x7f090011;
+        public static final int sendinglineimage=0x7f090012;
+        public static final int tableRow1=0x7f09000a;
+        public static final int tableRow2=0x7f09000b;
+        public static final int tableRow3=0x7f09000c;
+        public static final int tableRow4=0x7f09000d;
+        public static final int textView1=0x7f090016;
+        public static final int textView2=0x7f090017;
+        public static final int textView3=0x7f090018;
+        public static final int textView4=0x7f09001c;
+        public static final int textView5=0x7f09001b;
+        public static final int textView6=0x7f09001d;
+        public static final int textView8=0x7f090019;
         public static final int twitterButton=0x7f090003;
     }
     public static final class layout {
@@ -65,6 +83,7 @@ public final class R {
         public static final int activity_share_me=0x7f030003;
         public static final int activity_stops=0x7f030004;
         public static final int activity_twitter=0x7f030005;
+        public static final int stopstableview=0x7f030006;
     }
     public static final class menu {
         public static final int main=0x7f080000;
@@ -82,12 +101,13 @@ public final class R {
         public static final int feedback_button=0x7f060008;
         public static final int onmy_image=0x7f06000a;
         public static final int onmyway_button_image=0x7f06000d;
+        public static final int routedefault=0x7f060010;
+        public static final int schedual_time=0x7f06000f;
         public static final int sending_image=0x7f06000c;
         public static final int sendingline_image=0x7f06000b;
         public static final int twitter_button=0x7f060007;
     }
     public static final class style {
-        public static final int ActivityTheme=0x7f070002;
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.

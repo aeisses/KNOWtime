@@ -25,5 +25,8 @@ When you join our community, we’ll get you where you want to go in KNOWtime.\n
     <string name="sending_image">sendingimage</string>
     <string name="onmyway_button_image">onmywaybuttonimage</string>
     <string name="connect_to_server_image">connecttoserverimage</string>
-
+	<string name="schedual_time">Scheduled Time</string>
+	<string name="routedefault">888</string>
+	<string name="stopstabledefault">unknown</string>
+	<string name="route_name">Route Name</string>
 </resources>
