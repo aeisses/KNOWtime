@@ -50,8 +50,6 @@
             android:name="com.knowtime.StopsActivity"></activity>
         <activity
             android:name="com.knowtime.TwitterActivity"></activity>
-        <activity
-            android:name="com.knowtime.WebApiServiceActivity"></activity>
         </application>
 
 </manifest>
