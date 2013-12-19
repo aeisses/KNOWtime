@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/background" >
-    
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background"
+    android:orientation="vertical" >
+
     <ImageButton
         android:id="@+id/backbutton"
         android:layout_width="match_parent"
@@ -12,5 +12,28 @@
         android:background="@drawable/backbutton"
         android:contentDescription="@string/back_button_contentdescription"
         android:onClick="touchBackButton" />
-    
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TableRow
+            android:id="@+id/stopsTableRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+        </TableRow>
+
+    </TableLayout>
+
+    <ImageButton
+        android:id="@+id/favouriteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginRight="5dip"
+        android:layout_marginTop="15dip"
+        android:background="@drawable/star_button"
+        android:contentDescription="@string/favourite_button"
+        android:onClick="touchFavouriteButton" />
+
 </LinearLayout>
