@@ -7,10 +7,48 @@
     
     <ImageButton
         android:id="@+id/backbutton"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/backbutton"
         android:contentDescription="@string/back_button_contentdescription"
         android:onClick="touchBackButton" />
+
+    <ImageView
+        android:id="@+id/stopsHeader"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/stopstableheader"
+        android:contentDescription="@string/stops_table_header" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TableRow
+            android:id="@+id/stopsTableRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+        </TableRow>
+
+    </TableLayout>
+
+    <ImageView
+        android:id="@+id/routesHeader"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/routestableheader"
+        android:contentDescription="@string/routes_table_header" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TableRow
+            android:id="@+id/routesTableRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+        </TableRow>
+
+    </TableLayout>
     
 </LinearLayout>

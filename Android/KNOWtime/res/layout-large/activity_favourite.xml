@@ -2,50 +2,51 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/background" >
-    
+    android:background="@drawable/background"
+    android:orientation="vertical" >
+
     <ImageButton
-        android:id="@+id/imageButton1"
+        android:id="@+id/backbutton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/backbutton"
         android:contentDescription="@string/back_button_contentdescription"
         android:onClick="touchBackButton" />
 
+    <ImageView
+        android:id="@+id/stopsHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/stops_table_header"
+        android:src="@drawable/stopstableheader" />
+
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
         <TableRow
-            android:id="@+id/tableRow1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/tableRow2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/tableRow3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/tableRow4"
+            android:id="@+id/stopsTableRow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
         </TableRow>
     </TableLayout>
 
-    <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="wrap_content"
+    <ImageView
+        android:id="@+id/routesHeader"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@android:drawable/btn_star" />
+        android:contentDescription="@string/routes_table_header"
+        android:src="@drawable/routestableheader" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TableRow
+            android:id="@+id/routesTableRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+        </TableRow>
+    </TableLayout>
 
 </LinearLayout>
