@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/myTableRow"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/stopstablebackground" >
+
+    <TextView
+        android:id="@+id/time1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="5dip"
+        android:layout_marginTop="5dip"
+        android:text="@string/stopstabledefault"
+        android:textColor="@color/colourwhite"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/time2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/time1"
+        android:layout_marginRight="5dip"
+        android:text="@string/stopstabledefault"
+        android:textColor="@color/colourwhite"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/eta2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/eta1"
+        android:layout_marginRight="5dip"
+        android:layout_toLeftOf="@+id/time2"
+        android:text="@string/stopstabledefault"
+        android:textColor="@color/colourstopred"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/routenumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/scheduletime"
+        android:layout_marginLeft="16dp"
+        android:text="@string/routedefault"
+        android:textColor="@color/colourwhite"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/routeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/routenumber"
+        android:layout_alignBottom="@+id/routenumber"
+        android:layout_marginLeft="22dp"
+        android:layout_toRightOf="@+id/routenumber"
+        android:text="@string/route_name"
+		android:textSize="18sp"
+        android:textColor="@color/colourwhite" />
+
+    <TextView
+        android:id="@+id/scheduletime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/routeName"
+        android:layout_marginTop="2dip"
+        android:text="@string/schedual_time"
+        android:textColor="@color/colourtextgrey"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/eta3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/eta2"
+        android:layout_marginRight="5dip"
+        android:layout_toLeftOf="@+id/time3"
+        android:text="@string/stopstabledefault"
+        android:textColor="@color/colourstopred"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/eta1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="5dip"
+        android:layout_marginTop="5dip"
+        android:layout_toLeftOf="@+id/time1"
+        android:text="@string/stopstabledefault"
+        android:textColor="@color/colourstopred"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/time3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/time2"
+        android:layout_marginRight="5dip"
+        android:text="@string/stopstabledefault"
+        android:textColor="@color/colourwhite"
+        android:textSize="13sp" />
+
+</RelativeLayout>

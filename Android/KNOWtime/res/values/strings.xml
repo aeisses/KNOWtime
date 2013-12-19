@@ -27,6 +27,9 @@ When you join our community, we’ll get you where you want to go in KNOWtime.\n
     <string name="connect_to_server_image">connecttoserverimage</string>
 	<string name="schedual_time">Scheduled Time</string>
 	<string name="routedefault">888</string>
+	<string name="gotimedefault">8888</string>
 	<string name="stopstabledefault">unknown</string>
 	<string name="route_name">Route Name</string>
+	<string name="route_stop_fav_default">Route or Stop Name</string>
+	<string name="favourite_button">Favourite Button</string>
 </resources>

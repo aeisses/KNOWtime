@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/stopstablebackground" >
+
+    <ImageButton
+        android:id="@+id/favouriteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/star_button"
+        android:contentDescription="@string/favourite_button"
+        android:onClick="touchFavouriteButton" />
+
+    <TextView
+        android:id="@+id/favouriteId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="24dp"
+        android:text="@string/gotimedefault"
+        android:textColor="@color/colourblack"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/favouriteDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="45dp"
+        android:layout_toRightOf="@+id/favouriteId"
+        android:text="@string/route_stop_fav_default"
+        android:textColor="@color/colourwhite"
+        android:textSize="20sp" />
+
+</RelativeLayout>
