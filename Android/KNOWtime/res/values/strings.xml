@@ -4,8 +4,6 @@
     <string name="action_settings">Settings</string>
     <string name="back_button_contentdescription">backbutton</string>
     <string name="about">About</string>
-    <string name="about_label_contentdescription">about_label</string>
-    <string name="about_textview_contentdescription">about_textview</string>
     <string name="about_view">Hi there, HRM: Does relying on public transit get you down?\n\n
 Have you been frustrated by unreliable schedule times, waiting for your bus in bad weather, or being uncertain if you’ll arrive at your destination on time?\n\n
 Well, you’re not alone. There are lots of people who share your concerns, but we’ve come up with a solution to make it better.\n\n

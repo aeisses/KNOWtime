@@ -16,4 +16,9 @@ public class StopsActivity extends Activity {
 	{
 		this.finish();
 	}
+	
+	public void touchFavouriteButton(View view)
+	{
+		
+	}
 }

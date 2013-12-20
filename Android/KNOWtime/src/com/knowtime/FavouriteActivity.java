@@ -16,4 +16,9 @@ public class FavouriteActivity extends Activity {
 	{
 		this.finish();
 	}
+	
+	public void touchFavouriteButton(View view)
+	{
+		
+	}
 }

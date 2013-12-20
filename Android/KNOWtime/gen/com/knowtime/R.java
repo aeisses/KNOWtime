@@ -292,9 +292,7 @@ containing a value of this type.
     }
     public static final class string {
         public static final int about=0x7f06001d;
-        public static final int about_label_contentdescription=0x7f06001e;
-        public static final int about_textview_contentdescription=0x7f06001f;
-        public static final int about_view=0x7f060020;
+        public static final int about_view=0x7f06001e;
         public static final int action_settings=0x7f06001b;
         public static final int app_name=0x7f06001a;
         /**   Title for notification shown when GooglePlayServices needs to be
@@ -392,40 +390,35 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f060013;
-        public static final int connect_to_server_image=0x7f060028;
-        public static final int facebook_button=0x7f060023;
-        public static final int favourite_button=0x7f06002f;
-        public static final int feedback_button=0x7f060022;
-        public static final int gotimedefault=0x7f06002b;
-        public static final int onmy_image=0x7f060024;
-        public static final int onmyway_button_image=0x7f060027;
-        public static final int route_name=0x7f06002d;
-        public static final int route_stop_fav_default=0x7f06002e;
-        public static final int routedefault=0x7f06002a;
-        public static final int routes_table_header=0x7f060031;
-        public static final int schedual_time=0x7f060029;
-        public static final int sending_image=0x7f060026;
-        public static final int sendingline_image=0x7f060025;
-        public static final int stops_table_header=0x7f060030;
-        public static final int stopstabledefault=0x7f06002c;
-        public static final int twitter_button=0x7f060021;
+        public static final int connect_to_server_image=0x7f060026;
+        public static final int facebook_button=0x7f060021;
+        public static final int favourite_button=0x7f06002d;
+        public static final int feedback_button=0x7f060020;
+        public static final int gotimedefault=0x7f060029;
+        public static final int onmy_image=0x7f060022;
+        public static final int onmyway_button_image=0x7f060025;
+        public static final int route_name=0x7f06002b;
+        public static final int route_stop_fav_default=0x7f06002c;
+        public static final int routedefault=0x7f060028;
+        public static final int routes_table_header=0x7f06002f;
+        public static final int schedual_time=0x7f060027;
+        public static final int sending_image=0x7f060024;
+        public static final int sendingline_image=0x7f060023;
+        public static final int stops_table_header=0x7f06002e;
+        public static final int stopstabledefault=0x7f06002a;
+        public static final int twitter_button=0x7f06001f;
     }
     public static final class style {
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     
-
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        
          */
-        public static final int AppBaseTheme=0x7f090000;
+        public static final int AppTheme=0x7f090000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f090001;
+        public static final int Theme_MyAppTheme=0x7f090001;
     }
     public static final class styleable {
         /** Attributes that can be used with a AdsAttrs.
