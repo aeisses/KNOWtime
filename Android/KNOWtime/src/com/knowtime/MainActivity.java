@@ -9,6 +9,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 
 public class MainActivity extends Activity {
 
@@ -35,4 +36,8 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
+	public void touchHamburgerMenuButton(View view)
+	{
+		
+	}
 }

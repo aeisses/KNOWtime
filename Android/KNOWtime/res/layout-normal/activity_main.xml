@@ -15,7 +15,7 @@
     	class="com.google.android.gms.maps.MapFragment"/>
 
      <ImageButton
-         android:id="@+id/imageButton1"
+         android:id="@+id/hamburgerMenu"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_alignLeft="@+id/map1"
@@ -23,6 +23,6 @@
          android:layout_marginTop="27dp"
          android:background="@drawable/hamburgerbutton"
          android:contentDescription="@string/hamburger_menu_button"
-         android: />
+         android:onClick="touchHamburgerMenuButton" />
 
 </RelativeLayout>
