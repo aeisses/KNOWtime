@@ -32,4 +32,5 @@ When you join our community, we’ll get you where you want to go in KNOWtime.\n
 	<string name="favourite_button">Favourite Button</string>
 	<string name="stops_table_header">Stops Table Header</string>
 	<string name="routes_table_header">Routes Table Header</string>
+	<string name="hamburger_menu_button">Hamburger Menu Button</string>
 </resources>

@@ -9,7 +9,7 @@
    	</style>
 
     <!-- Application theme. -->
-    <style name="Theme.MyAppTheme" parent="android:style/Theme.Holo.NoActionBar">
+    <style name="Theme.MyAppTheme" parent="android:style/Theme.NoTitleBar">
         <item name="android:background">@null</item>
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>

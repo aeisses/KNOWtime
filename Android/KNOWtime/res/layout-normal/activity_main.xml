@@ -14,4 +14,15 @@
         android:layout_height="match_parent"
     	class="com.google.android.gms.maps.MapFragment"/>
 
+     <ImageButton
+         android:id="@+id/imageButton1"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignLeft="@+id/map1"
+         android:layout_alignTop="@+id/map1"
+         android:layout_marginTop="27dp"
+         android:background="@drawable/hamburgerbutton"
+         android:contentDescription="@string/hamburger_menu_button"
+         android: />
+
 </RelativeLayout>

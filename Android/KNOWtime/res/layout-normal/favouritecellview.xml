@@ -35,6 +35,6 @@
         android:layout_marginRight="10dp"
         android:background="@drawable/star_button"
         android:contentDescription="@string/favourite_button"
-        android:onClick="touchFavouriteButton" />
+        android:onClick="touchHamburgerMenuButton" />
 
 </RelativeLayout>
