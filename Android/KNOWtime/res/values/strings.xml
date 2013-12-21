@@ -33,4 +33,11 @@ When you join our community, we’ll get you where you want to go in KNOWtime.\n
 	<string name="stops_table_header">Stops Table Header</string>
 	<string name="routes_table_header">Routes Table Header</string>
 	<string name="hamburger_menu_button">Hamburger Menu Button</string>
+	<string name="menu_about_button">About Button</string>
+	<string name="menu_shareme_button">Share Me Button</string>
+	<string name="menu_stops_button">Stops Button</string>
+	<string name="menu_favourite_button">Favourite Button</string>
+	<string name="menu_twitter_button">Twitter Button</string>
+	<string name="menu_privacy_policy">Privacy Policy Button</string>
+	<string name="menu_arrow">Menu Arrow</string>
 </resources>
