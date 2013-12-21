@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="220dip"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@drawable/hamburgermenubackground" >
@@ -13,7 +13,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="139dp"
-        android:background="@drawable/sharemebutton"
+        android:background="@drawable/sharememenubutton"
         android:contentDescription="@string/menu_shareme_button"
         android:onClick="touchShareMeButton" />
 
@@ -25,7 +25,7 @@
         android:layout_below="@+id/shareMeButton"
         android:layout_marginTop="14dp"
         android:layout_marginLeft="15dp"
-        android:background="@drawable/aboutbutton"
+        android:background="@drawable/aboutmenubutton"
         android:contentDescription="@string/menu_about_button"
         android:onClick="touchAboutButton" />
 
@@ -37,7 +37,7 @@
         android:layout_below="@+id/aboutButton"
         android:layout_marginTop="14dp"
         android:layout_marginLeft="15dp"
-        android:background="@drawable/stopsbutton"
+        android:background="@drawable/stopsmenubutton"
         android:contentDescription="@string/menu_stops_button"
         android:onClick="touchStopsButton" />
     
@@ -49,7 +49,7 @@
         android:layout_below="@+id/stopsButton"
         android:layout_marginTop="14dp"
         android:layout_marginLeft="15dp"
-        android:background="@drawable/favouritesbutton"
+        android:background="@drawable/favouritemenubutton"
         android:contentDescription="@string/menu_favourite_button"
         android:onClick="touchFavouriteButton" />
         
@@ -61,7 +61,7 @@
         android:layout_below="@+id/favouriteButton"
         android:layout_marginTop="14dp"
         android:layout_marginLeft="15dp"
-        android:background="@drawable/hfxtransitbutton"
+        android:background="@drawable/hfxtransitmenubutton"
         android:contentDescription="@string/menu_twitter_button"
         android:onClick="touchHfxTransitButton" />
 
