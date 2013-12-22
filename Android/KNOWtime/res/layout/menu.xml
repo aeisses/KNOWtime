@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="220dip"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/hamburgermenubackground" >
+
+    <ImageButton
+        android:id="@+id/shareMeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="139dp"
+        android:background="@drawable/sharememenubutton"
+        android:contentDescription="@string/menu_shareme_button"
+        android:onClick="touchShareMeButton" />
+
+    <ImageButton
+        android:id="@+id/aboutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/shareMeButton"
+        android:layout_marginTop="14dp"
+        android:layout_marginLeft="15dp"
+        android:background="@drawable/aboutmenubutton"
+        android:contentDescription="@string/menu_about_button"
+        android:onClick="touchAboutButton" />
+
+    <ImageButton
+        android:id="@+id/stopsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/aboutButton"
+        android:layout_marginTop="14dp"
+        android:layout_marginLeft="15dp"
+        android:background="@drawable/stopsmenubutton"
+        android:contentDescription="@string/menu_stops_button"
+        android:onClick="touchStopsButton" />
+    
+	<ImageButton
+        android:id="@+id/favouriteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/stopsButton"
+        android:layout_marginTop="14dp"
+        android:layout_marginLeft="15dp"
+        android:background="@drawable/favouritemenubutton"
+        android:contentDescription="@string/menu_favourite_button"
+        android:onClick="touchFavouriteButton" />
+        
+	<ImageButton
+        android:id="@+id/hfxtransitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/favouriteButton"
+        android:layout_marginTop="14dp"
+        android:layout_marginLeft="15dp"
+        android:background="@drawable/hfxtransitmenubutton"
+        android:contentDescription="@string/menu_twitter_button"
+        android:onClick="touchHfxTransitButton" />
+
+	<ImageView
+	    android:id="@+id/imageView1"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentRight="true"
+	    android:layout_alignTop="@+id/shareMeButton"
+	    android:layout_marginTop="10dp"
+	    android:src="@drawable/triangleshareme"
+	    android:contentDescription="@string/menu_arrow" />
+
+	<ImageView
+	    android:id="@+id/imageView2"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentRight="true"
+	    android:layout_alignTop="@+id/aboutButton"
+	   	android:layout_marginTop="8dp"
+	    android:src="@drawable/triangleabout"
+	    android:contentDescription="@string/menu_arrow" />
+
+	<ImageView
+	    android:id="@+id/imageView3"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentRight="true"
+	    android:layout_alignTop="@+id/stopsButton"
+	   	android:layout_marginTop="10dp"
+	    android:src="@drawable/trianglesstops"
+	    android:contentDescription="@string/menu_arrow" />
+
+	<ImageView
+	    android:id="@+id/imageView4"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentRight="true"
+	    android:layout_alignTop="@+id/favouriteButton"
+	    android:layout_marginTop="10dp"
+	    android:src="@drawable/trianglefavourites"
+	    android:contentDescription="@string/menu_arrow" />
+
+	<ImageView
+	    android:id="@+id/imageView5"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentRight="true"
+	    android:layout_alignTop="@+id/hfxtransitButton"
+	    android:layout_marginTop="8dp"
+	    android:src="@drawable/trianglehfxtransit"
+	    android:contentDescription="@string/menu_arrow" />
+
+	<ImageButton
+	    android:id="@+id/imageButton1"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentBottom="true"
+	    android:layout_centerHorizontal="true"
+	    android:layout_marginBottom="55dp"
+	    android:background="@drawable/privacypolicybutton"
+	    android:contentDescription="@string/menu_privacy_policy"
+	    android:onClick="privacyPolicyButton" />
+
+</RelativeLayout>

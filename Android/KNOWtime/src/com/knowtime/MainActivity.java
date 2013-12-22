@@ -9,6 +9,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.*;
+import com.google.android.gms.maps.model.LatLng;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -18,7 +19,6 @@ import android.view.View;
 import java.util.HashMap;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
-
 
 public class MainActivity extends Activity implements GoogleMap.OnCameraChangeListener, LoaderManager.LoaderCallbacks<HashMap<String, MarkerOptions>> {
 
@@ -91,7 +91,6 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
     }
 
 
-
     private void addItemsToMap(HashMap<String, MarkerOptions> result) {
         final Object[] currentStops = busStopMarkers.keySet().toArray();
         Marker marker;
@@ -133,53 +132,45 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
 
     }
 
-    public void touchHamburgerMenuButton(View view)
-    {
-        if (hamburgerMenu.isMenuShowing())
-        {
+    public void touchHamburgerMenuButton(View view) {
+        if (hamburgerMenu.isMenuShowing()) {
             hamburgerMenu.showContent();
         } else {
             hamburgerMenu.showMenu();
         }
     }
 
-    public void touchShareMeButton(View view)
-    {
-        Intent intent = new Intent(MainActivity.this,ShareMeActivity.class);
+    public void touchShareMeButton(View view) {
+        Intent intent = new Intent(MainActivity.this, ShareMeActivity.class);
         startActivity(intent);
         hamburgerMenu.showContent(false);
     }
 
-    public void touchAboutButton(View view)
-    {
-        Intent intent = new Intent(MainActivity.this,AboutActivity.class);
+    public void touchAboutButton(View view) {
+        Intent intent = new Intent(MainActivity.this, AboutActivity.class);
         startActivity(intent);
         hamburgerMenu.showContent(false);
     }
 
-    public void touchStopsButton(View view)
-    {
-        Intent intent = new Intent(MainActivity.this,StopsActivity.class);
+    public void touchStopsButton(View view) {
+        Intent intent = new Intent(MainActivity.this, StopsActivity.class);
         startActivity(intent);
         hamburgerMenu.showContent(false);
     }
 
-    public void touchFavouriteButton(View view)
-    {
-        Intent intent = new Intent(MainActivity.this,FavouriteActivity.class);
+    public void touchFavouriteButton(View view) {
+        Intent intent = new Intent(MainActivity.this, FavouriteActivity.class);
         startActivity(intent);
         hamburgerMenu.showContent(false);
     }
 
-    public void touchHfxTransitButton(View view)
-    {
-        Intent intent = new Intent(MainActivity.this,TwitterActivity.class);
+    public void touchHfxTransitButton(View view) {
+        Intent intent = new Intent(MainActivity.this, TwitterActivity.class);
         startActivity(intent);
         hamburgerMenu.showContent(false);
     }
 
-    public void privacyPolicyButton(View view)
-    {
+    public void privacyPolicyButton(View view) {
 
     }
 }

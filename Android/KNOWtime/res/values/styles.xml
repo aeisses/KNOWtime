@@ -4,10 +4,15 @@
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
-    <style name="AppTheme" parent="@android:Theme.NoTitleBar">
+    <!--
+    <style name="AppTheme" parent="@style/Theme.AppCompat">
     	<item name="android:background">@null</item>
    	</style>
-
+-->
+    <style name="AppTheme" parent="android:Theme.NoTitleBar">
+    	<item name="android:background">@null</item>
+   	</style>
+   	
     <!-- Application theme. -->
     <style name="Theme.MyAppTheme" parent="android:style/Theme.NoTitleBar">
         <item name="android:background">@null</item>
