@@ -52,6 +52,8 @@
             android:name="com.knowtime.StopsActivity"></activity>
         <activity
             android:name="com.knowtime.TwitterActivity"></activity>
+        <activity
+            android:name="com.knowtime.PrivacyPolicyActivity"></activity>
         </application>
 
 </manifest>

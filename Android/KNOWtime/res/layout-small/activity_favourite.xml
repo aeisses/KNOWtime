@@ -9,7 +9,7 @@
         android:id="@+id/backbutton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/backbutton"
+        android:background="@drawable/backbuttonfull"
         android:contentDescription="@string/back_button_contentdescription"
         android:onClick="touchBackButton" />
 

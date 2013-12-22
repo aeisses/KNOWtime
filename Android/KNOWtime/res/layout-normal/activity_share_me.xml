@@ -9,7 +9,7 @@
         android:id="@+id/backbutton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/backbutton"
+        android:background="@drawable/backbuttonfull"
         android:contentDescription="@string/back_button_contentdescription"
         android:onClick="touchBackButton" />
 
@@ -43,11 +43,11 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dip"
-        android:background="@drawable/onmywaybutton"
+        android:background="@drawable/onmyway_button"
         android:contentDescription="@string/onmyway_button_image" />
     
     <ImageView
-        android:id="@+id/connecttoserveriamge"
+        android:id="@+id/connecttoserverimage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:contentDescription="@string/connect_to_server_image"

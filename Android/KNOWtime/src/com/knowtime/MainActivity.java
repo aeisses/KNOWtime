@@ -98,6 +98,8 @@ public class MainActivity extends Activity {
 	
 	public void privacyPolicyButton(View view)
 	{
-		
+		Intent intent = new Intent(MainActivity.this,PrivacyPolicyActivity.class);
+		startActivity(intent);
+		hamburgerMenu.showContent(false);
 	}
 }
