@@ -31,7 +31,11 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />  
-
+       
+        <service
+            android:name=".LocationShare"
+            android:exported="false"/>
+        
         <activity
             android:name="com.knowtime.MainActivity"
             android:theme="@style/AppTheme"
@@ -41,6 +45,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            
         </activity>
         <activity
             android:name="com.knowtime.AboutActivity"></activity>

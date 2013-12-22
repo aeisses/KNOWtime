@@ -44,7 +44,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dip"
         android:background="@drawable/onmyway_button"
-        android:contentDescription="@string/onmyway_button_image" />
+        android:contentDescription="@string/onmyway_button_image"
+        android:onClick="touchShareMeButton" />
 
    <ImageView
        android:id="@+id/connecttoserverimage"

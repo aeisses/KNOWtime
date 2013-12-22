@@ -9,6 +9,7 @@ public class ShareMeActivity extends Activity {
 
 	ImageView connectToServerImage;
 	ImageView sendingImage;
+	Boolean isSharing = false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,4 +25,6 @@ public class ShareMeActivity extends Activity {
 	{
 		this.finish();
 	}
+	
+	public void 
 }
