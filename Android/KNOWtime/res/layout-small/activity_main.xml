@@ -20,5 +20,23 @@
          android:background="@drawable/hamburgerbutton"
          android:contentDescription="@string/hamburger_menu_button"
          android:onClick="touchHamburgerMenuButton" />
-     
+
+    <ProgressBar
+            android:id="@+id/mapMarkerProgressBar"
+            android:layout_width="28dp"
+            android:layout_height="29dp"
+            android:layout_alignLeft="@+id/map1" android:layout_alignBottom="@+id/map1"
+            android:visibility="invisible"/>
+
+    <TextView
+            android:id="@+id/mapMarkerProgressBarText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/loading_stops"
+            android:textColor="@color/colourblack"
+            android:layout_toRightOf="@+id/mapMarkerProgressBar"
+            android:layout_alignBottom="@+id/map1" android:layout_alignTop="@+id/mapMarkerProgressBar"
+            android:visibility="invisible"
+            android:textAppearance="?android:attr/textAppearanceSmall"/>
+
 </RelativeLayout>

@@ -40,4 +40,6 @@ When you join our community, we’ll get you where you want to go in KNOWtime.\n
 	<string name="menu_twitter_button">Twitter Button</string>
 	<string name="menu_privacy_policy">Privacy Policy Button</string>
 	<string name="menu_arrow">Menu Arrow</string>
+    <string name="loading_stops">Loading Stops ....</string>
+
 </resources>

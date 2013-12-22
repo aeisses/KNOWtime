@@ -5,18 +5,23 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
 import android.location.Location;
+import android.location.LocationManager;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.*;
-import com.google.android.gms.maps.model.LatLng;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.HashMap;
+
+import org.w3c.dom.Text;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
@@ -28,35 +33,49 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
     public static final int DEFAULT_HALIFAX_LAT_LNG_ZOOM = 14;
     private HashMap<String, Marker> busStopMarkers = new HashMap<String, Marker>();
     private SlidingMenu hamburgerMenu;
+    
+    private ProgressBar mapMarkerProgressBar;
+	private TextView mapMarkerProgressBarText;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+    	mapMarkerProgressBar = (ProgressBar) findViewById(R.id.mapMarkerProgressBar);
+    	mapMarkerProgressBarText = (TextView) findViewById(R.id.mapMarkerProgressBarText);
 
-        mContext = getApplicationContext();
+		mContext = getApplicationContext();
 
-        mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map1)).getMap();
+		if (mMap == null) {
+			mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map1)).getMap();
 
-        mMap.setMyLocationEnabled(true);
-//        Location myLocation = mMap.getMyLocation();
-//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(myLocation.getLatitude(), myLocation.getLongitude()), DEFAULT_HALIFAX_LAT_LNG_ZOOM));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(DEFAULT_HALIFAX_LAT_LNG, DEFAULT_HALIFAX_LAT_LNG_ZOOM));
-        mMap.setOnCameraChangeListener(this);
+			if (mMap != null) {
+				mMap.setMyLocationEnabled(true);
 
-        hamburgerMenu = new SlidingMenu(this);
-        hamburgerMenu.setMode(SlidingMenu.LEFT);
-        hamburgerMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-//        sm.setShadowWidthRes(100);
-//        sm.setBehindOffsetRes(100);
-        hamburgerMenu.setBehindWidth(250);
-        hamburgerMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
-        hamburgerMenu.setMenu(R.layout.menu);
+				LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+				String locationProvider = LocationManager.NETWORK_PROVIDER;
+				Location lastKnownLocation = locationManager.getLastKnownLocation(locationProvider);
+				mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+						new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude()),
+						DEFAULT_HALIFAX_LAT_LNG_ZOOM));
 
-//        sm.setBehindOffsetRes(30);
+//				mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(DEFAULT_HALIFAX_LAT_LNG, DEFAULT_HALIFAX_LAT_LNG_ZOOM));
+				mMap.setOnCameraChangeListener(this);
+			}
+		}
+		hamburgerMenu = new SlidingMenu(this);
+		hamburgerMenu.setMode(SlidingMenu.LEFT);
+		hamburgerMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		// sm.setShadowWidthRes(100);
+		// sm.setBehindOffsetRes(100);
+		hamburgerMenu.setBehindWidth(250);
+		hamburgerMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
+		hamburgerMenu.setMenu(R.layout.menu);
 
-        refreshBusStopMarkers(null);
-    }
+		// sm.setBehindOffsetRes(30);
+
+		refreshBusStopMarkers(null);
+	}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -72,6 +91,7 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
 
     @Override
     public Loader<HashMap<String, MarkerOptions>> onCreateLoader(final int id, final Bundle position) {
+    	setStopMarkerProgressBar(true);
         return new StopsMarkerLoader(mContext,
                 position.getDouble("bottomLat"),
                 position.getDouble("bottomLog"), position.getDouble("topLat"),
@@ -81,8 +101,8 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
     @Override
     public void onLoadFinished(Loader<HashMap<String, MarkerOptions>> loader,
                                HashMap<String, MarkerOptions> marker) {
-        addItemsToMap(marker);
-
+    	setStopMarkerProgressBar(false);
+    	addItemsToMap(marker);
     }
 
     @Override
@@ -131,6 +151,16 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
         getLoaderManager().restartLoader(0, b, this).forceLoad();
 
     }
+    
+	private void setStopMarkerProgressBar(boolean b) {
+		if (b) {
+			mapMarkerProgressBar.setVisibility(View.VISIBLE);
+			mapMarkerProgressBarText.setVisibility(View.VISIBLE);
+		} else {
+			mapMarkerProgressBar.setVisibility(View.INVISIBLE);
+			mapMarkerProgressBarText.setVisibility(View.INVISIBLE);
+		}
+	}
 
     public void touchHamburgerMenuButton(View view) {
         if (hamburgerMenu.isMenuShowing()) {
@@ -173,4 +203,6 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
     public void privacyPolicyButton(View view) {
 
     }
+    
+    
 }
