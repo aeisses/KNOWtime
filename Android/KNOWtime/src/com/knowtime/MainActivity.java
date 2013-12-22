@@ -39,9 +39,9 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
         mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map1)).getMap();
 
         mMap.setMyLocationEnabled(true);
-        Location myLocation = mMap.getMyLocation();
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(myLocation.getLatitude(), myLocation.getLongitude()), DEFAULT_HALIFAX_LAT_LNG_ZOOM));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(DEFAULT_HALIFAX_LAT_LNG, DEFAULT_HALIFAX_LAT_LNG_ZOOM));
+//        Location myLocation = mMap.getMyLocation();
+//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(myLocation.getLatitude(), myLocation.getLongitude()), DEFAULT_HALIFAX_LAT_LNG_ZOOM));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(DEFAULT_HALIFAX_LAT_LNG, DEFAULT_HALIFAX_LAT_LNG_ZOOM));
         mMap.setOnCameraChangeListener(this);
 
         hamburgerMenu = new SlidingMenu(this);
