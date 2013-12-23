@@ -26,5 +26,8 @@ public class ShareMeActivity extends Activity {
 		this.finish();
 	}
 	
-	public void 
+	public void touchShareMeButton(View view)
+	{
+		
+	}
 }

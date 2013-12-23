@@ -29,7 +29,7 @@ public class MainActivity extends Activity {
 		
         map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map1)).getMap();
 
-        map.setMyLocationEnabled(true);
+        //map.setMyLocationEnabled(true);
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultHalifaxLatLng, defaultHalifaxLatLngZoom));
         
         hamburgerMenu = new SlidingMenu(this);

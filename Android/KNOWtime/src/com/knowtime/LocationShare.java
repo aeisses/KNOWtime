@@ -2,6 +2,7 @@ package com.knowtime;
 
 import android.app.IntentService;
 import android.content.Intent;
+import android.util.Log;
 
 public class LocationShare extends IntentService {
 	private static LocationShare instance;
