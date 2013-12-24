@@ -18,7 +18,7 @@
     -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -31,10 +31,16 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />  
-       
+ <!--       
         <service
             android:name=".LocationShare"
             android:exported="false"/>
+            -->
+        <service android:name=".service.LocationShare" android:enabled="true">
+        	<intent-filter android:label="@string/location_service" >
+            	<action android:name="com.knowtime.locationservice"/>
+        	</intent-filter>
+    	</service>
         
         <activity
             android:name="com.knowtime.MainActivity"

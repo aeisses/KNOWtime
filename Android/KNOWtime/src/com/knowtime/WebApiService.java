@@ -1,5 +1,6 @@
 package com.knowtime;
 
+import android.content.Intent;
 import android.text.format.DateFormat;
 import android.util.Log;
 
@@ -112,7 +113,7 @@ public class WebApiService {
         thread.start();
     }
 
-    private static void sendLocationToServer(final String locationURL)
+    public static void sendLocationToServer(final String locationURL)
     {
         locationsThread = new Thread(new Runnable()
         {
@@ -148,34 +149,29 @@ public class WebApiService {
     public static String createNewUser(final int routeId)
     {
         String returnString = "";
-        Thread thread = new Thread(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                try {
-                    HttpClient client = new DefaultHttpClient();
-                    HttpPost post = new HttpPost(SANGSTERBASEURL+USERS+NEW+routeId);
-                    post.setHeader("Content-type", "application/json");
-                    HttpResponse responsePOST = client.execute(post);
-                    if (responsePOST.getStatusLine().getStatusCode() == 201)
-                    {
-                        Header[] h = responsePOST.getAllHeaders();
-                        for (int i=0; i<h.length; i++)
-                        {
-                            if (h[i].getName().equals("Location"))
-                            {
-                                sendingLocations = true;
-                                WebApiService.sendLocationToServer(h[i].getValue().replaceAll("buserver", "api"));
-                            }
-                        }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        thread.start();
+        try {
+        	HttpClient client = new DefaultHttpClient();
+        	HttpPost post = new HttpPost(SANGSTERBASEURL+USERS+NEW+routeId);
+        	post.setHeader("Content-type", "application/json");
+        	HttpResponse responsePOST = client.execute(post);
+        	if (responsePOST.getStatusLine().getStatusCode() == 201)
+        	{
+        		Header[] h = responsePOST.getAllHeaders();
+        		for (int i=0; i<h.length; i++)
+        		{
+        			if (h[i].getName().equals("Location"))
+        			{
+        				returnString = h[i].getValue().replaceAll("buserver", "api");
+        			}
+        		}
+        	}
+        	else
+        	{
+        		returnString = "";
+        	}            
+        } catch (Exception e) {
+        	e.printStackTrace();
+        }
         return returnString;
     }
 

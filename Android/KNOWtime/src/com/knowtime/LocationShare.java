@@ -6,30 +6,50 @@ import android.util.Log;
 
 public class LocationShare extends IntentService {
 	private static LocationShare instance;
-	private static final String serviceName = "locationshare";
+	public static final String serviceName = "com.knowtime.locationservice";
 
-	public static void initInstance()
-	{
-		if (instance == null)
-		{
-			instance = new LocationShare(serviceName);
-		}
+	
+//	public static LocationShare getInstance()
+//	{
+//		if (instance == null)
+//		{
+//			instance = new LocationShare(serviceName);
+//		}
+//		return instance;
+//	}
+//	
+	public LocationShare() {
+		super(serviceName);
 	}
 	
-	public static LocationShare getInstance()
+	public void startLocationShare()
 	{
-		return instance;
-	}
-	
-	private LocationShare(String name) {
-		super(name);
-		// TODO Auto-generated constructor stub
+		WebApiService.createNewUser(1);
 	}
 
+//	public void setLocationCall(String locationCall)
+//	{
+//		if (locationCall.equals(""))
+//		{
+//			// This is a bad string return false
+//			
+//		}
+//		else
+//		{
+//			// A good string
+//			
+//		}
+//	}
+	
 	@Override
 	protected void onHandleIntent(Intent arg0) {
 		// TODO Auto-generated method stub
-		Log.d("Aaron","here we are");
+		Log.d("com.knowtime","here we are");
+		
 	}
 
+//	public boolean stopService()
+//	{
+//		return super.stopService(null)
+//	}
 }
