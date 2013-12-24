@@ -53,4 +53,6 @@ KNOWtime may from time to time change the terms of this Privacy Policy and Discl
 You agree to be bound by any of the changes made in the terms of this Privacy Policy and Disclaimer and EULA. Continuing to use the Service and App will indicate your acceptance of the amended terms. If you do not agree with any of the amended terms, you must avoid any further use of the Services.\n\n
 Last modified: 27th November 2013</string>
 	<string name="location_service">LocationService</string>
+    <string name="loading_stops">Loading Stops ....</string>
+
 </resources>
