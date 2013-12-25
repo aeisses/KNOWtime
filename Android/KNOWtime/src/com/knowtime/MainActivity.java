@@ -21,7 +21,7 @@ import android.widget.TextView;
 
 import java.util.HashMap;
 
-import org.w3c.dom.Text;
+//import org.w3c.dom.Text;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
@@ -50,7 +50,7 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
 			mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map1)).getMap();
 
 			if (mMap != null) {
-				mMap.setMyLocationEnabled(true);
+//				mMap.setMyLocationEnabled(true);
 
 				LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 				String locationProvider = LocationManager.NETWORK_PROVIDER;
@@ -66,13 +66,9 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
 		hamburgerMenu = new SlidingMenu(this);
 		hamburgerMenu.setMode(SlidingMenu.LEFT);
 		hamburgerMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-		// sm.setShadowWidthRes(100);
-		// sm.setBehindOffsetRes(100);
 		hamburgerMenu.setBehindWidth(250);
 		hamburgerMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
 		hamburgerMenu.setMenu(R.layout.menu);
-
-		// sm.setBehindOffsetRes(30);
 
 		refreshBusStopMarkers(null);
 	}
@@ -162,6 +158,16 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
 		}
 	}
 	
+	public void touchHamburgerMenuButton(View view)
+	{
+		if (hamburgerMenu.isMenuShowing())
+		{
+			hamburgerMenu.showContent();
+		} else {
+			hamburgerMenu.showMenu();
+		}
+	}
+
 	public void touchShareMeButton(View view)
 	{
 		Intent intent = new Intent(MainActivity.this,ShareMeActivity.class);
