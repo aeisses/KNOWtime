@@ -92,6 +92,7 @@ public class StopsActivity extends Activity {
                     			LayoutInflater li = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                     			View stopRow = li.inflate(R.layout.stopscellview, null);
                     			final String routeId = routeItem.getString("routeId");
+                    			final String routeNumber = routeItem.getString("shortName");
                     			stopRow.setOnTouchListener(new OnTouchListener()
                     			{
                     				@Override
@@ -99,17 +100,18 @@ public class StopsActivity extends Activity {
                     					if (event.getAction() == MotionEvent.ACTION_DOWN)
                     					{
                     		    			Intent intent = new Intent(StopsActivity.this,RouteMapActivity.class);
-                    		    			intent.putExtra("ROUTE_NUMBER", routeId);
+                    		    			intent.putExtra("ROUTE_NUMBER", routeNumber);
+                    		    			intent.putExtra("ROUTE_ID", routeId);
                     		    			startActivity(intent);
                     					}
                     					return false;
                     				}
                     			});
                     			stopTable.addView(stopRow,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                    			TextView routeNumber = (TextView)stopRow.findViewById(R.id.routenumber);
-                    			routeNumber.setText(routeItem.getString("shortName"));
-                    			TextView routeName = (TextView)stopRow.findViewById(R.id.routeName);
-                    			routeName.setText(routeItem.getString("longName"));
+                    			TextView routeNumberTextView = (TextView)stopRow.findViewById(R.id.routenumber);
+                    			routeNumberTextView.setText(routeNumber);
+                    			TextView routeNameTextView = (TextView)stopRow.findViewById(R.id.routeName);
+                    			routeNameTextView.setText(routeItem.getString("longName"));
                     			
                     			SimpleDateFormat displayFormatter = new SimpleDateFormat("h:mm", Locale.US);
                     			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US);

@@ -1,6 +1,5 @@
 package com.knowtime;
 
-import android.content.Intent;
 import android.text.format.DateFormat;
 import android.util.Log;
 
