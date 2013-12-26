@@ -42,7 +42,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dip"
-        android:background="@drawable/onmyway_button"
+        android:background="@drawable/onmywaybutton"
         android:contentDescription="@string/onmyway_button_image" />
 
     <ImageView

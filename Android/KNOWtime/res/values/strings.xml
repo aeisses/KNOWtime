@@ -52,4 +52,8 @@ Disclaimer: As the App uses User data to build our real-time, crowd-sourced bus 
 KNOWtime may from time to time change the terms of this Privacy Policy and Disclaimer, and choose to develop its own End User License Agreement (EULA). Changes will be made in-app and distributed as an update, as well as being made to this website.\n\n
 You agree to be bound by any of the changes made in the terms of this Privacy Policy and Disclaimer and EULA. Continuing to use the Service and App will indicate your acceptance of the amended terms. If you do not agree with any of the amended terms, you must avoid any further use of the Services.\n\n
 Last modified: 27th November 2013</string>
+	<string name="location_service">LocationService</string>
+    <string name="loading_stops">Loading Stops ....</string>
+    <string name="stops_header_default">Stops Header</string>
+
 </resources>
