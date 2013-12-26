@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/background"
     android:orientation="vertical" >
@@ -14,16 +14,39 @@
         android:onClick="touchBackButton" />
 
     <TableLayout
+        android:id="@+id/stopTable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
         <TableRow
+            android:id="@+id/stopsTableHeader" 
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/stopsheader" >
+
+            <TextView
+                android:id="@+id/stopsHeaderText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dip"
+                android:layout_marginTop="5dip"
+                android:layout_weight="1"
+                android:text="@string/stops_header_default" />
+
+        </TableRow>
+        
+        <TableRow
             android:id="@+id/stopsTableRow"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content" >
         </TableRow>
 
     </TableLayout>
+	
+	<ProgressBar
+	    android:id="@+id/stopsProgressBar"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" />
 
     <ImageButton
         android:id="@+id/favouriteButton"

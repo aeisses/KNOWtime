@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/myTableRow"
+    android:id="@+id/stopTableRow"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/stopstablebackground" >
@@ -56,8 +56,8 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/routenumber"
         android:layout_alignBottom="@+id/routenumber"
-        android:layout_marginLeft="22dp"
-        android:layout_toRightOf="@+id/routenumber"
+        android:layout_marginLeft="70dp"
+        android:layout_alignParentLeft="true"
         android:text="@string/route_name"
 		android:textSize="18sp"
         android:textColor="@color/colourwhite" />
@@ -67,7 +67,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/routeName"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="70dp"
         android:layout_marginTop="2dip"
         android:text="@string/schedual_time"
         android:textColor="@color/colourtextgrey"

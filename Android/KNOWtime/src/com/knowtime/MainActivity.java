@@ -9,6 +9,7 @@ import android.location.LocationManager;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.*;
 
@@ -22,6 +23,8 @@ import android.widget.TextView;
 import java.util.HashMap;
 
 //import org.w3c.dom.Text;
+
+
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
@@ -61,6 +64,7 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
 
 //				mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(DEFAULT_HALIFAX_LAT_LNG, DEFAULT_HALIFAX_LAT_LNG_ZOOM));
 				mMap.setOnCameraChangeListener(this);
+				mMap.setOnInfoWindowClickListener(getInfoWindowClickListener());
 			}
 		}
 		hamburgerMenu = new SlidingMenu(this);
@@ -127,7 +131,6 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
     }
 
     private void refreshBusStopMarkers(CameraPosition position) {
-
         if (position == null) {
             position = mMap.getCameraPosition();
         }
@@ -145,7 +148,21 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
         b.putFloat("zoom", zoom);
 
         getLoaderManager().restartLoader(0, b, this).forceLoad();
-
+    }
+    
+    public OnInfoWindowClickListener getInfoWindowClickListener()
+    {
+    	return new OnInfoWindowClickListener()
+    	{
+    		@Override
+    		public void onInfoWindowClick(Marker marker)
+    		{
+    			Intent intent = new Intent(MainActivity.this,StopsActivity.class);
+    			intent.putExtra("STOP_NUMBER", marker.getSnippet());
+    			intent.putExtra("STOP_NAME", marker.getTitle());
+    			startActivity(intent);
+    		}
+    	};
     }
     
 	private void setStopMarkerProgressBar(boolean b) {
@@ -184,9 +201,9 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
 	
 	public void touchStopsButton(View view)
 	{
-		Intent intent = new Intent(MainActivity.this,StopsActivity.class);
-		startActivity(intent);
-		hamburgerMenu.showContent(false);
+//		Intent intent = new Intent(MainActivity.this,StopsActivity.class);
+//		startActivity(intent);
+//		hamburgerMenu.showContent(false);
 	}
 	
 	public void touchFavouriteButton(View view)
