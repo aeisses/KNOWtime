@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -90,14 +91,16 @@ public class StopsActivity extends Activity {
                         		final JSONObject routeItem = jsonArray.getJSONObject(i);
                     			LayoutInflater li = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                     			View stopRow = li.inflate(R.layout.stopscellview, null);
+                    			final String routeId = routeItem.getString("routeId");
                     			stopRow.setOnTouchListener(new OnTouchListener()
                     			{
                     				@Override
                     				public boolean onTouch(View v, MotionEvent event) {
                     					if (event.getAction() == MotionEvent.ACTION_DOWN)
                     					{
-// TODO: Make a call here to the a map view showing the route
-//                                			TextView routeNumber = (TextView)v.findViewById(R.id.routenumber);
+                    		    			Intent intent = new Intent(StopsActivity.this,RouteMapActivity.class);
+                    		    			intent.putExtra("ROUTE_NUMBER", routeId);
+                    		    			startActivity(intent);
                     					}
                     					return false;
                     				}
