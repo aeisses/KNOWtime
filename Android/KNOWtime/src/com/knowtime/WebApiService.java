@@ -1,6 +1,5 @@
 package com.knowtime;
 
-import android.content.Intent;
 import android.text.format.DateFormat;
 import android.util.Log;
 
@@ -269,6 +268,7 @@ public class WebApiService {
         JSONArray jObj = null;
         // try parse the string to a JSON object
         try {
+        	Log.d("com.timeplay","Url: "+url);
             jObj = new JSONArray(WebApiService.getResponseFromUrl(url));
         } catch (JSONException e) {
             Log.e("JSON Parser", "Error parsing data " + e.toString());

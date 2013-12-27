@@ -21,11 +21,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.HashMap;
-
 //import org.w3c.dom.Text;
-
-
-
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 public class MainActivity extends Activity implements GoogleMap.OnCameraChangeListener, LoaderManager.LoaderCallbacks<HashMap<String, MarkerOptions>> {
@@ -33,7 +29,7 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
     private GoogleMap mMap;
     private Context mContext;
     public static final LatLng DEFAULT_HALIFAX_LAT_LNG = new LatLng(44.67600, -63.60800);
-    public static final int DEFAULT_HALIFAX_LAT_LNG_ZOOM = 14;
+    public static final int DEFAULT_HALIFAX_LAT_LNG_ZOOM = 15;
     private HashMap<String, Marker> busStopMarkers = new HashMap<String, Marker>();
     private SlidingMenu hamburgerMenu;
     
