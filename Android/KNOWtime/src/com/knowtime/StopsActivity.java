@@ -180,4 +180,12 @@ public class StopsActivity extends Activity {
 	{
 		view.setSelected(!view.isSelected());
 	}
+	
+	@Override
+	public void onStop()
+	{
+		super.onStop();
+		// Need to save the favourites information here, some how, some way
+		
+	}
 }

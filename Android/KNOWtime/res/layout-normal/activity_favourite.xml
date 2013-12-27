@@ -21,6 +21,7 @@
         android:contentDescription="@string/stops_table_header" />
 
     <TableLayout
+        android:id="@+id/stopsTable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
@@ -40,6 +41,7 @@
         android:contentDescription="@string/routes_table_header" />
 
     <TableLayout
+        android:id="@+id/routesTable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 

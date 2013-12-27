@@ -264,4 +264,12 @@ public class RouteMapActivity extends Activity {
 		}
 		markers = null;
 	}
+	
+	@Override
+	public void onStop()
+	{
+		super.onStop();
+		// Need to save the favourites information here, some how, some way
+		
+	}
 }

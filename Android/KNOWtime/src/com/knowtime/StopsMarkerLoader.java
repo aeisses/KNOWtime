@@ -32,12 +32,12 @@ public class StopsMarkerLoader extends AsyncTaskLoader<HashMap<String, MarkerOpt
     @Override
     public HashMap<String, MarkerOptions> loadInBackground() {
         if (storedStopMarkers.size() == 0) {
-            WebApiService wb = new WebApiService();
-            wb.fetchAllStops();
+//            WebApiService wb = new WebApiService();
+            WebApiService.fetchAllStops();
 
             JSONArray jsonArray = null;
             while (jsonArray == null) {
-                jsonArray = wb.getStopsJSONArray();
+                jsonArray = WebApiService.getStopsJSONArray();
                 try {
                     Thread.sleep(5000);
                 } catch (Exception e) {

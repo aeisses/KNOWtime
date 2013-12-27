@@ -317,11 +317,11 @@ public class WebApiService {
         return response;
     }
 
-    public JSONArray getRoutesJSONArray() {
+    public static JSONArray getRoutesJSONArray() {
         return routesJSONArray;
     }
 
-    public JSONArray getStopsJSONArray() {
+    public static JSONArray getStopsJSONArray() {
         return stopsJSONArray;
     }
 

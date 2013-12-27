@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 
 public class LocationShare extends IntentService {
-	private static LocationShare instance;
+//	private static LocationShare instance;
 	public static final String serviceName = "com.knowtime.locationservice";
 
 	
