@@ -163,6 +163,7 @@ public class RouteMapActivity extends Activity {
             {
             	isUpdatingLocations = true;
             	final JSONArray routes = WebApiService.getEstimatesForRoute(Integer.parseInt(routeNumber));
+            	Log.d("com.knowtime",""+routes);
             	if (routes != null)
             	{
             		runOnUiThread(new Runnable() {
@@ -191,10 +192,17 @@ public class RouteMapActivity extends Activity {
             						public void run() {
             							markers[markerCounter] = mMap.addMarker(new MarkerOptions()
             							.position(new LatLng(lat,lng))
+            							.anchor(0.5f,0.5f)
             							.icon(BitmapDescriptorFactory.fromResource(R.drawable.busicon)));
             						}
             					});
-            				} else {
+            				} 
+            				else if (i != 0)
+            				{
+            					break;
+            				}
+            				else
+            				{
             					runOnUiThread(new Runnable() {
             						@Override
             						public void run() {
@@ -248,8 +256,11 @@ public class RouteMapActivity extends Activity {
 	
 	private void clearMarkers() {
 		for (int i = 0; i < markers.length; i++ ) {
-		    markers[i].remove();
-		    markers[i] = null;
+			if (markers[i] != null)
+			{
+				markers[i].remove();
+				markers[i] = null;
+			}
 		}
 		markers = null;
 	}
