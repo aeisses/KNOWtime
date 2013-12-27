@@ -65,7 +65,6 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
 		}
 		hamburgerMenu = new SlidingMenu(this);
 		hamburgerMenu.setMode(SlidingMenu.LEFT);
-		hamburgerMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 		hamburgerMenu.setBehindWidth(250);
 		hamburgerMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
 		hamburgerMenu.setMenu(R.layout.menu);
