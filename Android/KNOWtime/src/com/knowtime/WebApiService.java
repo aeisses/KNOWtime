@@ -22,6 +22,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
+import java.util.Vector;
 
 /**
  * Created by aeisses on 2013-11-19.
@@ -321,6 +322,40 @@ public class WebApiService {
         return routesJSONArray;
     }
 
+    private static Boolean isStringInt(String value)
+    {
+    	try
+    	{
+    		Integer.parseInt(value);
+    	}
+    	catch (Exception e)
+    	{
+    		return false;
+    	}
+    	return true;
+    }
+    
+    public static Object[] getRoutesArray() {
+		Vector<String> returnVector = new Vector<String>();
+    	if (routesJSONArray != null)
+    	{
+    		try {
+    			for (int i=0; i<routesJSONArray.length(); i++)
+    			{
+    				if (WebApiService.isStringInt(routesJSONArray.getJSONObject(i).getString("shortName")))
+    				{
+    					returnVector.add(routesJSONArray.getJSONObject(i).getString("shortName"));
+    				}
+    			}
+    		}
+    		catch (JSONException e)
+    		{
+    			e.printStackTrace();
+    		}	
+    	}
+    	return returnVector.toArray();
+    }
+    
     public static JSONArray getStopsJSONArray() {
         return stopsJSONArray;
     }

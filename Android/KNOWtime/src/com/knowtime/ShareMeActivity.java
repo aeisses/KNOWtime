@@ -1,32 +1,40 @@
 package com.knowtime;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 
 public class ShareMeActivity extends Activity 
 {
-	ImageButton onMyWayButton;
-	ImageView connectToServerImage;
-	ImageView sendingImage;
-	Boolean isSharing = false;
-	Context myContext;
-	String currentUser;
-	PopupWindow routePickerPopup;
-	
+	private ImageButton onMyWayButton;
+	private ImageView connectToServerImage;
+	private ImageView sendingImage;
+	private Boolean isSharing = false;
+	private String currentUser;
+	private final Handler mHandler = new Handler();
+	private boolean isSendingLocations;
+
+	private final Runnable mUpdateUI = new Runnable() {
+		public void run() {
+			if (!isSendingLocations)
+			{
+				shareMyLocation();
+			}
+			mHandler.postDelayed(mUpdateUI, 3000); // 1 second
+        }
+    };
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_share_me);
-		myContext = this;
 		currentUser = "";
 		connectToServerImage = (ImageView)findViewById(R.id.connecttoserverimage);
 		connectToServerImage.setVisibility(View.INVISIBLE);
@@ -58,16 +66,18 @@ public class ShareMeActivity extends Activity
 					}
 					else
 					{
+						Intent intent = new Intent(ShareMeActivity.this,RoutePickerActivity.class);
+						startActivityForResult(intent,1);
 //						LayoutInflater li = getLayoutInflater();
 //						View collectionView = li.inflate(R.layout.routecollection, (ViewGroup)findViewById(R.id.routeCollection));
 //						routePickerPopup = new PopupWindow();
 //						if (LocationShare.getInstance() == null)
 //						{
-						Intent locationIntent = new Intent(myContext,LocationShare.class);
-						startService(locationIntent);
+//						Intent locationIntent = new Intent(myContext,LocationShare.class);
+//						startService(locationIntent);
 //							LocationShare.getInstance().startService(new Intent(LocationShare.serviceName));
-						startSharing();
-						createNewUser();
+//						startSharing();
+//						createNewUser();
 //						}
 					}
 				}
@@ -106,14 +116,14 @@ public class ShareMeActivity extends Activity
 		// Stop the animation here
 	}
 	
-	private void createNewUser()
+	private void createNewUser(final String route)
 	{
 		Thread thread = new Thread(new Runnable()
         {
             @Override
             public void run()
             {
-    			currentUser = WebApiService.createNewUser(1);
+    			currentUser = WebApiService.createNewUser(Integer.parseInt(route));
     			if (!currentUser.equals(""))
     			{
     				// Need to figure out what is going to happen here
@@ -127,6 +137,11 @@ public class ShareMeActivity extends Activity
       	thread.start();
 	}
 	
+    private void shareMyLocation()
+    {
+    	
+    }
+    
 //	public class ResponseReceiver extends BroadcastReceiver
 //	{
 //		public static final String ACTION_RESP = "";
@@ -136,4 +151,15 @@ public class ShareMeActivity extends Activity
 //		{
 //		}
 //	}
+    
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+    	super.onActivityResult(requestCode, resultCode, data);
+    	if (requestCode == 1 && resultCode == RESULT_OK && data != null)
+    	{
+    		String routeNumber = data.getStringExtra("routeNumber");
+    		createNewUser(routeNumber);
+    	}
+    }
 }

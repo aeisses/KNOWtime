@@ -67,6 +67,8 @@
             android:name="com.knowtime.PrivacyPolicyActivity"></activity>
         <activity
             android:name="com.knowtime.RouteMapActivity"></activity>
+        <activity
+            android:name="com.knowtime.RoutePickerActivity"></activity>
         </application>
 
 </manifest>
