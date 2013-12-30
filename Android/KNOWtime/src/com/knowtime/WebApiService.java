@@ -23,6 +23,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
+import java.util.List;
 import java.util.Vector;
 
 /**
@@ -43,7 +44,6 @@ public class WebApiService {
     private static final String ESTIMATE        = "estimates/";
     private static final String POLLRATE        = "pollrate";
 
-    private static JSONArray routesJSONArray;
     private static JSONArray stopsJSONArray;
     private static Thread locationsThread;
     
@@ -56,7 +56,16 @@ public class WebApiService {
             {
                 try
                 {
-                    routesJSONArray = getJSONArrayFromUrl(SANGSTERBASEURL + ROUTES + NAMES);
+                	JSONArray routesJSONArray = getJSONArrayFromUrl(SANGSTERBASEURL + ROUTES + NAMES);
+                    for (int i=0; i<routesJSONArray.length(); i++)
+                    {
+                    	JSONObject routeJSON = routesJSONArray.getJSONObject(i);
+                    	Route route = new Route(routeJSON.getString("longName"),routeJSON.getString("shortName"));
+                    	if (DatabaseHandler.getInstance().getRoute(route.getShortName()) == null)
+                    	{
+                    		DatabaseHandler.getInstance().addRoute(route);
+                    	}
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -75,6 +84,16 @@ public class WebApiService {
                 try
                 {
                     stopsJSONArray = getJSONArrayFromUrl(SANGSTERBASEURL+STOPS);
+                    for (int i=0; i<stopsJSONArray.length(); i++)
+                    {
+                    	JSONObject stopJSON = stopsJSONArray.getJSONObject(i);
+                    	Stop stop = new Stop(
+                    			stopJSON.getString("code"),
+                    			stopJSON.getString("name"),
+                    			Double.parseDouble(stopJSON.getString("latitude")),
+                    			Double.parseDouble(stopJSON.getString("longitude")));
+                    	DatabaseHandler.getInstance().addStop(stop);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -301,8 +320,8 @@ public class WebApiService {
         return response;
     }
 
-    public static JSONArray getRoutesJSONArray() {
-        return routesJSONArray;
+    public static List<Route> getRoutesList() {
+        return DatabaseHandler.getInstance().getAllRoutes();
     }
 
     private static Boolean isStringInt(String value)
@@ -320,26 +339,24 @@ public class WebApiService {
     
     public static Object[] getRoutesArray() {
 		Vector<String> returnVector = new Vector<String>();
-    	if (routesJSONArray != null)
+		List<Route> routes = DatabaseHandler.getInstance().getAllRoutes();
+    	for (int i=0; i<routes.size(); i++)
     	{
-    		try {
-    			for (int i=0; i<routesJSONArray.length(); i++)
-    			{
-    				if (WebApiService.isStringInt(routesJSONArray.getJSONObject(i).getString("shortName")))
-    				{
-    					returnVector.add(routesJSONArray.getJSONObject(i).getString("shortName"));
-    				}
-    			}
-    		}
-    		catch (JSONException e)
+    		Route route = (Route)routes.get(i);
+    		if (WebApiService.isStringInt(route.getShortName()))
     		{
-    			e.printStackTrace();
-    		}	
-    	}
+    			returnVector.add(routes.get(i).getShortName());
+    		}
+    	}	
     	return returnVector.toArray();
     }
     
-    public static JSONArray getStopsJSONArray() {
-        return stopsJSONArray;
+    public static List<Stop> getStopsList() {
+        return DatabaseHandler.getInstance().getAllStops();
+    }
+    
+    public static JSONArray getStopsJSONArray()
+    {
+    	return stopsJSONArray;
     }
 }

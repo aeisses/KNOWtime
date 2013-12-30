@@ -14,6 +14,7 @@ public class Route {
 	{
 		this.longName = longName;
 		this.shortName = shortName;
+		this.isFavourite = false;
 	}
 	
 	public Route(String longName, String shortName, boolean isFavourite)

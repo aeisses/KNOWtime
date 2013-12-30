@@ -40,6 +40,7 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		DatabaseHandler.getInstance(this);
     	mapMarkerProgressBar = (ProgressBar) findViewById(R.id.mapMarkerProgressBar);
     	mapMarkerProgressBarText = (TextView) findViewById(R.id.mapMarkerProgressBarText);
     	WebApiService.fetchAllRoutes();

@@ -19,6 +19,7 @@ public class Stop {
 		this.name = name;
 		this.lat = lat;
 		this.lng = lng;
+		this.isFavourite = false;
 	}
 	
 	public Stop(String code, String name, double lat, double lng, boolean isFavourite)

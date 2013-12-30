@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -37,7 +36,6 @@ public class RoutePickerActivity extends Activity {
 	private void getRoutes()
 	{
 		final Object[] routes = WebApiService.getRoutesArray();
-		Log.d("com.timeplay",""+routes);
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {

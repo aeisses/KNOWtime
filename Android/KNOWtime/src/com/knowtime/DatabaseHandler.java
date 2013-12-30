@@ -27,6 +27,11 @@ public class DatabaseHandler extends SQLiteOpenHelper
 	
 	private static DatabaseHandler instance = null;
 	
+	public static DatabaseHandler getInstance()
+	{
+		return instance;
+	}
+	
 	public static DatabaseHandler getInstance(Context context)
 	{
 		if (instance == null)
@@ -44,7 +49,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
 	@Override
 	public void onCreate(SQLiteDatabase db)
 	{
-		String CREATE_ROUTE_TABLE = "CREATE TABLE " + TABLE_ROUTE + "(" + KEY_SHORTNAME + " TEXT PRIMARY KEY," + KEY_LONGNAME + " TEXT," + KEY_FAVOURITE + " BOOLEAN" + ")";
+		String CREATE_ROUTE_TABLE = "CREATE TABLE " + TABLE_ROUTE + "(" + KEY_SHORTNAME + " TEXT PRIMARY KEY," + KEY_LONGNAME + " TEXT," + KEY_FAVOURITE + " TEXT" + ")";
 		db.execSQL(CREATE_ROUTE_TABLE);
 		String CREATE_STOP_TABLE = "CREATE TABLE " + TABLE_STOP + "(" + KEY_CODE + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT," + KEY_LATITUDE + " DOUBLE," + KEY_LONGITUDE + " DOUBLE" + KEY_FAVOURITE + " BOOLEAN" + ")";
 		db.execSQL(CREATE_STOP_TABLE);
@@ -80,7 +85,14 @@ public class DatabaseHandler extends SQLiteOpenHelper
 		ContentValues values = new ContentValues();
 		values.put(KEY_SHORTNAME, route.getShortName());
 		values.put(KEY_LONGNAME, route.getLongName());
-		values.put(KEY_FAVOURITE, route.getFavourite());
+		if (route.getFavourite())
+		{
+			values.put(KEY_FAVOURITE, "1");
+		}
+		else
+		{
+			values.put(KEY_FAVOURITE, "0");
+		}
 		
 		db.insert(TABLE_ROUTE, null, values);
 		db.close();
@@ -89,26 +101,31 @@ public class DatabaseHandler extends SQLiteOpenHelper
 	public Stop getStop(int code)
 	{
 		SQLiteDatabase db = this.getReadableDatabase();
-		
+		Stop stop = null;
 		Cursor cursor = db.query(TABLE_STOP, new String[] { KEY_CODE, KEY_NAME, KEY_LATITUDE, KEY_LONGITUDE, KEY_FAVOURITE }, KEY_CODE + "=?", new String[] { String.valueOf(code) }, null, null, null, null);
 		if (cursor != null)
 		{
 			cursor.moveToFirst();
-		}
-		Stop stop = new Stop(cursor.getString(0),cursor.getString(1),Double.parseDouble(cursor.getString(2)),Double.parseDouble(cursor.getString(3)),Boolean.valueOf(cursor.getString(4)));
+			stop = new Stop(cursor.getString(0),cursor.getString(1),Double.parseDouble(cursor.getString(2)),Double.parseDouble(cursor.getString(3)),Boolean.valueOf(cursor.getString(4)));
+		} 
 		return stop;
 	}
 	
 	public Route getRoute(String shortName)
 	{
 		SQLiteDatabase db = this.getReadableDatabase();
-		
-		Cursor cursor = db.query(TABLE_ROUTE, new String[] { KEY_SHORTNAME, KEY_LONGNAME, KEY_FAVOURITE }, KEY_SHORTNAME + "=?", new String[] { shortName }, null, null, null, null);
-		if (cursor != null)
+		Route route = null;
+		Cursor cursor = db.query(TABLE_ROUTE, new String[] { KEY_SHORTNAME, KEY_LONGNAME, KEY_FAVOURITE }, KEY_SHORTNAME + "= ?", new String[] { shortName }, null, null, null, null);
+		if (cursor.getCount() > 0)
 		{
 			cursor.moveToFirst();
-		}
-		Route route = new Route(cursor.getString(0),cursor.getString(1),Boolean.valueOf(cursor.getString(2)));
+			boolean isFavourite = false;
+			if (cursor.getString(2).equals("1"))
+			{
+				isFavourite = true;
+			}
+			route = new Route(cursor.getString(1),cursor.getString(0),isFavourite);
+		} 
 		return route;
 	}
 	
@@ -161,7 +178,15 @@ public class DatabaseHandler extends SQLiteOpenHelper
 				Route route = new Route();
 				route.setShortName(cursor.getString(0));
 				route.setLongName(cursor.getString(1));
-				route.setFavourite(Boolean.parseBoolean(cursor.getString(2)));
+				if (cursor.getString(2).equals("1"))
+				{
+					route.setFavourite(true);
+				}
+				else
+				{
+					route.setFavourite(false);
+				}
+				routeList.add(route);
 			}
 			while (cursor.moveToNext());
 		}
@@ -212,7 +237,14 @@ public class DatabaseHandler extends SQLiteOpenHelper
 		ContentValues values = new ContentValues();
 		values.put(KEY_SHORTNAME, route.getShortName());
 		values.put(KEY_LONGNAME, route.getLongName());
-		values.put(KEY_FAVOURITE, route.getFavourite());
+		if (route.getFavourite())
+		{
+			values.put(KEY_FAVOURITE, "1");
+		}
+		else
+		{
+			values.put(KEY_FAVOURITE, "0");
+		}
 		
 		return db.update(TABLE_ROUTE, values, KEY_SHORTNAME + " = ?", new String[] { route.getShortName() });
 	}
