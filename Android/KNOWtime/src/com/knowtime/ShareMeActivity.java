@@ -1,37 +1,79 @@
 package com.knowtime;
 
+import java.util.Date;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 
 public class ShareMeActivity extends Activity 
 {
-	ImageButton onMyWayButton;
-	ImageView connectToServerImage;
-	ImageView sendingImage;
-	Boolean isSharing = false;
-	Context myContext;
-	String currentUser;
-	PopupWindow routePickerPopup;
+	private ImageButton onMyWayButton;
+	private ImageView connectToServerImage;
+	private ImageView sendingImage;
+	private Boolean isSharing = false;
+	private String locationUrl;
+	private final Handler mHandler = new Handler();
+	private int pollRate;
+	private ImageView sendingLineImage;
+	Date startTime;
+	int loopCounter;
 	
+	private boolean isSendingLocations()
+	{
+		Date currentDate = new Date();
+		long diffTime = currentDate.getTime() - startTime.getTime();
+		return isSharing && diffTime < 108000000;
+	}
+	
+	private final Runnable mUpdateUI = new Runnable() {
+		public void run() {
+			if (isSendingLocations())
+			{
+				if (loopCounter == 0)
+				{
+					sendingLineImage.setImageResource(R.drawable.sending1);
+					loopCounter++;
+				}
+				else if (loopCounter == 1)
+				{
+					sendingLineImage.setImageResource(R.drawable.sending2);
+					loopCounter++;
+				}
+				else
+				{
+					sendingLineImage.setImageResource(R.drawable.sending3);
+					shareMyLocation();
+					loopCounter = 0;
+				}
+				mHandler.postDelayed(mUpdateUI, (pollRate*1000)/3); // 1 second
+			}
+        }
+    };
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_share_me);
-		myContext = this;
-		currentUser = "";
+		locationUrl = "";
 		connectToServerImage = (ImageView)findViewById(R.id.connecttoserverimage);
 		connectToServerImage.setVisibility(View.INVISIBLE);
 		sendingImage = (ImageView)findViewById(R.id.sendingimage);
 		sendingImage.setVisibility(View.INVISIBLE);
+		sendingLineImage = (ImageView)findViewById(R.id.sendinglineimage);
 		onMyWayButton = (ImageButton)findViewById(R.id.onmywaybutton);
 		onMyWayButton.setOnTouchListener(new OnTouchListener()
 		{
@@ -52,23 +94,13 @@ public class ShareMeActivity extends Activity
 				{
 					if (isSharing)
 					{
-//						LocationShare.getInstance().stopService(new Intent(LocationShare.serviceName));
-//						stopService(LocationShare.serviceName);
 						stopSharing();
 					}
 					else
 					{
-//						LayoutInflater li = getLayoutInflater();
-//						View collectionView = li.inflate(R.layout.routecollection, (ViewGroup)findViewById(R.id.routeCollection));
-//						routePickerPopup = new PopupWindow();
-//						if (LocationShare.getInstance() == null)
-//						{
-						Intent locationIntent = new Intent(myContext,LocationShare.class);
-						startService(locationIntent);
-//							LocationShare.getInstance().startService(new Intent(LocationShare.serviceName));
-						startSharing();
-						createNewUser();
-//						}
+						Intent intent = new Intent(ShareMeActivity.this,RoutePickerActivity.class);
+						startActivityForResult(intent,1);
+		    			startSharing();
 					}
 				}
 				return false;
@@ -94,7 +126,7 @@ public class ShareMeActivity extends Activity
 		isSharing = true;
 		connectToServerImage.setVisibility(View.VISIBLE);
 		sendingImage.setVisibility(View.VISIBLE);
-		// Start the animation here
+		loopCounter = 0;
 	}
 	
 	private void stopSharing()
@@ -103,20 +135,30 @@ public class ShareMeActivity extends Activity
 		isSharing = false;
 		connectToServerImage.setVisibility(View.INVISIBLE);
 		sendingImage.setVisibility(View.INVISIBLE);
-		// Stop the animation here
+		sendingLineImage.setImageResource(R.drawable.sendingline);
 	}
 	
-	private void createNewUser()
+	private void createNewUser(final String route)
 	{
 		Thread thread = new Thread(new Runnable()
         {
             @Override
             public void run()
             {
-    			currentUser = WebApiService.createNewUser(1);
-    			if (!currentUser.equals(""))
+    			locationUrl = WebApiService.createNewUser(Integer.parseInt(route));
+    			if (!locationUrl.equals(""))
     			{
-    				// Need to figure out what is going to happen here
+    				final JSONObject jsonPollRate = WebApiService.getPollRate();
+    				try 
+    				{
+    	                 pollRate = jsonPollRate.getInt("rate");
+    				}
+    				catch (JSONException e)
+    				{
+    					e.printStackTrace();
+    				}
+    		    	startTime = new Date();
+					mHandler.post(mUpdateUI);
     			}
     			else
     			{
@@ -127,13 +169,29 @@ public class ShareMeActivity extends Activity
       	thread.start();
 	}
 	
-//	public class ResponseReceiver extends BroadcastReceiver
-//	{
-//		public static final String ACTION_RESP = "";
-//		
-//		@Override
-//		public void onReceive(Context context, Intent intent)
-//		{
-//		}
-//	}
+    private void shareMyLocation()
+    {
+		LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+		String locationProvider = LocationManager.NETWORK_PROVIDER;
+		Location lastKnownLocation = locationManager.getLastKnownLocation(locationProvider);
+		WebApiService.sendLocationToServer(locationUrl,lastKnownLocation);
+    }
+    
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+    	super.onActivityResult(requestCode, resultCode, data);
+    	if (requestCode == 1 && resultCode == RESULT_OK && data != null)
+    	{
+			String routeNumber = data.getStringExtra("routeNumber");
+    		if (Integer.parseInt(routeNumber) == -1)
+    		{
+    			stopSharing();
+    		}
+    		else
+    		{
+    			createNewUser(routeNumber);
+    		}
+    	}
+    }
 }
