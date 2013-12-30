@@ -149,6 +149,9 @@ public class RoutePickerActivity extends Activity {
 	
 	public void touchBackButton(View view)
 	{
+		Intent resultIntent = new Intent();
+		resultIntent.putExtra("routeNumber","-1");
+		setResult(Activity.RESULT_OK,resultIntent);
 		this.finish();
 	}
 }

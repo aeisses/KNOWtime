@@ -1,5 +1,6 @@
 package com.knowtime;
 
+import android.location.Location;
 import android.text.format.DateFormat;
 import android.util.Log;
 
@@ -45,9 +46,7 @@ public class WebApiService {
     private static JSONArray routesJSONArray;
     private static JSONArray stopsJSONArray;
     private static Thread locationsThread;
-    private static int pollRate = 3;
-    private static Boolean sendingLocations = false;
-
+    
     public static void fetchAllRoutes()
     {
         Thread thread = new Thread(new Runnable()
@@ -95,51 +94,35 @@ public class WebApiService {
         return null;
     }
 
-    public static void getPollRate()
+    public static JSONObject getPollRate()
     {
-        Thread thread = new Thread(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                try {
-                    JSONObject returnObject = getJSONObjectFromUrl(SANGSTERBASEURL+POLLRATE);
-                    pollRate = returnObject.getInt("rate");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        thread.start();
+    	return getJSONObjectFromUrl(SANGSTERBASEURL+POLLRATE);
     }
 
-    public static void sendLocationToServer(final String locationURL)
+    public static void sendLocationToServer(final String locationURL, final Location location)
     {
         locationsThread = new Thread(new Runnable()
         {
             @Override
             public void run()
             {
-                while (sendingLocations)
-                {
-                    try {
-                        HttpClient client = new DefaultHttpClient();
-                        HttpPost post = new HttpPost(locationURL);
-                        post.setHeader("Accept", "application/json");
-                        post.setHeader("Content-type", "application/json");
-                        JSONObject jsonParam = new JSONObject();
-
-                        StringEntity se = new StringEntity(jsonParam.toString());
-                        post.setEntity(se);
-                        HttpResponse responsePost = client.execute(post);
-                        if (responsePost.getStatusLine().getStatusCode() != 200)
-                        {
-                            return;
-                        }
-                        Thread.sleep(pollRate*1000);
-                    } catch (Exception e) {
-                        e.printStackTrace();
+            	try {
+            		HttpClient client = new DefaultHttpClient();
+                    HttpPost post = new HttpPost(locationURL);
+                    post.setHeader("Accept", "application/json");
+                    post.setHeader("Content-type", "application/json");
+                    JSONObject jsonParam = new JSONObject();
+                    jsonParam.put("lat",location.getLatitude());
+                    jsonParam.put("lng",location.getLongitude());
+                    StringEntity se = new StringEntity(jsonParam.toString());
+                    post.setEntity(se);
+                    HttpResponse responsePost = client.execute(post);
+                    if (responsePost.getStatusLine().getStatusCode() != 200)
+                    {
+                        return;
                     }
+                } catch (Exception e) {
+                   e.printStackTrace();
                 }
             }
         });
@@ -358,9 +341,5 @@ public class WebApiService {
     
     public static JSONArray getStopsJSONArray() {
         return stopsJSONArray;
-    }
-
-    public void setSendingLocations(Boolean _sendingLocations) {
-        sendingLocations = _sendingLocations;
     }
 }
