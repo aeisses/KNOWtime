@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.flurry.android.FlurryAgent;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -83,6 +84,20 @@ public class RouteMapActivity extends Activity {
 		favouriteButton = (ImageButton)this.findViewById(R.id.favouritebutton);
 		favouriteButton.setSelected(route.getFavourite());
 		getRoute();
+	}
+	
+	@Override
+	protected void onStart()
+	{
+		super.onStart();
+		FlurryAgent.onStartSession(this, "54VCHBRBYDDP5VT63WFB");
+	}
+	
+	@Override
+	protected void onStop()
+	{
+		super.onStop();
+		FlurryAgent.onEndSession(this);
 	}
 	
 	private void getRoute()
@@ -271,13 +286,5 @@ public class RouteMapActivity extends Activity {
 			}
 		}
 		markers = null;
-	}
-	
-	@Override
-	public void onStop()
-	{
-		super.onStop();
-		// Need to save the favourites information here, some how, some way
-		
 	}
 }

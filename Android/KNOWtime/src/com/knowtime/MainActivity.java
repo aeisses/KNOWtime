@@ -21,7 +21,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.HashMap;
-//import org.w3c.dom.Text;
+import com.flurry.android.FlurryAgent;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 public class MainActivity extends Activity implements GoogleMap.OnCameraChangeListener, LoaderManager.LoaderCallbacks<HashMap<String, MarkerOptions>> {
@@ -51,7 +51,7 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
 			mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map1)).getMap();
 
 			if (mMap != null) {
-//				mMap.setMyLocationEnabled(true);
+				mMap.setMyLocationEnabled(true);
 
 				LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 				String locationProvider = LocationManager.NETWORK_PROVIDER;
@@ -74,6 +74,20 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
 		refreshBusStopMarkers(null);
 	}
 
+	@Override
+	protected void onStart()
+	{
+		super.onStart();
+		FlurryAgent.onStartSession(this, "54VCHBRBYDDP5VT63WFB");
+	}
+	
+	@Override
+	protected void onStop()
+	{
+		super.onStop();
+		FlurryAgent.onEndSession(this);
+	}
+	
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

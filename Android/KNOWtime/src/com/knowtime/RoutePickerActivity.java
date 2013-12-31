@@ -1,5 +1,7 @@
 package com.knowtime;
 
+import com.flurry.android.FlurryAgent;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -31,6 +33,20 @@ public class RoutePickerActivity extends Activity {
             }
         });
 		thread.start();
+	}
+	
+	@Override
+	protected void onStart()
+	{
+		super.onStart();
+		FlurryAgent.onStartSession(this, "54VCHBRBYDDP5VT63WFB");
+	}
+	
+	@Override
+	protected void onStop()
+	{
+		super.onStop();
+		FlurryAgent.onEndSession(this);
 	}
 	
 	private void getRoutes()

@@ -5,6 +5,8 @@ import java.util.Date;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.flurry.android.FlurryAgent;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -109,6 +111,20 @@ public class ShareMeActivity extends Activity
 	}
 	
 	@Override
+	protected void onStart()
+	{
+		super.onStart();
+		FlurryAgent.onStartSession(this, "54VCHBRBYDDP5VT63WFB");
+	}
+	
+	@Override
+	protected void onStop()
+	{
+		super.onStop();
+		FlurryAgent.onEndSession(this);
+	}
+	
+	@Override
 	protected void onResume()
 	{
 		super.onResume();
@@ -190,6 +206,7 @@ public class ShareMeActivity extends Activity
     		else
     		{
     			createNewUser(routeNumber);
+    			FlurryAgent.logEvent("Touched the tracking button for Route: "+routeNumber);
     		}
     	}
     }
