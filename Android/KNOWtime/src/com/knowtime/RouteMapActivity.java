@@ -23,8 +23,8 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
 public class RouteMapActivity extends Activity {
@@ -37,6 +37,8 @@ public class RouteMapActivity extends Activity {
 	private Marker[] markers = null;
 	private Context mContext;
 	private boolean isUpdatingLocations;
+	private ImageButton favouriteButton;
+	private Route route;
 	
 	private final Runnable mUpdateUI = new Runnable() {
 		public void run() {
@@ -59,6 +61,9 @@ public class RouteMapActivity extends Activity {
 		{
 			routeId = extras.getString("ROUTE_ID");
 			routeNumber = extras.getString("ROUTE_NUMBER");
+			route = DatabaseHandler.getInstance().getRoute(routeNumber);
+			route.setId(routeId);
+			DatabaseHandler.getInstance().updateRoute(route);
 		}
 		if (mMap == null) {
 			mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map1)).getMap();
@@ -75,6 +80,8 @@ public class RouteMapActivity extends Activity {
 		}
 		// Load the route
 		progressBar = (ProgressBar) findViewById(R.id.routesProgressBar);
+		favouriteButton = (ImageButton)this.findViewById(R.id.favouritebutton);
+		favouriteButton.setSelected(route.getFavourite());
 		getRoute();
 	}
 	
@@ -146,6 +153,8 @@ public class RouteMapActivity extends Activity {
 	
 	public void touchBackButton(View view)
 	{
+		route.setFavourite(favouriteButton.isSelected());
+		DatabaseHandler.getInstance().updateRoute(route);
 		this.finish();
 	}
 	
@@ -163,7 +172,6 @@ public class RouteMapActivity extends Activity {
             {
             	isUpdatingLocations = true;
             	final JSONArray routes = WebApiService.getEstimatesForRoute(Integer.parseInt(routeNumber));
-            	Log.d("com.knowtime",""+routes);
             	if (routes != null)
             	{
             		runOnUiThread(new Runnable() {

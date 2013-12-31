@@ -18,6 +18,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnTouchListener;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TableLayout;
 import android.widget.TextView;
@@ -27,6 +28,8 @@ public class StopsActivity extends Activity {
 	String stopName = "";
 	ProgressBar progressBar;
 	TableLayout stopTable;
+	Stop stop;
+	ImageButton favouriteButton;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +40,15 @@ public class StopsActivity extends Activity {
 		{
 			stopNumber = extras.getString("STOP_NUMBER");
 			stopName = extras.getString("STOP_NAME");
+			stop = DatabaseHandler.getInstance().getStop(stopNumber);
 		}
 		progressBar = (ProgressBar) findViewById(R.id.stopsProgressBar);
 		stopTable = (TableLayout) findViewById(R.id.stopTable);
 		TextView stopsHeaderTextView = (TextView)stopTable.findViewById(R.id.stopsHeaderText);
 		stopsHeaderTextView.setText(stopName);
 		// Determine if this is a favorite stop
-		
+		favouriteButton = (ImageButton) findViewById(R.id.favouriteButton);
+		favouriteButton.setSelected(stop.getFavourite());
 		getStops();
 	}
 	
@@ -173,6 +178,8 @@ public class StopsActivity extends Activity {
 	
 	public void touchBackButton(View view)
 	{
+		stop.setFavourite(favouriteButton.isSelected());
+		DatabaseHandler.getInstance().updateStop(stop);
 		this.finish();
 	}
 	

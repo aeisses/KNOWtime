@@ -112,7 +112,6 @@ public class ShareMeActivity extends Activity
 	protected void onResume()
 	{
 		super.onResume();
-		
 	}
 	
 	public void touchBackButton(View view)
