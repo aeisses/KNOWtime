@@ -2,6 +2,8 @@ package com.knowtime;
 
 import java.util.List;
 
+import com.flurry.android.FlurryAgent;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -28,6 +30,20 @@ public class FavouriteActivity extends Activity {
 		routeTable = (TableLayout)this.findViewById(R.id.routesTable);
 		loadFavouriteStops();
 		loadFavouriteRoutes();
+	}
+	
+	@Override
+	protected void onStart()
+	{
+		super.onStart();
+		FlurryAgent.onStartSession(this, "54VCHBRBYDDP5VT63WFB");
+	}
+	
+	@Override
+	protected void onStop()
+	{
+		super.onStop();
+		FlurryAgent.onEndSession(this);
 	}
 	
 	private void loadFavouriteStops()

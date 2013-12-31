@@ -9,6 +9,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.flurry.android.FlurryAgent;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -50,6 +52,20 @@ public class StopsActivity extends Activity {
 		favouriteButton = (ImageButton) findViewById(R.id.favouriteButton);
 		favouriteButton.setSelected(stop.getFavourite());
 		getStops();
+	}
+	
+	@Override
+	protected void onStart()
+	{
+		super.onStart();
+		FlurryAgent.onStartSession(this, "54VCHBRBYDDP5VT63WFB");
+	}
+	
+	@Override
+	protected void onStop()
+	{
+		super.onStop();
+		FlurryAgent.onEndSession(this);
 	}
 	
 	private Date getStopDate(String departTime, SimpleDateFormat formatter, SimpleDateFormat currentTimeFormatter)
@@ -186,13 +202,5 @@ public class StopsActivity extends Activity {
 	public void touchFavouriteButton(View view)
 	{
 		view.setSelected(!view.isSelected());
-	}
-	
-	@Override
-	public void onStop()
-	{
-		super.onStop();
-		// Need to save the favourites information here, some how, some way
-		
 	}
 }
