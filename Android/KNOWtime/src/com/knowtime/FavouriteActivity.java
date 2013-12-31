@@ -55,12 +55,13 @@ public class FavouriteActivity extends Activity {
 					return false;
 				}
 			});
-			stopTable.addView(stopRow,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+			stopTable.addView(stopRow,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 			TextView stopNumberTextView = (TextView)stopRow.findViewById(R.id.favouriteId);
 			stopNumberTextView.setText(stopNumber);
 			TextView stopNameTextView = (TextView)stopRow.findViewById(R.id.favouriteDescription);
 			stopNameTextView.setText(stopName);
 			final ImageButton favouriteButton = (ImageButton)stopRow.findViewById(R.id.favouriteButton);
+			favouriteButton.setSelected(true);
 			favouriteButton.setOnTouchListener(new OnTouchListener()
 			{
 				@Override
@@ -100,12 +101,13 @@ public class FavouriteActivity extends Activity {
 					return false;
 				}
 			});
-			routeTable.addView(stopRow,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+			routeTable.addView(stopRow,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 			TextView routeNumberTextView = (TextView)stopRow.findViewById(R.id.favouriteId);
 			routeNumberTextView.setText(routeNumber);
 			TextView routeNameTextView = (TextView)stopRow.findViewById(R.id.favouriteDescription);
 			routeNameTextView.setText(routeName);
 			final ImageButton favouriteButton = (ImageButton)stopRow.findViewById(R.id.favouriteButton);
+			favouriteButton.setSelected(true);
 			favouriteButton.setOnTouchListener(new OnTouchListener()
 			{
 				@Override
@@ -122,13 +124,5 @@ public class FavouriteActivity extends Activity {
 	public void touchBackButton(View view)
 	{
 		this.finish();
-	}
-	
-	@Override
-	public void onStop()
-	{
-		super.onStop();
-		// Need to save the favourites information here, some how, some way
-		
 	}
 }

@@ -15,15 +15,17 @@ public class StopsMarkerLoader extends AsyncTaskLoader<HashMap<String, MarkerOpt
     private double topLat;
     private double topLng;
     private float zoom;
+    private boolean showStops;
     private static HashMap<String, MarkerOptions> storedStopMarkers = new HashMap<String, MarkerOptions>();
 
-    public StopsMarkerLoader(Context context, double bottomLat, double bottomLng, double topLat, double topLng, float zoom) {
+    public StopsMarkerLoader(Context context, double bottomLat, double bottomLng, double topLat, double topLng, float zoom, boolean showStops) {
         super(context);
         this.bottomLat = bottomLat;
         this.bottomLng = bottomLng;
         this.topLat = topLat;
         this.topLng = topLng;
         this.zoom = zoom;
+        this.showStops = showStops;
     }
 
     @Override
@@ -52,10 +54,13 @@ public class StopsMarkerLoader extends AsyncTaskLoader<HashMap<String, MarkerOpt
                 lat = latlng.latitude;
                 lng = latlng.longitude;
 
-                if (this.topLat > lat && lat > this.bottomLat ) {
-                    if (this.topLng > lng && lng > this.bottomLng ){
-                        resultMarker.put((String)currentStop, busMarker.get(currentStop));
-                    }
+                if (showStops)
+                {
+                	if (this.topLat > lat && lat > this.bottomLat ) {
+                		if (this.topLng > lng && lng > this.bottomLng ){
+                			resultMarker.put((String)currentStop, busMarker.get(currentStop));
+                		}
+                	}
                 }
             }
         }

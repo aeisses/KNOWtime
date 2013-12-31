@@ -32,7 +32,7 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
     public static final int DEFAULT_HALIFAX_LAT_LNG_ZOOM = 15;
     private HashMap<String, Marker> busStopMarkers = new HashMap<String, Marker>();
     private SlidingMenu hamburgerMenu;
-    
+    private Boolean showStops;
     private ProgressBar mapMarkerProgressBar;
 	private TextView mapMarkerProgressBarText;
 
@@ -44,7 +44,7 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
     	mapMarkerProgressBar = (ProgressBar) findViewById(R.id.mapMarkerProgressBar);
     	mapMarkerProgressBarText = (TextView) findViewById(R.id.mapMarkerProgressBarText);
     	WebApiService.fetchAllRoutes();
-
+    	showStops = true;
 		mContext = getApplicationContext();
 
 		if (mMap == null) {
@@ -92,7 +92,8 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
         return new StopsMarkerLoader(mContext,
                 position.getDouble("bottomLat"),
                 position.getDouble("bottomLog"), position.getDouble("topLat"),
-                position.getDouble("topLog"), position.getFloat("zoom"));
+                position.getDouble("topLog"), position.getFloat("zoom"),
+                showStops);
     }
 
     @Override
@@ -106,7 +107,6 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
     public void onLoaderReset(Loader<HashMap<String, MarkerOptions>> hashMapLoader) {
         //To change body of implemented methods use File | Settings | File Templates.
     }
-
 
     private void addItemsToMap(HashMap<String, MarkerOptions> result) {
         final Object[] currentStops = busStopMarkers.keySet().toArray();
@@ -122,8 +122,11 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
                 result.remove(currentStop);
             }
         }
-        for (String newStop : result.keySet()) {
-            busStopMarkers.put(newStop, mMap.addMarker(result.get(newStop)));
+        if (showStops)
+        {
+        	for (String newStop : result.keySet()) {
+        		busStopMarkers.put(newStop, mMap.addMarker(result.get(newStop)));
+        	}
         }
     }
 
@@ -143,6 +146,7 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
         b.putDouble("topLat", top.latitude);
         b.putDouble("topLog", top.longitude);
         b.putFloat("zoom", zoom);
+        b.putBoolean("showStops", showStops);
 
         getLoaderManager().restartLoader(0, b, this).forceLoad();
     }
@@ -198,9 +202,8 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
 	
 	public void touchStopsButton(View view)
 	{
-//		Intent intent = new Intent(MainActivity.this,StopsActivity.class);
-//		startActivity(intent);
-//		hamburgerMenu.showContent(false);
+		showStops = !showStops;
+		refreshBusStopMarkers(null);
 	}
 	
 	public void touchFavouriteButton(View view)
