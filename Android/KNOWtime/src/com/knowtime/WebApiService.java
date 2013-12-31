@@ -17,12 +17,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 
@@ -74,32 +79,45 @@ public class WebApiService {
         thread.start();
     }
 
-    public static void fetchAllStops()
+    public static HashMap<String, MarkerOptions> fetchAllStops()
     {
-        Thread thread = new Thread(new Runnable()
+        HashMap<String, MarkerOptions> hashMap = new HashMap<String, MarkerOptions>();
+
+        try
         {
-            @Override
-            public void run()
-            {
-                try
-                {
+                    MarkerOptions markerStops;
                     stopsJSONArray = getJSONArrayFromUrl(SANGSTERBASEURL+STOPS);
                     for (int i=0; i<stopsJSONArray.length(); i++)
                     {
                     	JSONObject stopJSON = stopsJSONArray.getJSONObject(i);
+                    	JSONObject locationJSON = stopJSON.getJSONObject("location");
                     	Stop stop = new Stop(
-                    			stopJSON.getString("code"),
+                    			stopJSON.getString("stopNumber"),
                     			stopJSON.getString("name"),
-                    			Double.parseDouble(stopJSON.getString("latitude")),
-                    			Double.parseDouble(stopJSON.getString("longitude")));
-                    	DatabaseHandler.getInstance().addStop(stop);
+                    			Double.parseDouble(locationJSON.getString("lat")),
+                    			Double.parseDouble(locationJSON.getString("lng")));
+                    	if (DatabaseHandler.getInstance().getStop(stop.getCode()) == null)
+                    	{
+                    		DatabaseHandler.getInstance().addStop(stop);
+                    	}
+                    	markerStops = new MarkerOptions();
+                    	
+                        markerStops.draggable(false);
+                        markerStops.anchor(.6f, .6f);
+
+                        markerStops.icon(BitmapDescriptorFactory.fromResource(R.drawable.bus_stop));
+                        markerStops.position(new LatLng(stop.getLat(), stop.getLng()));
+
+                        markerStops.snippet(stop.getCode());
+                        markerStops.title(stop.getName());
+
+                        // Adding marker to the result HashMap.
+                        hashMap.put(stop.getCode(), markerStops);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            }
-        });
-        thread.start();
+                return hashMap;
     }
 
     public static JSONArray getEstimatesForRoute(final int routeId)
@@ -269,9 +287,9 @@ public class WebApiService {
 
     private static JSONArray getJSONArrayFromUrl(String url) {
         JSONArray jObj = null;
+        Log.d("com.knowtime","URL: "+url);
         // try parse the string to a JSON object
         try {
-        	Log.d("com.timeplay","Url: "+url);
             jObj = new JSONArray(WebApiService.getResponseFromUrl(url));
         } catch (JSONException e) {
             Log.e("JSON Parser", "Error parsing data " + e.toString());

@@ -2,6 +2,7 @@ package com.knowtime;
 
 public class Route {
 	boolean isFavourite;
+	String id;
 	String longName;
 	String shortName;
 	
@@ -12,16 +13,28 @@ public class Route {
 	
 	public Route(String longName, String shortName)
 	{
+		this.id = "";
 		this.longName = longName;
 		this.shortName = shortName;
 		this.isFavourite = false;
 	}
 	
-	public Route(String longName, String shortName, boolean isFavourite)
+	public Route(String longName, String shortName, String id, boolean isFavourite)
 	{
+		this.id = "";
 		this.longName = longName;
 		this.shortName = shortName;
 		this.isFavourite = isFavourite;
+	}
+	
+	public String getId()
+	{
+		return this.id;
+	}
+	
+	public void setId(String id)
+	{
+		this.id = id;
 	}
 	
 	public String getLongName()
