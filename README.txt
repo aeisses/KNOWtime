@@ -1,3 +1,0 @@
-IzaSyD7eMyBtby0GsgV-5IR8JlN_4Qwd9Nbh1c
-KeyStore PWD:
-apps4halifax
