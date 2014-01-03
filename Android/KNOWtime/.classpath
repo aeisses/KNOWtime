@@ -6,5 +6,6 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry exported="true" kind="lib" path="/Users/aeisses/DownloadedTools/Flurry Android SDK vAndroid 3.3.2/Android 3.3.2/FlurryAnalytics/FlurryAnalytics_3.3.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/aeisses/DownloadedTools/twitter4j-3.0.5/lib/twitter4j-core-3.0.5.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
