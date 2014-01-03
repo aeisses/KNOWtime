@@ -33,9 +33,10 @@ import android.widget.Toast;
 
 public class TwitterActivity extends Activity
 {
-	static String TWITTER_CONSUMER_KEY = "o4YaT3H0SgmjQFSkGJy1A";
-    static String TWITTER_CONSUMER_SECRET = "uxCIVsaPSsvckIBpSfZCLYGli0jHus4xMkE5sgk";
-
+	static String TWITTER_CONSUMER_KEY = "4nCDEefDi54ErZd3qtpZ7g";
+    static String TWITTER_CONSUMER_SECRET = "q4Fq2xLFFEh7TPfTTVPGGRivx99BD0Hjzou7HieECI";
+    static String TWITTER_OAUTH_TOKEN = "1969214929-dWw75ztFDOXTzlTvDxtkdpUZC2PuRSiEdYFkcZI";
+    static String TWITTER_OAUTH_TOKEN_SECRET = "3HRCrTu0tN4M4IqpbRJMxk5YLNqDaA77ywibDTPH8wHvK";
     // Preference Constants
     static String PREFERENCE_NAME = "twitter_oauth";
     static final String PREF_KEY_OAUTH_TOKEN = "oauth_token";
@@ -103,12 +104,12 @@ public class TwitterActivity extends Activity
 		this.finish();
 	}
 	
-	private boolean isNeededTwitterAuth() {
-	    SharedPreferences settings = getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
-	    String twitterAccesToken = settings.getString("bearerAccessToken", "");
-	    String twitterTokenType = settings.getString("bearerTokenType", "");
-	    return ((twitterAccesToken.length() == 0) && (twitterTokenType.length() == 0));
-	}
+//	private boolean isNeededTwitterAuth() {
+//	    SharedPreferences settings = getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+//	    String twitterAccesToken = settings.getString("bearerAccessToken", "");
+//	    String twitterTokenType = settings.getString("bearerTokenType", "");
+//	    return ((twitterAccesToken.length() == 0) && (twitterTokenType.length() == 0));
+//	}
 	
 //    protected OAuth2Token doInBackground(Void... params) {
 //        OAuth2Token bearerToken = null;
@@ -134,7 +135,7 @@ public class TwitterActivity extends Activity
 		builder = new ConfigurationBuilder();
 	    builder.setUseSSL(true);
 	    builder.setApplicationOnlyAuthEnabled(true);
-	    builder.setOAuthConsumerKey(TWITTER_CONSUMER_KEY).setOAuthConsumerSecret(TWITTER_CONSUMER_SECRET);
+	    builder.setOAuthConsumerKey(TWITTER_OAUTH_TOKEN).setOAuthConsumerSecret(TWITTER_OAUTH_TOKEN_SECRET);
         OAuth2Token token = new TwitterFactory(builder.build()).getInstance().getOAuth2Token();
         
         ConfigurationBuilder cb = new ConfigurationBuilder();
@@ -152,7 +153,7 @@ public class TwitterActivity extends Activity
 		}
 		catch(Exception e)
 		{
-			
+			e.printStackTrace();
 		}
 //        builder.setOAuthConsumerKey(TWITTER_CONSUMER_KEY);
 //	    builder.setOAuthConsumerSecret(TWITTER_CONSUMER_SECRET);
