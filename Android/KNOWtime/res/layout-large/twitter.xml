@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="10dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingTop="10dp" >
+
+    <ImageView
+        android:id="@+id/twitterIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:contentDescription="Twitter Icon" />
+
+    <TextView
+        android:id="@+id/twitterName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/twitterIcon"
+        android:paddingLeft="5dp"
+        android:text="Metro Transit"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#aaaaaa" />
+
+    <TextView
+        android:id="@+id/twitterScreenName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/twitterName"
+        android:paddingLeft="5dp"
+        android:text="halifax"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#aaaaaa" />
+
+    <TextView
+        android:id="@+id/twitterDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="date"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#ff735f" />
+
+    <TextView
+        android:id="@+id/twitterMainText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/twitterName"
+        android:layout_toRightOf="@+id/twitterIcon"
+        android:paddingLeft="5dp"
+        android:text="Text"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/twitterRetweetButton"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_below="@+id/twitterMainText"
+        android:layout_toLeftOf="@+id/twitterFavoriteButton"
+        android:background="@null"
+        android:drawableLeft="@drawable/twitter_retweet"
+        android:text="Retweet"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#aaaaaa" />
+
+    <Button
+        android:id="@+id/twitterFavoriteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignRight="@+id/twitterDate"
+        android:layout_below="@+id/twitterMainText"
+        android:background="@null"
+        android:drawableLeft="@drawable/twitter_favorite"
+        android:text="Favorite"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#aaaaaa" />
+
+</RelativeLayout>
