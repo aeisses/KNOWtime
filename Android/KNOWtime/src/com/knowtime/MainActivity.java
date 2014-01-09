@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import com.flurry.android.FlurryAgent;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
@@ -46,7 +47,7 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
     	WebApiService.fetchAllRoutes();
     	showStops = true;
 		mContext = getApplicationContext();
-
+		
 		if (mMap == null) {
 			mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map1)).getMap();
 
