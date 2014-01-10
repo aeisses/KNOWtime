@@ -8,12 +8,19 @@ import org.json.JSONObject;
 import com.flurry.android.FlurryAgent;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
+import android.os.Messenger;
+import android.os.RemoteException;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -32,38 +39,74 @@ public class ShareMeActivity extends Activity
 	private ImageView sendingLineImage;
 	Date startTime;
 	int loopCounter;
+	Messenger mService = null;
+    boolean mIsBound;
+	final Messenger mMessenger = new Messenger(new IncomingHandler());
 	
-	private boolean isSendingLocations()
-	{
-		Date currentDate = new Date();
-		long diffTime = currentDate.getTime() - startTime.getTime();
-		return isSharing && diffTime < 108000000;
+	class IncomingHandler extends Handler {
+		@Override
+		public void handleMessage(Message msg) {
+//			switch (msg.what) {
+			
+//			}
+			Log.d("com.knowtime"," "+msg);
+			super.handleMessage(msg);
+		}
 	}
 	
-	private final Runnable mUpdateUI = new Runnable() {
-		public void run() {
-			if (isSendingLocations())
-			{
-				if (loopCounter == 0)
-				{
-					sendingLineImage.setImageResource(R.drawable.sending1);
-					loopCounter++;
-				}
-				else if (loopCounter == 1)
-				{
-					sendingLineImage.setImageResource(R.drawable.sending2);
-					loopCounter++;
-				}
-				else
-				{
-					sendingLineImage.setImageResource(R.drawable.sending3);
-					shareMyLocation();
-					loopCounter = 0;
-				}
-				mHandler.postDelayed(mUpdateUI, (pollRate*1000)/3); // 1 second
-			}
+    private ServiceConnection mConnection = new ServiceConnection() {
+        public void onServiceConnected(ComponentName className, IBinder service) {
+            mService = new Messenger(service);
+//            textStatus.setText("Attached.");
+            try {
+                Message msg = Message.obtain(null, PassiveLocationChangedReceiver.MSG_REGISTER_CLIENT);
+                msg.replyTo = mMessenger;
+                mService.send(msg);
+            } catch (RemoteException e) {
+                // In this case the service has crashed before we could even do anything with it
+            }
+        }
+
+        public void onServiceDisconnected(ComponentName className) {
+            // This is called when the connection with the service has been unexpectedly disconnected - process crashed.
+            mService = null;
+//            textStatus.setText("Disconnected.");
         }
     };
+    
+//	private boolean isSendingLocations()
+//	{
+//		Date currentDate = new Date();
+//		long diffTime = currentDate.getTime() - startTime.getTime();
+//		return isSharing && diffTime < 108000000;
+//	}
+	
+//	private final Runnable mUpdateUI = new Runnable() {
+//		public void run() {
+//			if (isSendingLocations())
+//			{
+//				if (loopCounter == 0)
+//				{
+//					sendingLineImage.setImageResource(R.drawable.sending1);
+//					loopCounter++;
+//				}
+//				else if (loopCounter == 1)
+//				{
+//					sendingLineImage.setImageResource(R.drawable.sending2);
+//					loopCounter++;
+//				}
+//				else
+//				{
+//					sendingLineImage.setImageResource(R.drawable.sending3);
+//					shareMyLocation();
+//					loopCounter = 0;
+//				}
+//				mHandler.postDelayed(mUpdateUI, (pollRate*1000)/3); // 1 second
+//			}
+//        }
+//    };
+    
+	
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -108,6 +151,7 @@ public class ShareMeActivity extends Activity
 				return false;
 			}
 		});
+		CheckIfServiceIsRunning();
 	}
 	
 	@Override
@@ -130,9 +174,29 @@ public class ShareMeActivity extends Activity
 		super.onResume();
 	}
 	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		try {
+			doUnbindService();
+		} catch (Throwable t) {
+			Log.e("ShareMeActivity","Failed to unbind from the service",t);
+		}
+	}
+	
 	public void touchBackButton(View view)
 	{
 		this.finish();
+	}
+	
+	private void CheckIfServiceIsRunning() {
+		// If the service is running when the activity starts, we want to automatically bind to it.
+		if (PassiveLocationChangedReceiver.isRunning()) {
+			doBindService();
+			startSharing();
+		} else {
+			stopSharing();
+		}
 	}
 	
 	private void startSharing()
@@ -173,7 +237,7 @@ public class ShareMeActivity extends Activity
     					e.printStackTrace();
     				}
     		    	startTime = new Date();
-					mHandler.post(mUpdateUI);
+//					mHandler.post(mUpdateUI);
     			}
     			else
     			{
@@ -209,5 +273,28 @@ public class ShareMeActivity extends Activity
     			FlurryAgent.logEvent("Touched the tracking button for Route: "+routeNumber);
     		}
     	}
+    }
+    
+    void doBindService() {
+        bindService(new Intent(this, PassiveLocationChangedReceiver.class), mConnection, Context.BIND_AUTO_CREATE);
+        mIsBound = true;
+//        textStatus.setText("Binding.");
+    }
+    void doUnbindService() {
+        if (mIsBound) {
+            // If we have received the service, and hence registered with it, then now is the time to unregister.
+            if (mService != null) {
+                try {
+                    Message msg = Message.obtain(null, PassiveLocationChangedReceiver.MSG_UNREGISTER_CLIENT);
+                    msg.replyTo = mMessenger;
+                    mService.send(msg);
+                } catch (RemoteException e) {
+                    // There is nothing special we need to do if the service has crashed.
+                }
+            }
+            // Detach our existing connection.
+            unbindService(mConnection);
+            mIsBound = false;
+        }
     }
 }
