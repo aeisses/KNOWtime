@@ -22,7 +22,6 @@ import android.widget.TextView;
 
 import java.util.HashMap;
 import com.flurry.android.FlurryAgent;
-import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 public class MainActivity extends Activity implements GoogleMap.OnCameraChangeListener, LoaderManager.LoaderCallbacks<HashMap<String, MarkerOptions>> {
 
@@ -31,7 +30,7 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
     public static final LatLng DEFAULT_HALIFAX_LAT_LNG = new LatLng(44.67600, -63.60800);
     public static final int DEFAULT_HALIFAX_LAT_LNG_ZOOM = 15;
     private HashMap<String, Marker> busStopMarkers = new HashMap<String, Marker>();
-    private SlidingMenu hamburgerMenu;
+    //private SlidingMenu hamburgerMenu;
     private Boolean showStops;
     private ProgressBar mapMarkerProgressBar;
 	private TextView mapMarkerProgressBarText;
@@ -65,11 +64,11 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
 				mMap.setOnInfoWindowClickListener(getInfoWindowClickListener());
 			}
 		}
-		hamburgerMenu = new SlidingMenu(this);
-		hamburgerMenu.setMode(SlidingMenu.LEFT);
-		hamburgerMenu.setBehindWidth(250);
-		hamburgerMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
-		hamburgerMenu.setMenu(R.layout.menu);
+//		hamburgerMenu = new SlidingMenu(this);
+//		hamburgerMenu.setMode(SlidingMenu.LEFT);
+//		hamburgerMenu.setBehindWidth(250);
+//		hamburgerMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
+//		hamburgerMenu.setMenu(R.layout.menu);
 
 		refreshBusStopMarkers(null);
 	}
@@ -192,26 +191,26 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
 	
 	public void touchHamburgerMenuButton(View view)
 	{
-		if (hamburgerMenu.isMenuShowing())
-		{
-			hamburgerMenu.showContent();
-		} else {
-			hamburgerMenu.showMenu();
-		}
+//		if (hamburgerMenu.isMenuShowing())
+//		{
+//			hamburgerMenu.showContent();
+//		} else {
+////			hamburgerMenu.showMenu();
+//		}
 	}
 
 	public void touchShareMeButton(View view)
 	{
 		Intent intent = new Intent(MainActivity.this,ShareMeActivity.class);
 		startActivity(intent);
-		hamburgerMenu.showContent(false);
+//		hamburgerMenu.showContent(false);
 	}
 	
 	public void touchAboutButton(View view)
 	{
 		Intent intent = new Intent(MainActivity.this,AboutActivity.class);
 		startActivity(intent);
-		hamburgerMenu.showContent(false);
+//		hamburgerMenu.showContent(false);
 	}
 	
 	public void touchStopsButton(View view)
@@ -224,20 +223,20 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
 	{
 		Intent intent = new Intent(MainActivity.this,FavouriteActivity.class);
 		startActivity(intent);
-		hamburgerMenu.showContent(false);
+//		hamburgerMenu.showContent(false);
 	}
 	
 	public void touchHfxTransitButton(View view)
 	{
-		Intent intent = new Intent(MainActivity.this,TwitterActivity.class);
-		startActivity(intent);
-		hamburgerMenu.showContent(false);
+//		Intent intent = new Intent(MainActivity.this,TwitterActivity.class);
+//		startActivity(intent);
+//		hamburgerMenu.showContent(false);
 	}
 	
 	public void privacyPolicyButton(View view)
 	{
 		Intent intent = new Intent(MainActivity.this,PrivacyPolicyActivity.class);
 		startActivity(intent);
-		hamburgerMenu.showContent(false);
+//		hamburgerMenu.showContent(false);
 	}
 }

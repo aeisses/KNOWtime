@@ -10,16 +10,6 @@
         android:layout_height="match_parent"
     	class="com.google.android.gms.maps.MapFragment"/>
 
-     <ImageButton
-        android:id="@+id/backbutton"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/backbuttonfull"
-        android:contentDescription="@string/back_button_contentdescription"
-        android:onClick="touchBackButton" />
-
      <ProgressBar
         android:id="@+id/routesProgressBar"
         style="?android:attr/progressBarStyleLarge"

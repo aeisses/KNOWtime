@@ -3,23 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/background" >
-    
-    <ImageButton
-        android:id="@+id/backbutton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/backbuttonfull"
-        android:contentDescription="@string/back_button_contentdescription"
-        android:onClick="touchBackButton" />
-
-    <ImageView
-        android:id="@+id/onmywayimage"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dip"
-        android:contentDescription="@string/onmy_image"
-        android:src="@drawable/onmywayimage" />
+    android:background="@drawable/backgroundonmyway" >
       
     <ImageView
         android:id="@+id/sendingimage"

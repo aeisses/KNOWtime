@@ -130,11 +130,6 @@ public class ShareMeActivity extends Activity
 		super.onResume();
 	}
 	
-	public void touchBackButton(View view)
-	{
-		this.finish();
-	}
-	
 	private void startSharing()
 	{
 		onMyWayButton.setBackgroundResource(R.drawable.stop);

@@ -5,20 +5,12 @@
     android:background="@drawable/background"
     android:orientation="vertical" >
 
-    <ImageButton
-        android:id="@+id/backbutton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/backbuttonfull"
-        android:contentDescription="@string/back_button_contentdescription"
-        android:onClick="touchBackButton" />
-
     <ImageView
         android:id="@+id/stopsHeader"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:contentDescription="@string/stops_table_header"
-        android:src="@drawable/stopstable" />
+        android:src="@drawable/stopstableheader" />
 
     <TableLayout
         android:id="@+id/stopsTable"
@@ -37,7 +29,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:contentDescription="@string/routes_table_header"
-        android:src="@drawable/routestable" />
+        android:src="@drawable/routestableheader" />
 
     <TableLayout
         android:id="@+id/routesTable"

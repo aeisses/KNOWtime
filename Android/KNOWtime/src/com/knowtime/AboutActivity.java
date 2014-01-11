@@ -29,11 +29,6 @@ public class AboutActivity extends Activity {
 		FlurryAgent.onEndSession(this);
 	}
 	
-	public void touchBackButton(View view)
-	{
-		this.finish();
-	}
-	
 	public void touchTwitterButton(View view)
 	{
 		

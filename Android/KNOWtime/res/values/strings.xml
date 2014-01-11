@@ -37,9 +37,11 @@ When you join our community, we’ll get you where you want to go in KNOWtime.\n
 	<string name="menu_shareme_button">Share Me Button</string>
 	<string name="menu_stops_button">Stops Button</string>
 	<string name="menu_favourite_button">Favourite Button</string>
+	<string name="submit_button">Submit Button</string>
 	<string name="route_favourite_button">Favourite Button</string>
-	<string name="menu_twitter_button">Twitter Button</string>
+	<string name="menu_routes_button">Route Button</string>
 	<string name="menu_privacy_policy">Privacy Policy Button</string>
+	<string name="screen_header">Screen Header</string>
 	<string name="menu_arrow">Menu Arrow</string>
 	<string name="privacy_policy">Privacy Policy</string>
 	<string name="privacy_policy_text">KNOWtime Transit© End User License Agreement, Privacy Policy and Disclaimer\n\n
@@ -57,4 +59,5 @@ Last modified: 27th November 2013</string>
     <string name="loading_stops">Loading Stops ....</string>
     <string name="stops_header_default">Stops Header</string>
 	<string name="route_selector_default_number">99</string>
+	<string name="route_selector_default_value"></string>
 </resources>

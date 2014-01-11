@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroundmenu" >
+
+    <ImageView
+        android:id="@+id/screenheader"
+        android:layout_width="fill_parent"
+        android:layout_height="65dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/uptodownbutton"
+        android:contentDescription="@string/screen_header" />
+    
+    <ImageButton
+        android:id="@+id/sharemebutton"
+        android:layout_width="wrap_content"
+        android:layout_height="125dip"
+        android:layout_above="@+id/trackmybutton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/sharemebutton"
+        android:contentDescription="@string/menu_shareme_button"
+        android:onClick="touchShareMeButton" />
+
+    <ImageButton
+        android:id="@+id/trackmybutton"
+        android:layout_width="wrap_content"
+        android:layout_height="125dip"
+        android:layout_above="@+id/stopsbutton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/trackmybusbutton"
+        android:contentDescription="@string/menu_routes_button"
+        android:onClick="touchTrackMyBusButton" />
+
+ 	<ImageButton
+ 	    android:id="@+id/stopsbutton"
+ 	    android:layout_width="wrap_content"
+ 	    android:layout_height="125dip"
+ 	    android:layout_above="@+id/favouritebutton"
+ 	    android:layout_alignParentLeft="true"
+ 	    android:layout_alignParentRight="true"
+ 	    android:background="@drawable/stopsbutton"
+        android:contentDescription="@string/menu_stops_button"
+        android:onClick="touchStopsButton" />
+        
+    <ImageButton
+        android:id="@+id/favouritebutton"
+        android:layout_width="wrap_content"
+        android:layout_height="125dip"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/favouritesbutton"
+        android:contentDescription="@string/menu_favourite_button"
+        android:onClick="touchFavouriteButton" />
+
+    <ImageButton
+        android:id="@+id/imageButton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/screenheader"
+        android:layout_marginTop="57dp"
+        android:background="@drawable/aboutbutton"
+        android:contentDescription="@string/menu_about_button"
+        android:onClick="touchAboutButton" />
+
+</RelativeLayout>

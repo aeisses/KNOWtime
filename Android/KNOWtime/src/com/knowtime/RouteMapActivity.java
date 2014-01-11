@@ -97,6 +97,8 @@ public class RouteMapActivity extends Activity {
 	protected void onStop()
 	{
 		super.onStop();
+		route.setFavourite(favouriteButton.isSelected());
+		DatabaseHandler.getInstance().updateRoute(route);
 		FlurryAgent.onEndSession(this);
 	}
 	
@@ -164,13 +166,6 @@ public class RouteMapActivity extends Activity {
             }
         });
 		thread.start();
-	}
-	
-	public void touchBackButton(View view)
-	{
-		route.setFavourite(favouriteButton.isSelected());
-		DatabaseHandler.getInstance().updateRoute(route);
-		this.finish();
 	}
 	
 	public void touchFavouriteButton(View view)

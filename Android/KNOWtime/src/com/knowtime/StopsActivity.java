@@ -58,6 +58,8 @@ public class StopsActivity extends Activity {
 	protected void onStart()
 	{
 		super.onStart();
+		stop.setFavourite(favouriteButton.isSelected());
+		DatabaseHandler.getInstance().updateStop(stop);
 		FlurryAgent.onStartSession(this, "54VCHBRBYDDP5VT63WFB");
 	}
 	
@@ -190,13 +192,6 @@ public class StopsActivity extends Activity {
             }
         });
         thread.start();
-	}
-	
-	public void touchBackButton(View view)
-	{
-		stop.setFavourite(favouriteButton.isSelected());
-		DatabaseHandler.getInstance().updateStop(stop);
-		this.finish();
 	}
 	
 	public void touchFavouriteButton(View view)

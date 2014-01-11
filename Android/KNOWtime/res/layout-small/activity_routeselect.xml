@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/backgroundtracksmall" >
+
+    <ImageButton
+        android:id="@+id/screenheader"
+        android:layout_width="fill_parent"
+        android:layout_height="35dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/uptodownbutton"
+        android:contentDescription="@string/screen_header" />
+        
+    <ImageButton
+        android:id="@+id/imageButton1"
+        android:layout_width="fill_parent"
+        android:layout_height="60dip"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/routescreenbutton"
+        android:contentDescription="@string/routedefault"
+        android:onClick="touchRouteButton" />
+
+    <ImageButton
+        android:id="@+id/submitButton"
+        android:layout_width="80dip"
+        android:layout_height="60dip"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/submitbutton"
+        android:contentDescription="@string/submit_button"
+        android:onClick="touchSubmitButton" />
+
+    <TextView
+        android:id="@+id/routeNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:textColor="@color/colourblack"
+        android:textSize="20sp"
+        android:text="@string/route_selector_default_value" />
+
+</RelativeLayout>
