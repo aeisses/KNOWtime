@@ -4,9 +4,12 @@ import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.util.Log;
 
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
 import java.util.HashMap;
+import java.util.List;
 
 public class StopsMarkerLoader extends AsyncTaskLoader<HashMap<String, MarkerOptions>> {
 
@@ -16,6 +19,7 @@ public class StopsMarkerLoader extends AsyncTaskLoader<HashMap<String, MarkerOpt
     private double topLng;
     private float zoom;
     private boolean showStops;
+	private DatabaseHandler db;
     private static HashMap<String, MarkerOptions> storedStopMarkers = new HashMap<String, MarkerOptions>();
 
     public StopsMarkerLoader(Context context, double bottomLat, double bottomLng, double topLat, double topLng, float zoom, boolean showStops) {
@@ -26,16 +30,28 @@ public class StopsMarkerLoader extends AsyncTaskLoader<HashMap<String, MarkerOpt
         this.topLng = topLng;
         this.zoom = zoom;
         this.showStops = showStops;
+        db = DatabaseHandler.getInstance();
+
     }
 
-    @Override
-    public HashMap<String, MarkerOptions> loadInBackground() {
-        if (storedStopMarkers.size() == 0)
-        {
-        	storedStopMarkers = WebApiService.fetchAllStops();
-        }
-        return limitMarkerByBounds(storedStopMarkers);
-    }
+	@Override
+	public HashMap<String, MarkerOptions> loadInBackground() {
+		if (storedStopMarkers.size() == 0) {
+			List<Stop> stops;
+			if (db.getStopsCount() > 0) {
+				 stops =  db.getAllStops();
+				storedStopMarkers = createStopMarker(stops);
+				Log.d(getClass().getCanonicalName(), "DB Stop Size:"+stops.size());
+			} else {
+				stops =  WebApiService.fetchAllStops();
+				storedStopMarkers = createStopMarker(stops);
+				//adding to Database on a background thread
+				addStop(stops);
+				Log.d(getClass().getCanonicalName(), "External DB Stop Size:"+stops.size());
+			}
+		}
+		return limitMarkerByBounds(storedStopMarkers);
+	}
 
     private HashMap<String, MarkerOptions> limitMarkerByBounds(HashMap<String, MarkerOptions> busMarker) {
         HashMap<String, MarkerOptions> resultMarker = new HashMap<String, MarkerOptions>();
@@ -67,4 +83,35 @@ public class StopsMarkerLoader extends AsyncTaskLoader<HashMap<String, MarkerOpt
         Log.d(getClass().getCanonicalName(), "limited result size :" + resultMarker.size());
         return resultMarker;
     }
+    
+	private HashMap<String, MarkerOptions> createStopMarker(List<Stop> stops) {
+		HashMap<String, MarkerOptions> hashMap = new HashMap<String, MarkerOptions>();
+
+		MarkerOptions markerStops;
+
+		for (Stop stop : stops) {
+			markerStops = new MarkerOptions();
+			markerStops.draggable(false);
+			markerStops.anchor(.6f, .6f);
+
+			markerStops.icon(BitmapDescriptorFactory.fromResource(R.drawable.bus_stop));
+			markerStops.position(new LatLng(stop.getLat(), stop.getLng()));
+
+			markerStops.snippet(stop.getCode());
+			markerStops.title(stop.getName());
+
+			// Adding marker to the result HashMap.
+			hashMap.put(stop.getCode(), markerStops);
+
+		}
+		return hashMap;
+	}
+	
+	private void addStop(final List<Stop> stops) {
+		new Thread(new Runnable() {
+	        public void run() {
+	        	db.addAllStop(stops);
+	        }
+	    }).start();
+	}
 }

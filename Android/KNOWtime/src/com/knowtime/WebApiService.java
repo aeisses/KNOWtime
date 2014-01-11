@@ -1,5 +1,6 @@
 package com.knowtime;
 
+import android.database.Cursor;
 import android.location.Location;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -26,6 +27,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -79,13 +81,13 @@ public class WebApiService {
         thread.start();
     }
 
-    public static HashMap<String, MarkerOptions> fetchAllStops()
+    public static List<Stop> fetchAllStops()
     {
-        HashMap<String, MarkerOptions> hashMap = new HashMap<String, MarkerOptions>();
-
+//        HashMap<String, MarkerOptions> hashMap = new HashMap<String, MarkerOptions>();
+        List<Stop> stopList = new ArrayList<Stop>();
         try
         {
-                    MarkerOptions markerStops;
+//                    MarkerOptions markerStops;
                     stopsJSONArray = getJSONArrayFromUrl(SANGSTERBASEURL+STOPS);
                     for (int i=0; i<stopsJSONArray.length(); i++)
                     {
@@ -96,28 +98,30 @@ public class WebApiService {
                     			stopJSON.getString("name"),
                     			Double.parseDouble(locationJSON.getString("lat")),
                     			Double.parseDouble(locationJSON.getString("lng")));
-                    	if (DatabaseHandler.getInstance().getStop(stop.getCode()) == null)
-                    	{
-                    		DatabaseHandler.getInstance().addStop(stop);
-                    	}
-                    	markerStops = new MarkerOptions();
+                    	stopList.add(stop);
+//                    	if (DatabaseHandler.getInstance().getStop(stop.getCode()) == null)
+//                    	{
+//                    		DatabaseHandler.getInstance().addStop(stop);
+//                    	}
                     	
-                        markerStops.draggable(false);
-                        markerStops.anchor(.6f, .6f);
-
-                        markerStops.icon(BitmapDescriptorFactory.fromResource(R.drawable.bus_stop));
-                        markerStops.position(new LatLng(stop.getLat(), stop.getLng()));
-
-                        markerStops.snippet(stop.getCode());
-                        markerStops.title(stop.getName());
-
-                        // Adding marker to the result HashMap.
-                        hashMap.put(stop.getCode(), markerStops);
+//                    	markerStops = new MarkerOptions();
+//                    	
+//                        markerStops.draggable(false);
+//                        markerStops.anchor(.6f, .6f);
+//
+//                        markerStops.icon(BitmapDescriptorFactory.fromResource(R.drawable.bus_stop));
+//                        markerStops.position(new LatLng(stop.getLat(), stop.getLng()));
+//
+//                        markerStops.snippet(stop.getCode());
+//                        markerStops.title(stop.getName());
+//
+//                        // Adding marker to the result HashMap.
+//                        hashMap.put(stop.getCode(), markerStops);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                return hashMap;
+                return stopList;
     }
 
     public static JSONArray getEstimatesForRoute(final int routeId)
