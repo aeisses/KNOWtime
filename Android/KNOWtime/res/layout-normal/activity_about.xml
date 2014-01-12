@@ -1,76 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@color/colourtextgrey"
     android:orientation="vertical" >
 
-    <ImageButton
-        android:id="@+id/backButton"
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/screenheader"
+        android:layout_width="fill_parent"
+        android:layout_height="45dip"
+        android:background="@drawable/uptodownbutton"
+        android:contentDescription="@string/screen_header" />
+
+    <ImageView
+        android:id="@+id/sidebar"
+        android:layout_width="5dip"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/back_button_contentdescription"
-        android:onClick="touchBackButton"
-        android:background="@drawable/backbuttonfull" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/screenheader"
+        android:contentDescription="@string/about_screen_arrow"
+        android:background="@color/colourblack" />
+
+    <ImageView
+        android:id="@+id/arrow1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/arrow2"
+        android:layout_marginBottom="15dip"
+        android:layout_alignLeft="@+id/sidebar"
+        android:contentDescription="@string/about_screen_arrow"
+        android:src="@drawable/explaination" />
+
+    <ImageView
+        android:id="@+id/arrow2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/arrow3"
+        android:layout_marginBottom="15dip"
+        android:layout_alignLeft="@+id/sidebar"
+        android:contentDescription="@string/about_screen_arrow"
+        android:src="@drawable/explaination" />
+
+    <ImageView
+        android:id="@+id/arrow3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/arrow4"
+        android:layout_marginBottom="15dip"
+        android:layout_alignLeft="@+id/sidebar"
+        android:contentDescription="@string/about_screen_arrow"
+        android:src="@drawable/explaination" />
+
+    <ImageView
+        android:id="@+id/arrow4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/sidebar"
+        android:layout_marginBottom="15dip"
+        android:layout_alignParentBottom="true"
+        android:contentDescription="@string/about_screen_arrow"
+        android:src="@drawable/explaination" />
 
     <TextView
-        android:id="@+id/aboutTextView"
+        android:id="@+id/text1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/about"
+        android:layout_alignTop="@+id/arrow1"
+        android:layout_alignLeft="@+id/arrow1"
+        android:layout_marginLeft="45dip"
+        android:layout_marginTop="15dip"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/colourwhite"
+        android:text="@string/about_screen_shareme" />
+
+    <TextView
+        android:id="@+id/text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/arrow2"
+        android:layout_marginLeft="45dip"
+        android:layout_marginTop="15dip"
+        android:layout_alignTop="@+id/arrow2"
+        android:textColor="@color/colourwhite"
+        android:text="@string/about_screen_trackme" />
+
+    <TextView
+        android:id="@+id/text3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/arrow3"
+        android:layout_marginLeft="45dip"
+        android:layout_marginTop="15dip"
+        android:layout_alignTop="@+id/arrow3"
+        android:textColor="@color/colourwhite"
+        android:text="@string/about_screen_stops" />
+
+    <TextView
+        android:id="@+id/text4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/arrow4"
+        android:layout_marginLeft="45dip"
+        android:layout_marginTop="15dip"
+        android:layout_alignTop="@+id/arrow4"
+        android:textColor="@color/colourwhite"
+        android:text="@string/about_screen_favourite" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/sidebar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp"
+        android:text="@string/about_screen_title"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <ScrollView
-        android:id="@+id/scrollView"
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
-        android:layout_height="0dip"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_weight="1.14" >
-        
-    	<TextView
-        	android:id="@+id/aboutBodyView"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:scrollbars="vertical"
-        	android:text="@string/about_view" />
-    </ScrollView>
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:layout_marginRight="45dip"
+        android:layout_marginLeft="45dip"
+        android:text="@string/about_screen_header"
+        android:textColor="@color/colourwhite" />
+
+    <ImageButton
+        android:id="@+id/imageButton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/textView1"
+        android:layout_marginRight="18dp"
+        android:background="@drawable/mailbutton"
+        android:onClick="touchFeedbackButton"
+        android:contentDescription="@string/feedback_button" />
     
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <ImageButton
-            android:id="@+id/twitterButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/twitter_button"
-            android:contentDescription="@string/twitter_button"
-            android:onClick="touchTwitterButton" />
-
-        <ImageButton
-            android:id="@+id/facebookButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/facebook_button"
-            android:contentDescription="@string/facebook_button"
-            android:onClick="touchFacebookButton" />
-
-        <ImageButton
-            android:id="@+id/feedbackButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/feedback_button"
-            android:contentDescription="@string/feedback_button"
-            android:onClick="touchFeedbackButton" />
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

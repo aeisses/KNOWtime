@@ -60,4 +60,11 @@ Last modified: 27th November 2013</string>
     <string name="stops_header_default">Stops Header</string>
 	<string name="route_selector_default_number">99</string>
 	<string name="route_selector_default_value"></string>
+	<string name="about_screen_header">KNOWtime uses crowd-sourced GPS data to share real-time tracking information between riders on Halifax Metro Transit buses.</string>
+	<string name="about_screen_shareme">Click "Share My Ride" to share your GPS info from your bus.</string>
+	<string name="about_screen_trackme">Use "Track My Bus" to check the location of the next bus on your route.</string>
+	<string name="about_screen_stops">Click "My Stops" to review Halifax Metro Transit\'s scheduled arrival times at each bus stop.</string>
+	<string name="about_screen_favourite">Store preferred stops and routes under "My Favourites".</string>
+	<string name="about_screen_title">ABOUT</string>
+	<string name="about_screen_arrow">Arrow</string>
 </resources>

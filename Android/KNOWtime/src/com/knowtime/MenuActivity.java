@@ -26,7 +26,8 @@ public class MenuActivity extends Activity {
 	
 	public void touchAboutButton(View view)
 	{
-		
+		Intent intent = new Intent(MenuActivity.this,AboutActivity.class);
+		startActivity(intent);
 	}
 	
 	public void touchShareMeButton(View view)

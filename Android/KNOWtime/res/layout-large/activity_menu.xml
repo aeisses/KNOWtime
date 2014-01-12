@@ -61,9 +61,10 @@
         android:id="@+id/imageButton1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
         android:layout_below="@+id/screenheader"
-        android:layout_marginTop="57dp"
+        android:layout_marginLeft="147dp"
+        android:layout_marginTop="64dp"
         android:background="@drawable/aboutbutton"
         android:contentDescription="@string/menu_about_button"
         android:onClick="touchAboutButton" />
