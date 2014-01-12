@@ -6,7 +6,6 @@ import java.util.List;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -65,33 +64,35 @@ public class DatabaseHandler extends SQLiteOpenHelper
 		onCreate(db);
 	}
 	
-	public synchronized void addAllStop(List<Stop> stops) {
-		for (Stop stop : stops) {
-			addStop(stop);
+	public synchronized void addAllStop(List<Stop> stops){
+		for (Stop stop: stops){
+//        	if (getStop(stop.getCode()) == null)
+//			{
+        		addStop(stop);
+//			}
 		}
 	}
 	
-	public void addStop(Stop stop) {
+	public void addStop(Stop stop)
+	{
 		SQLiteDatabase db = this.getWritableDatabase();
-
-		try {
-			ContentValues values = new ContentValues();
-			values.put(KEY_CODE, stop.getCode());
-			values.put(KEY_NAME, stop.getName());
-			values.put(KEY_LATITUDE, "" + stop.getLat());
-			values.put(KEY_LONGITUDE, "" + stop.getLng());
-			if (stop.getFavourite()) {
-				values.put(KEY_FAVOURITE, "1");
-			} else {
-				values.put(KEY_FAVOURITE, "0");
-			}
-
-			db.insertWithOnConflict(TABLE_STOP, null, values, SQLiteDatabase.CONFLICT_IGNORE);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			db.close();
+		
+		ContentValues values = new ContentValues();
+		values.put(KEY_CODE, stop.getCode());
+		values.put(KEY_NAME, stop.getName());
+		values.put(KEY_LATITUDE, ""+stop.getLat());
+		values.put(KEY_LONGITUDE, ""+stop.getLng());
+		if (stop.getFavourite())
+		{
+			values.put(KEY_FAVOURITE, "1");
 		}
+		else
+		{
+			values.put(KEY_FAVOURITE, "0");
+		}
+		
+		db.insertWithOnConflict(TABLE_STOP, null, values, SQLiteDatabase.CONFLICT_IGNORE);
+		db.close();
 	}
 	
 	public void addRoute(Route route)
@@ -132,7 +133,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
 				stop = new Stop(cursor.getString(0),cursor.getString(1),Double.parseDouble(cursor.getString(2)),Double.parseDouble(cursor.getString(3)),isFavourite);
 			}
 		} catch (Exception e) {
-//			e.printStackTrace();
+			e.printStackTrace();
 		} finally {
 			db.close();
 		}
@@ -168,33 +169,27 @@ public class DatabaseHandler extends SQLiteOpenHelper
 		List<Stop> stopList = new ArrayList<Stop>();
 		
 		SQLiteDatabase db = this.getWritableDatabase();
-		try {
-			Cursor cursor = db.rawQuery(selectQuery, null);
-			if (cursor.moveToFirst()) 
+		Cursor cursor = db.rawQuery(selectQuery, null);
+		if (cursor.moveToFirst()) 
+		{
+			do 
 			{
-				do 
+				Stop stop = new Stop();
+				stop.setCode(cursor.getString(0));
+				stop.setName(cursor.getString(1));
+				stop.setLat(Double.parseDouble(cursor.getString(2)));
+				stop.setLng(Double.parseDouble(cursor.getString(3)));
+				if (cursor.getString(4).equals("1"))
 				{
-					Stop stop = new Stop();
-					stop.setCode(cursor.getString(0));
-					stop.setName(cursor.getString(1));
-					stop.setLat(Double.parseDouble(cursor.getString(2)));
-					stop.setLng(Double.parseDouble(cursor.getString(3)));
-					if (cursor.getString(4).equals("1"))
-					{
-						stop.setFavourite(true);
-					}
-					else
-					{
-						stop.setFavourite(false);
-					}
-					stopList.add(stop);
+					stop.setFavourite(true);
 				}
-				while (cursor.moveToNext());
+				else
+				{
+					stop.setFavourite(false);
+				}
+				stopList.add(stop);
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			db.close();
+			while (cursor.moveToNext());
 		}
 		
 		return stopList;
@@ -216,34 +211,29 @@ public class DatabaseHandler extends SQLiteOpenHelper
 	{
 		List<Route> routeList = new ArrayList<Route>();		
 		SQLiteDatabase db = this.getWritableDatabase();
-		try {
-			Cursor cursor = db.rawQuery(selectQuery, null);
-			
-			if (cursor.moveToFirst())
+		Cursor cursor = db.rawQuery(selectQuery, null);
+		
+		if (cursor.moveToFirst())
+		{
+			do
 			{
-				do
+				Route route = new Route();
+				route.setShortName(cursor.getString(0));
+				route.setLongName(cursor.getString(1));
+				route.setId(cursor.getString(2));
+				if (cursor.getString(3).equals("1"))
 				{
-					Route route = new Route();
-					route.setShortName(cursor.getString(0));
-					route.setLongName(cursor.getString(1));
-					route.setId(cursor.getString(2));
-					if (cursor.getString(3).equals("1"))
-					{
-						route.setFavourite(true);
-					}
-					else
-					{
-						route.setFavourite(false);
-					}
-					routeList.add(route);
+					route.setFavourite(true);
 				}
-				while (cursor.moveToNext());
+				else
+				{
+					route.setFavourite(false);
+				}
+				routeList.add(route);
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			db.close();
+			while (cursor.moveToNext());
 		}
+		
 		return routeList;
 	}
 	
@@ -326,10 +316,9 @@ public class DatabaseHandler extends SQLiteOpenHelper
 
 	public int getStopsCount() {
 		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.rawQuery("SELECT count(*) from "+TABLE_STOP, null);
 		int count = 0;
 		try {
-			Cursor cursor = db.rawQuery("SELECT count(*) from " + TABLE_STOP, null);
-
 			cursor.moveToFirst();
 			count = cursor.getInt(0);
 		} catch (Exception e) {

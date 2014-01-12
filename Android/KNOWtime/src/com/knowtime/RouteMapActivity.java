@@ -100,7 +100,14 @@ public class RouteMapActivity extends Activity {
 	protected void onStop()
 	{
 		super.onStop();
-		mHandler.removeCallbacks(mUpdateUI);
+		try 
+		{
+			mHandler.removeCallbacks(mUpdateUI);
+		}
+		catch (Exception e)
+		{
+    		e.printStackTrace();
+		}
 		route.setFavourite(favouriteButton.isSelected());
 		DatabaseHandler.getInstance().updateRoute(route);
 		FlurryAgent.onEndSession(this);
