@@ -13,6 +13,13 @@
         android:contentDescription="@string/screen_header" />
         
     <ImageView
+        android:id="@+id/screenfiller"
+        android:layout_width="fill_parent"
+        android:layout_height="100dip"
+        android:background="@drawable/filler"
+        android:contentDescription="@string/screen_header" />
+       	
+    <ImageView
         android:id="@+id/sendingimage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
