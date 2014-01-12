@@ -66,10 +66,10 @@ public class DatabaseHandler extends SQLiteOpenHelper
 	
 	public synchronized void addAllStop(List<Stop> stops){
 		for (Stop stop: stops){
-        	if (getStop(stop.getCode()) == null)
-			{
+//        	if (getStop(stop.getCode()) == null)
+//			{
         		addStop(stop);
-			}
+//			}
 		}
 	}
 	
@@ -91,7 +91,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
 			values.put(KEY_FAVOURITE, "0");
 		}
 		
-		db.insert(TABLE_STOP, null, values);
+		db.insertWithOnConflict(TABLE_STOP, null, values, SQLiteDatabase.CONFLICT_IGNORE);
 		db.close();
 	}
 	

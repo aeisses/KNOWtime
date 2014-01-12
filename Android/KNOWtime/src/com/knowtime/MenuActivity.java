@@ -7,11 +7,14 @@ import android.view.View;
 
 public class MenuActivity extends Activity {
 
+	boolean buttonsEnabled;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_menu);
 		DatabaseHandler.getInstance(this);
+		buttonsEnabled = false;
     	WebApiService.fetchAllRoutes();
         Thread thread = new Thread(new Runnable()
         {
@@ -19,6 +22,7 @@ public class MenuActivity extends Activity {
             public void run()
             {
             	WebApiService.fetchAllStops();
+            	buttonsEnabled = true;
             }
         });
         thread.start();
@@ -26,31 +30,46 @@ public class MenuActivity extends Activity {
 	
 	public void touchAboutButton(View view)
 	{
-		Intent intent = new Intent(MenuActivity.this,AboutActivity.class);
-		startActivity(intent);
+		if (buttonsEnabled)
+		{
+			Intent intent = new Intent(MenuActivity.this,AboutActivity.class);
+			startActivity(intent);
+		}
 	}
 	
 	public void touchShareMeButton(View view)
 	{
-		Intent intent = new Intent(MenuActivity.this,ShareMeActivity.class);
-		startActivity(intent);
+		if (buttonsEnabled)
+		{
+			Intent intent = new Intent(MenuActivity.this,ShareMeActivity.class);
+			startActivity(intent);
+		}
 	}
 	
 	public void touchTrackMyBusButton(View view)
 	{
-		Intent intent = new Intent(MenuActivity.this,RouteSelectActivity.class);
-		startActivity(intent);
+		if (buttonsEnabled)
+		{
+			Intent intent = new Intent(MenuActivity.this,RouteSelectActivity.class);
+			startActivity(intent);
+		}
 	}
 	
 	public void touchStopsButton(View view)
 	{
-		Intent intent = new Intent(MenuActivity.this,MainActivity.class);
-		startActivity(intent);
+		if (buttonsEnabled)
+		{
+			Intent intent = new Intent(MenuActivity.this,MainActivity.class);
+			startActivity(intent);
+		}
 	}
 	
 	public void touchFavouriteButton(View view)
 	{
-		Intent intent = new Intent(MenuActivity.this,FavouriteActivity.class);
-		startActivity(intent);
+		if (buttonsEnabled)
+		{
+			Intent intent = new Intent(MenuActivity.this,FavouriteActivity.class);
+			startActivity(intent);
+		}
 	}
 }
