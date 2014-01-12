@@ -76,49 +76,26 @@ public class WebApiService {
         thread.start();
     }
 
-    public static List<Stop> fetchAllStops()
-    {
-//        HashMap<String, MarkerOptions> hashMap = new HashMap<String, MarkerOptions>();
-        List<Stop> stopList = new ArrayList<Stop>();
-        try
-        {
-//                    MarkerOptions markerStops;
-                    stopsJSONArray = getJSONArrayFromUrl(SANGSTERBASEURL+STOPS);
-                    for (int i=0; i<stopsJSONArray.length(); i++)
-                    {
-                    	JSONObject stopJSON = stopsJSONArray.getJSONObject(i);
-                    	JSONObject locationJSON = stopJSON.getJSONObject("location");
-                    	Stop stop = new Stop(
-                    			stopJSON.getString("stopNumber"),
-                    			stopJSON.getString("name"),
-                    			Double.parseDouble(locationJSON.getString("lat")),
-                    			Double.parseDouble(locationJSON.getString("lng")));
-                    	stopList.add(stop);
-//                    	if (DatabaseHandler.getInstance().getStop(stop.getCode()) == null)
-//                    	{
-//                    		DatabaseHandler.getInstance().addStop(stop);
-//                    	}
-                    	
-//                    	markerStops = new MarkerOptions();
-//                    	
-//                        markerStops.draggable(false);
-//                        markerStops.anchor(.6f, .6f);
-//
-//                        markerStops.icon(BitmapDescriptorFactory.fromResource(R.drawable.bus_stop));
-//                        markerStops.position(new LatLng(stop.getLat(), stop.getLng()));
-//
-//                        markerStops.snippet(stop.getCode());
-//                        markerStops.title(stop.getName());
-//
-//                        // Adding marker to the result HashMap.
-//                        hashMap.put(stop.getCode(), markerStops);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-        Log.d("com.knowtime","Loaded stops");
-                return stopList;
-    }
+	public static List<Stop> fetchAllStops() {
+		List<Stop> stopList = new ArrayList<Stop>();
+		try {
+			stopsJSONArray = getJSONArrayFromUrl(SANGSTERBASEURL + STOPS);
+			for (int i = 0; i < stopsJSONArray.length(); i++) {
+				JSONObject stopJSON = stopsJSONArray.getJSONObject(i);
+				JSONObject locationJSON = stopJSON.getJSONObject("location");
+            	Stop stop = new Stop(
+            			stopJSON.getString("stopNumber"),
+            			stopJSON.getString("name"),
+            			Double.parseDouble(locationJSON.getString("lat")),
+            			Double.parseDouble(locationJSON.getString("lng")));
+            	stopList.add(stop);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Log.d("com.knowtime", "Loaded stops");
+		return stopList;
+	}
 
     public static JSONArray getEstimatesForRoute(final int routeId)
     {

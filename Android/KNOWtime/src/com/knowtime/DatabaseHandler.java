@@ -64,12 +64,9 @@ public class DatabaseHandler extends SQLiteOpenHelper
 		onCreate(db);
 	}
 	
-	public synchronized void addAllStop(List<Stop> stops){
-		for (Stop stop: stops){
-//        	if (getStop(stop.getCode()) == null)
-//			{
-        		addStop(stop);
-//			}
+	public synchronized void addAllStop(List<Stop> stops) {
+		for (Stop stop : stops) {
+			addStop(stop);
 		}
 	}
 	
@@ -316,7 +313,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
 
 	public int getStopsCount() {
 		SQLiteDatabase db = this.getReadableDatabase();
-		Cursor cursor = db.rawQuery("SELECT count(*) from "+TABLE_STOP, null);
+		Cursor cursor = db.rawQuery("SELECT count(*) from " + TABLE_STOP, null);
 		int count = 0;
 		try {
 			cursor.moveToFirst();
