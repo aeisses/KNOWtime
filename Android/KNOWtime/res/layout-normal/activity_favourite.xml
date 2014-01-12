@@ -5,11 +5,18 @@
     android:orientation="vertical"
     android:background="@drawable/background" >
 
+   	<ImageView
+        android:id="@+id/screenheader"
+        android:layout_width="fill_parent"
+        android:layout_height="45dip"
+        android:background="@drawable/uptodownbutton"
+        android:contentDescription="@string/screen_header" />
+        
     <ImageView
         android:id="@+id/stopsHeader"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/stopstableheader"
+        android:layout_height="32dip"
+        android:background="@drawable/stopstableheader"
         android:contentDescription="@string/stops_table_header" />
 
     <TableLayout
@@ -28,8 +35,8 @@
     <ImageView
         android:id="@+id/routesHeader"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/routestableheader"
+        android:layout_height="32dip"
+        android:background="@drawable/routestableheader"
         android:contentDescription="@string/routes_table_header" />
 
     <TableLayout

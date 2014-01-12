@@ -30,7 +30,7 @@ public class RouteSelectActivity extends Activity {
 			Route route = DatabaseHandler.getInstance().getRoute((String)routeNumberTextView.getText());
 			Intent intent = new Intent(RouteSelectActivity.this,RouteMapActivity.class);
 			intent.putExtra("ROUTE_ID", route.getId());
-			intent.putExtra("ROUTE_NUMBER", route.getLongName());
+			intent.putExtra("ROUTE_NUMBER", route.getShortName());
 			startActivity(intent);
 		}
 		else

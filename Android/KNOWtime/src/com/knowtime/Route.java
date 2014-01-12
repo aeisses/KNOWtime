@@ -21,7 +21,7 @@ public class Route {
 	
 	public Route(String longName, String shortName, String id, boolean isFavourite)
 	{
-		this.id = "";
+		this.id = id;
 		this.longName = longName;
 		this.shortName = shortName;
 		this.isFavourite = isFavourite;

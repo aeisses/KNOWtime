@@ -58,8 +58,6 @@ public class StopsActivity extends Activity {
 	protected void onStart()
 	{
 		super.onStart();
-		stop.setFavourite(favouriteButton.isSelected());
-		DatabaseHandler.getInstance().updateStop(stop);
 		FlurryAgent.onStartSession(this, "54VCHBRBYDDP5VT63WFB");
 	}
 	
@@ -67,6 +65,8 @@ public class StopsActivity extends Activity {
 	protected void onStop()
 	{
 		super.onStop();
+		stop.setFavourite(favouriteButton.isSelected());
+		DatabaseHandler.getInstance().updateStop(stop);
 		FlurryAgent.onEndSession(this);
 	}
 	

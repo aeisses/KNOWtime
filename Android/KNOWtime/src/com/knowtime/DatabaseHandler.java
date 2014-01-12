@@ -133,7 +133,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
 				stop = new Stop(cursor.getString(0),cursor.getString(1),Double.parseDouble(cursor.getString(2)),Double.parseDouble(cursor.getString(3)),isFavourite);
 			}
 		} catch (Exception e) {
-//			e.printStackTrace();
+			e.printStackTrace();
 		} finally {
 			db.close();
 		}
@@ -157,7 +157,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
 				route = new Route(cursor.getString(1),cursor.getString(0),cursor.getString(2),isFavourite);
 			}
 		} catch (Exception e) {
-//			e.printStackTrace();
+			e.printStackTrace();
 		} finally {
 			db.close();
 		}

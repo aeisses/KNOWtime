@@ -73,6 +73,7 @@ public class WebApiService {
                     		DatabaseHandler.getInstance().addRoute(route);
                     	}
                     }
+                    Log.d("com.knowtime","Routes Loaded");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -121,6 +122,7 @@ public class WebApiService {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+        Log.d("com.knowtime","Loaded stops");
                 return stopList;
     }
 
@@ -225,7 +227,7 @@ public class WebApiService {
     {
     	try
         {
-    		return getJSONArrayFromUrl(SANGSTERBASEURL+ROUTES+SHORTS+shortName+"/"+HEADSIGNS+DateFormat.format("yyyy-MM-dd", new Date())+"/"+DateFormat.format("HH:MM", new Date()));
+    		return getJSONArrayFromUrl(SANGSTERBASEURL+ROUTES+SHORTS+shortName+"/"+HEADSIGNS+DateFormat.format("yyyy-MM-dd", new Date())+"/"+DateFormat.format("hh:mm", new Date()));
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -15,7 +15,6 @@ import com.google.android.gms.maps.model.*;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -39,10 +38,10 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		DatabaseHandler.getInstance(this);
+//		DatabaseHandler.getInstance(this);
     	mapMarkerProgressBar = (ProgressBar) findViewById(R.id.mapMarkerProgressBar);
     	mapMarkerProgressBarText = (TextView) findViewById(R.id.mapMarkerProgressBarText);
-    	WebApiService.fetchAllRoutes();
+//    	WebApiService.fetchAllRoutes();
     	showStops = true;
 		mContext = getApplicationContext();
 
@@ -87,12 +86,12 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
 		FlurryAgent.onEndSession(this);
 	}
 	
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.main, menu);
+//        return true;
+//    }
 
     @Override
     public void onCameraChange(CameraPosition cameraPosition) {
@@ -187,56 +186,5 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
 			mapMarkerProgressBar.setVisibility(View.INVISIBLE);
 			mapMarkerProgressBarText.setVisibility(View.INVISIBLE);
 		}
-	}
-	
-	public void touchHamburgerMenuButton(View view)
-	{
-//		if (hamburgerMenu.isMenuShowing())
-//		{
-//			hamburgerMenu.showContent();
-//		} else {
-////			hamburgerMenu.showMenu();
-//		}
-	}
-
-	public void touchShareMeButton(View view)
-	{
-		Intent intent = new Intent(MainActivity.this,ShareMeActivity.class);
-		startActivity(intent);
-//		hamburgerMenu.showContent(false);
-	}
-	
-	public void touchAboutButton(View view)
-	{
-		Intent intent = new Intent(MainActivity.this,AboutActivity.class);
-		startActivity(intent);
-//		hamburgerMenu.showContent(false);
-	}
-	
-	public void touchStopsButton(View view)
-	{
-		showStops = !showStops;
-		refreshBusStopMarkers(null);
-	}
-	
-	public void touchFavouriteButton(View view)
-	{
-		Intent intent = new Intent(MainActivity.this,FavouriteActivity.class);
-		startActivity(intent);
-//		hamburgerMenu.showContent(false);
-	}
-	
-	public void touchHfxTransitButton(View view)
-	{
-//		Intent intent = new Intent(MainActivity.this,TwitterActivity.class);
-//		startActivity(intent);
-//		hamburgerMenu.showContent(false);
-	}
-	
-	public void privacyPolicyButton(View view)
-	{
-		Intent intent = new Intent(MainActivity.this,PrivacyPolicyActivity.class);
-		startActivity(intent);
-//		hamburgerMenu.showContent(false);
 	}
 }

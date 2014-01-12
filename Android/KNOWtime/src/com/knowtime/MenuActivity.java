@@ -11,6 +11,17 @@ public class MenuActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_menu);
+		DatabaseHandler.getInstance(this);
+    	WebApiService.fetchAllRoutes();
+        Thread thread = new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+            	WebApiService.fetchAllStops();
+            }
+        });
+        thread.start();
 	}
 	
 	public void touchAboutButton(View view)
@@ -32,7 +43,7 @@ public class MenuActivity extends Activity {
 	
 	public void touchStopsButton(View view)
 	{
-		Intent intent = new Intent(MenuActivity.this,StopsActivity.class);
+		Intent intent = new Intent(MenuActivity.this,MainActivity.class);
 		startActivity(intent);
 	}
 	

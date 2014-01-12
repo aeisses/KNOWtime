@@ -5,6 +5,13 @@
     android:orientation="vertical"
     android:background="@drawable/background" >
     
+    <ImageView
+        android:id="@+id/screenheader"
+        android:layout_width="fill_parent"
+        android:layout_height="65dip"
+        android:background="@drawable/uptodownbutton"
+        android:contentDescription="@string/screen_header" />
+        
     <TableLayout
         android:id="@+id/stopTable"
         android:layout_width="match_parent"
@@ -23,6 +30,7 @@
                 android:layout_marginLeft="5dip"
                 android:layout_marginTop="5dip"
                 android:layout_weight="1"
+                android:textColor="@color/colourwhite"
                 android:text="@string/stops_header_default" />
 
         </TableRow>

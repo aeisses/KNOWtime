@@ -63,8 +63,11 @@ public class RouteMapActivity extends Activity {
 			routeId = extras.getString("ROUTE_ID");
 			routeNumber = extras.getString("ROUTE_NUMBER");
 			route = DatabaseHandler.getInstance().getRoute(routeNumber);
-			route.setId(routeId);
-			DatabaseHandler.getInstance().updateRoute(route);
+			if (!routeId.equals(""))
+			{
+				route.setId(routeId);
+				DatabaseHandler.getInstance().updateRoute(route);
+			}
 		}
 		if (mMap == null) {
 			mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map1)).getMap();
@@ -97,6 +100,7 @@ public class RouteMapActivity extends Activity {
 	protected void onStop()
 	{
 		super.onStop();
+		mHandler.removeCallbacks(mUpdateUI);
 		route.setFavourite(favouriteButton.isSelected());
 		DatabaseHandler.getInstance().updateRoute(route);
 		FlurryAgent.onEndSession(this);
@@ -109,6 +113,23 @@ public class RouteMapActivity extends Activity {
             @Override
             public void run()
             {
+            	if (routeId.equals(""))
+            	{
+            		JSONArray json = WebApiService.loadPathForRoute(routeNumber);
+            		if (json.length() > 0)
+            		{
+            			try {
+            				JSONObject routeJSON = json.getJSONObject(0);
+            				routeId = routeJSON.getString("routeId");
+            				route.setId(routeId);
+            				DatabaseHandler.getInstance().updateRoute(route);
+            			}
+            			catch (JSONException e)
+                    	{
+                    		e.printStackTrace();
+                    	}
+            		}
+            	}
             	JSONArray pathArray = WebApiService.getPathForRouteId(routeId);
             	if (pathArray.length() > 1)
             	{
@@ -182,7 +203,7 @@ public class RouteMapActivity extends Activity {
             {
             	isUpdatingLocations = true;
             	final JSONArray routes = WebApiService.getEstimatesForRoute(Integer.parseInt(routeNumber));
-            	if (routes != null)
+            	if (routes != null && routes.length() > 0)
             	{
             		runOnUiThread(new Runnable() {
             			@Override
@@ -202,7 +223,7 @@ public class RouteMapActivity extends Activity {
             				final JSONObject busLocationJSON = busJSON.getJSONObject("location");
             				final float lat = Float.parseFloat(busLocationJSON.getString("lat"));
             				final float lng = Float.parseFloat(busLocationJSON.getString("lng")); 
-            				if (busLocationJSON == null || lat != 0 || lng != 0)
+            				if (busLocationJSON != null && lat != 0 && lng != 0)
             				{
             					final int markerCounter = i;
             					runOnUiThread(new Runnable() {

@@ -23,7 +23,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="24dp"
         android:text="@string/gotimedefault"
-        android:textColor="@color/colourblack"
+        android:textColor="@color/colourwhite"
         android:textSize="16sp" />
 
     <TextView
@@ -34,7 +34,7 @@
         android:layout_marginLeft="100dp"
         android:layout_alignParentLeft="true"
         android:text="@string/route_stop_fav_default"
-        android:textColor="@color/colourwhite"
+        android:textColor="@color/colourblack"
         android:textSize="20sp" />
 
 </RelativeLayout>
