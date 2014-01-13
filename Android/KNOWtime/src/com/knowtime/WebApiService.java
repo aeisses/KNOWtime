@@ -46,7 +46,7 @@ public class WebApiService {
     private static final String POLLRATE        = "pollrate";
 
     private static JSONArray stopsJSONArray;
-    private static Thread locationsThread;
+//    private static Thread locationsThread;
     
     public static void fetchAllRoutes()
     {
@@ -138,11 +138,11 @@ public class WebApiService {
 
     public static void sendLocationToServer(final String locationURL, final Location location)
     {
-        locationsThread = new Thread(new Runnable()
-        {
-            @Override
-            public void run()
-            {
+//        locationsThread = new Thread(new Runnable()
+//        {
+//            @Override
+//            public void run()
+//            {
             	try {
             		HttpClient client = new DefaultHttpClient();
                     HttpPost post = new HttpPost(locationURL);
@@ -161,9 +161,9 @@ public class WebApiService {
                 } catch (Exception e) {
                    e.printStackTrace();
                 }
-            }
-        });
-        locationsThread.start();
+//            }
+//        });
+//        locationsThread.start();
     }
 
     public static String createNewUser(final int routeId)

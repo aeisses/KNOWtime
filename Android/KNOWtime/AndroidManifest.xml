@@ -27,9 +27,9 @@
         
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-                            android:value="AIzaSyD7eMyBtby0GsgV-5IR8JlN_4Qwd9Nbh1c" />
+              			android:value="IzaSyD7eMyBtby0GsgV-5IR8JlN_4Qwd9Nbh1c" />
+            <!--            android:value="AIzaSyD7eMyBtby0GsgV-5IR8JlN_4Qwd9Nbh1c" /> -->
            
-<!--  			android:value="IzaSyD7eMyBtby0GsgV-5IR8JlN_4Qwd9Nbh1c" /> -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />  
@@ -73,6 +73,8 @@
             android:name="com.knowtime.RoutePickerActivity"></activity>
         <activity
             android:name="com.knowtime.MainActivity"></activity>
-        </application>
+        <service
+    	    android:name="com.knowtime.LocationShare"></service>
+	</application>
 
 </manifest>

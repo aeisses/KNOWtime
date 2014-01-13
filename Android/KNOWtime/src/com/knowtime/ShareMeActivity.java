@@ -2,19 +2,15 @@ package com.knowtime;
 
 import java.util.Date;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import com.flurry.android.FlurryAgent;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.location.Location;
-import android.location.LocationManager;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -27,18 +23,16 @@ public class ShareMeActivity extends Activity
 	private ImageView connectToServerImage;
 	private ImageView sendingImage;
 	private Boolean isSharing = false;
-	private String locationUrl;
 	private final Handler mHandler = new Handler();
-	private int pollRate;
 	private ImageView sendingLineImage;
 	Date startTime;
 	int loopCounter;
+	private ResponseReceiver receiver;
+	private Intent locationShareIntent;
 	
 	private boolean isSendingLocations()
 	{
-		Date currentDate = new Date();
-		long diffTime = currentDate.getTime() - startTime.getTime();
-		return isSharing && diffTime < 108000000;
+		return isSharing;
 	}
 	
 	private final Runnable mUpdateUI = new Runnable() {
@@ -58,10 +52,9 @@ public class ShareMeActivity extends Activity
 				else
 				{
 					sendingLineImage.setImageResource(R.drawable.sending3);
-					shareMyLocation();
 					loopCounter = 0;
 				}
-				mHandler.postDelayed(mUpdateUI, (pollRate*1000)/3); // 1 second
+				mHandler.postDelayed(mUpdateUI, 500);
 			}
         }
     };
@@ -71,7 +64,10 @@ public class ShareMeActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_share_me);
-		locationUrl = "";
+		IntentFilter filter = new IntentFilter(ResponseReceiver.ACTION_RESP);
+		filter.addCategory(Intent.CATEGORY_DEFAULT);
+		receiver = new ResponseReceiver();
+        registerReceiver(receiver, filter);
 		connectToServerImage = (ImageView)findViewById(R.id.connecttoserverimage);
 		connectToServerImage.setVisibility(View.INVISIBLE);
 		sendingImage = (ImageView)findViewById(R.id.sendingimage);
@@ -103,12 +99,16 @@ public class ShareMeActivity extends Activity
 					{
 						Intent intent = new Intent(ShareMeActivity.this,RoutePickerActivity.class);
 						startActivityForResult(intent,1);
-		    			startSharing();
 					}
 				}
 				return false;
 			}
 		});
+//		locationShareIntent = LocationShare.getInstance();
+		if (LocationShare.getInstance() != null)
+		{
+			startSharing();
+		}
 	}
 	
 	@Override
@@ -122,6 +122,8 @@ public class ShareMeActivity extends Activity
 	protected void onStop()
 	{
 		super.onStop();
+//	    unregisterReceiver(receiver);
+		isSharing = false;
 		FlurryAgent.onEndSession(this);
 	}
 	
@@ -138,6 +140,7 @@ public class ShareMeActivity extends Activity
 		connectToServerImage.setVisibility(View.VISIBLE);
 		sendingImage.setVisibility(View.VISIBLE);
 		loopCounter = 0;
+		mHandler.post(mUpdateUI);
 	}
 	
 	private void stopSharing()
@@ -147,47 +150,50 @@ public class ShareMeActivity extends Activity
 		connectToServerImage.setVisibility(View.INVISIBLE);
 		sendingImage.setVisibility(View.INVISIBLE);
 		sendingLineImage.setImageResource(R.drawable.sendingline);
+ 	   LocationShare.getInstance().isSharing = false;
+
+//		stopService();
 	}
 	
-	private void createNewUser(final String route)
-	{
-		Thread thread = new Thread(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-    			locationUrl = WebApiService.createNewUser(Integer.parseInt(route));
-    			if (!locationUrl.equals(""))
-    			{
-    				final JSONObject jsonPollRate = WebApiService.getPollRate();
-    				try 
-    				{
-    	                 pollRate = jsonPollRate.getInt("rate");
-    				}
-    				catch (JSONException e)
-    				{
-    					e.printStackTrace();
-    				}
-    		    	startTime = new Date();
-					mHandler.post(mUpdateUI);
-    			}
-    			else
-    			{
-    				stopSharing();
-    			}
-            }
-        });
-      	thread.start();
-	}
+//	private void createNewUser(final String route)
+//	{
+//		Thread thread = new Thread(new Runnable()
+//        {
+//            @Override
+//            public void run()
+//            {
+//    			locationUrl = WebApiService.createNewUser(Integer.parseInt(route));
+//    			if (!locationUrl.equals(""))
+//    			{
+//    				final JSONObject jsonPollRate = WebApiService.getPollRate();
+//    				try 
+//    				{
+//    	                 pollRate = jsonPollRate.getInt("rate");
+//    				}
+//    				catch (JSONException e)
+//    				{
+//    					e.printStackTrace();
+//    				}
+//    		    	startTime = new Date();
+//					mHandler.post(mUpdateUI);
+//    			}
+//    			else
+//    			{
+//    				stopSharing();
+//    			}
+//            }
+//        });
+//      	thread.start();
+//	}
 	
-    private void shareMyLocation()
-    {
-    	Log.d("com.knowtime","Sharing location");
-		LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-		String locationProvider = LocationManager.NETWORK_PROVIDER;
-		Location lastKnownLocation = locationManager.getLastKnownLocation(locationProvider);
-		WebApiService.sendLocationToServer(locationUrl,lastKnownLocation);
-    }
+//    private void shareMyLocation()
+//    {
+//    	Log.d("com.knowtime","Sharing location");
+//		LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+//		String locationProvider = LocationManager.NETWORK_PROVIDER;
+//		Location lastKnownLocation = locationManager.getLastKnownLocation(locationProvider);
+//		WebApiService.sendLocationToServer(locationUrl,lastKnownLocation);
+//    }
     
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
@@ -198,13 +204,35 @@ public class ShareMeActivity extends Activity
 			String routeNumber = data.getStringExtra("routeNumber");
     		if (Integer.parseInt(routeNumber) == -1)
     		{
-    			stopSharing();
+//    			stopSharing();
+ 	    	   LocationShare.getInstance().isSharing = false;
     		}
     		else
     		{
-    			createNewUser(routeNumber);
+    			locationShareIntent = new Intent(this, LocationShare.class);
+    			locationShareIntent.putExtra(LocationShare.PARAM_IN_MSG, "start");
+    			locationShareIntent.putExtra(LocationShare.ROUTE_IN_MSG, routeNumber);
+    			this.startService(locationShareIntent);
     			FlurryAgent.logEvent("Touched the tracking button for Route: "+routeNumber);
     		}
     	}
     }
+    
+    public class ResponseReceiver extends BroadcastReceiver {
+    	public static final String ACTION_RESP = "com.knowtime.RESPONSE";
+    	   @Override
+    	    public void onReceive(Context context, Intent intent) {
+    	       String text = intent.getStringExtra(LocationShare.PARAM_OUT_MSG);
+    	       if (text.equals("sendingLocations"))
+    	       {
+    	    	   startSharing();
+    	       }
+    	       else if (text.equals("notSendingLocation"))
+    	       {
+    	    	   LocationShare.getInstance().isSharing = false;
+//    	    	   stopSharing();
+    	       }
+    	    }
+    	}
 }
+
