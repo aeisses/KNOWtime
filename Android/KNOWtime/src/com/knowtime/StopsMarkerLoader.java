@@ -45,6 +45,7 @@ public class StopsMarkerLoader extends AsyncTaskLoader<HashMap<String, MarkerOpt
 			} else {
 				stops =  WebApiService.fetchAllStops();
 				storedStopMarkers = createStopMarker(stops);
+				
 				//adding to Database on a background thread
 				addStop(stops);
 				Log.d(getClass().getCanonicalName(), "External DB Stop Size:"+stops.size());
