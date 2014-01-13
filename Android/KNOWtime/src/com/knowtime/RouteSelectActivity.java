@@ -27,11 +27,13 @@ public class RouteSelectActivity extends Activity {
 		TextView routeNumberTextView = (TextView)findViewById(R.id.routeNumber);
 		if (!routeNumberTextView.equals(""))
 		{
-			Route route = DatabaseHandler.getInstance().getRoute((String)routeNumberTextView.getText());
-			Intent intent = new Intent(RouteSelectActivity.this,RouteMapActivity.class);
-			intent.putExtra("ROUTE_ID", route.getId());
-			intent.putExtra("ROUTE_NUMBER", route.getShortName());
-			startActivity(intent);
+			Route route = DatabaseHandler.getInstance().getRoute((String) routeNumberTextView.getText());
+			if (route != null) {
+				Intent intent = new Intent(RouteSelectActivity.this, RouteMapActivity.class);
+				intent.putExtra("ROUTE_ID", route.getId());
+				intent.putExtra("ROUTE_NUMBER", route.getShortName());
+				startActivity(intent);
+			}
 		}
 		else
 		{
