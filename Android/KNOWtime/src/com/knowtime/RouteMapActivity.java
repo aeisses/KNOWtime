@@ -297,7 +297,12 @@ public class RouteMapActivity extends Activity {
 				dialog.cancel();
 			}
 		});
-		alertDialog.show();
+		try {
+			alertDialog.show();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private void clearMarkers() {
