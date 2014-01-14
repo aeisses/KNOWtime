@@ -64,10 +64,6 @@ public class ShareMeActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_share_me);
-		IntentFilter filter = new IntentFilter(ResponseReceiver.ACTION_RESP);
-		filter.addCategory(Intent.CATEGORY_DEFAULT);
-		receiver = new ResponseReceiver();
-        registerReceiver(receiver, filter);
 		connectToServerImage = (ImageView)findViewById(R.id.connecttoserverimage);
 		connectToServerImage.setVisibility(View.INVISIBLE);
 		sendingImage = (ImageView)findViewById(R.id.sendingimage);
@@ -122,15 +118,25 @@ public class ShareMeActivity extends Activity
 	protected void onStop()
 	{
 		super.onStop();
-//	    unregisterReceiver(receiver);
 		isSharing = false;
 		FlurryAgent.onEndSession(this);
+	}
+	
+	@Override
+	protected void onPause()
+	{
+		super.onPause();
+	    unregisterReceiver(receiver);
 	}
 	
 	@Override
 	protected void onResume()
 	{
 		super.onResume();
+		IntentFilter filter = new IntentFilter(ResponseReceiver.ACTION_RESP);
+		filter.addCategory(Intent.CATEGORY_DEFAULT);
+		receiver = new ResponseReceiver();
+        registerReceiver(receiver, filter);
 	}
 	
 	private void startSharing()
