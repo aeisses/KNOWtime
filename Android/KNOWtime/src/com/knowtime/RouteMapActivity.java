@@ -27,7 +27,6 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 public class RouteMapActivity extends Activity {
 
@@ -66,7 +65,6 @@ public class RouteMapActivity extends Activity {
 			route = DatabaseHandler.getInstance().getRoute(routeNumber);
 			if (!routeId.equals(""))
 			{
-				route = new Route();
 				route.setId(routeId);
 				DatabaseHandler.getInstance().updateRoute(route);
 			}
@@ -194,7 +192,7 @@ public class RouteMapActivity extends Activity {
                 	}
             	} else { 
 					progressBar.setVisibility(View.INVISIBLE);
-					Toast.makeText(mContext, "No Route is avialable", Toast.LENGTH_SHORT);
+//					Toast.makeText(mContext, "No Route is avialable", Toast.LENGTH_SHORT);
             	}
             }
         });
@@ -222,16 +220,11 @@ public class RouteMapActivity extends Activity {
             	final JSONArray routes = WebApiService.getEstimatesForRoute(routeInt);
             	if (routes != null && routes.length() > 0)
             	{
-            		runOnUiThread(new Runnable() {
-            			@Override
-            			public void run() {
-            				if (markers != null)
-            				{
-            					clearMarkers();
-            				}
-            				markers = new Marker[routes.length()];
-            			}
-            		});
+            		if (markers != null)
+            		{
+            			clearMarkers();
+            		}
+            		markers = new Marker[routes.length()];
             		try
             		{
             			for (int i=0; i<routes.length(); i++)
@@ -319,10 +312,15 @@ public class RouteMapActivity extends Activity {
 		for (int i = 0; i < markers.length; i++ ) {
 			if (markers[i] != null)
 			{
-				markers[i].remove();
+				final Marker markerToRemove = markers[i];
+        		runOnUiThread(new Runnable() {
+        			@Override
+        			public void run() {
+        				markerToRemove.remove();
+        			}
+        		});
 				markers[i] = null;
 			}
 		}
-		markers = null;
 	}
 }
