@@ -27,6 +27,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 public class RouteMapActivity extends Activity {
 
@@ -65,6 +66,7 @@ public class RouteMapActivity extends Activity {
 			route = DatabaseHandler.getInstance().getRoute(routeNumber);
 			if (!routeId.equals(""))
 			{
+				route = new Route();
 				route.setId(routeId);
 				DatabaseHandler.getInstance().updateRoute(route);
 			}
@@ -138,7 +140,7 @@ public class RouteMapActivity extends Activity {
             		}
             	}
             	JSONArray pathArray = WebApiService.getPathForRouteId(routeId);
-            	if (pathArray.length() > 1)
+            	if (pathArray != null && pathArray.length() > 1)
             	{
             		try
                 	{
@@ -190,7 +192,10 @@ public class RouteMapActivity extends Activity {
                 	{
                 		e.printStackTrace();
                 	}
-            	}            	
+            	} else { 
+					progressBar.setVisibility(View.INVISIBLE);
+					Toast.makeText(mContext, "No Route is avialable", Toast.LENGTH_SHORT);
+            	}
             }
         });
 		thread.start();
@@ -209,7 +214,12 @@ public class RouteMapActivity extends Activity {
             public void run()
             {
             	isUpdatingLocations = true;
-            	final JSONArray routes = WebApiService.getEstimatesForRoute(Integer.parseInt(routeNumber));
+            	int routeInt = -1;
+				try {
+					routeInt = Integer.parseInt(routeNumber);
+				} catch (NumberFormatException e1) {
+				}
+            	final JSONArray routes = WebApiService.getEstimatesForRoute(routeInt);
             	if (routes != null && routes.length() > 0)
             	{
             		runOnUiThread(new Runnable() {
