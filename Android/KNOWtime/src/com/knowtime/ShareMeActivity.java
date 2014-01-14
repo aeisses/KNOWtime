@@ -5,12 +5,16 @@ import java.util.Date;
 import com.flurry.android.FlurryAgent;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.NotificationCompat;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -29,6 +33,10 @@ public class ShareMeActivity extends Activity
 	int loopCounter;
 	private ResponseReceiver receiver;
 	private Intent locationShareIntent;
+	private Context mContext;
+	private NotificationManager mNotificationManager;
+	private NotificationCompat.Builder mNotification;
+	private int notifyId = 1;
 	
 	private boolean isSendingLocations()
 	{
@@ -64,6 +72,8 @@ public class ShareMeActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_share_me);
+		mContext = getApplicationContext();
+		mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
 		connectToServerImage = (ImageView)findViewById(R.id.connecttoserverimage);
 		connectToServerImage.setVisibility(View.INVISIBLE);
 		sendingImage = (ImageView)findViewById(R.id.sendingimage);
@@ -100,8 +110,19 @@ public class ShareMeActivity extends Activity
 				return false;
 			}
 		});
+
+		//Adding Sharing me notification
+		Intent notificationIntent = new Intent(mContext, ShareMeActivity.class);
+		notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		PendingIntent contentIntent = PendingIntent.getActivity(mContext, 0, notificationIntent, 0);
+
+		mNotification = new NotificationCompat.Builder(this)
+	    	.setContentTitle("Sharing My Ride")
+	    	.setSmallIcon(R.drawable.ic_launcher)
+	    	.setContentIntent(contentIntent);
+
 //		locationShareIntent = LocationShare.getInstance();
-		if (LocationShare.getInstance() != null)
+		if (LocationShare.getInstance() != null && LocationShare.getInstance().isSharing)
 		{
 			startSharing();
 		}
@@ -147,6 +168,7 @@ public class ShareMeActivity extends Activity
 		sendingImage.setVisibility(View.VISIBLE);
 		loopCounter = 0;
 		mHandler.post(mUpdateUI);
+		mNotificationManager.notify(notifyId, mNotification.build());
 	}
 	
 	private void stopSharing()
@@ -156,7 +178,9 @@ public class ShareMeActivity extends Activity
 		connectToServerImage.setVisibility(View.INVISIBLE);
 		sendingImage.setVisibility(View.INVISIBLE);
 		sendingLineImage.setImageResource(R.drawable.sendingline);
- 	   LocationShare.getInstance().isSharing = false;
+ 	   	LocationShare.getInstance().isSharing = false;
+		mNotificationManager.cancel(notifyId);
+
 
 //		stopService();
 	}

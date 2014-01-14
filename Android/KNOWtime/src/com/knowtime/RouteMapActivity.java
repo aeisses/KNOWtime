@@ -303,8 +303,6 @@ public class RouteMapActivity extends Activity {
 		try {
 			alertDialog.show();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 	
