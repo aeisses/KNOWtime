@@ -120,7 +120,7 @@ public class RouteMapActivity extends Activity {
             @Override
             public void run()
             {
-            	if (routeId.equals(""))
+            	if (routeId.isEmpty())
             	{
             		JSONArray json = WebApiService.loadPathForRoute(routeNumber);
             		if (json.length() > 0)
@@ -128,6 +128,28 @@ public class RouteMapActivity extends Activity {
             			try {
             				JSONObject routeJSON = json.getJSONObject(0);
             				routeId = routeJSON.getString("routeId");
+            				if (routeId.isEmpty())
+            				{
+                				runOnUiThread(new Runnable() {
+                					@Override
+                					public void run() {
+                						AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
+                						alertDialog.setTitle("Alert");
+                						alertDialog.setMessage("This route is not in service at the moment, or the server is having some issues.");
+                						alertDialog.setNegativeButton("Thanks",new DialogInterface.OnClickListener() {
+                							public void onClick(DialogInterface dialog,int id) {
+                								dialog.cancel();
+                							}
+                						});
+                						try {
+                							alertDialog.show();
+                						} catch (Exception e) {
+                						}
+                						progressBar.setVisibility(View.INVISIBLE);
+                					}
+                				});
+            					return;
+            				}
             				route.setId(routeId);
             				DatabaseHandler.getInstance().updateRoute(route);
             			}
@@ -135,6 +157,28 @@ public class RouteMapActivity extends Activity {
                     	{
                     		e.printStackTrace();
                     	}
+            		}
+            		else
+            		{
+        				runOnUiThread(new Runnable() {
+        					@Override
+        					public void run() {
+        						AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
+        						alertDialog.setTitle("Alert");
+        						alertDialog.setMessage("This route is not in service at the moment, or the server is having some issues.");
+        						alertDialog.setNegativeButton("Thanks",new DialogInterface.OnClickListener() {
+        							public void onClick(DialogInterface dialog,int id) {
+        								dialog.cancel();
+        							}
+        						});
+        						try {
+        							alertDialog.show();
+        						} catch (Exception e) {
+        						}
+        						progressBar.setVisibility(View.INVISIBLE);
+        					}
+        				});
+    					return;
             		}
             	}
             	JSONArray pathArray = WebApiService.getPathForRouteId(routeId);

@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -198,7 +199,9 @@ public class WebApiService {
     {
     	try
         {
-    		return getJSONArrayFromUrl(SANGSTERBASEURL+ROUTES+SHORTS+shortName+"/"+HEADSIGNS+DateFormat.format("yyyy-MM-dd", new Date())+"/"+DateFormat.format("hh:mm", new Date()));
+    		SimpleDateFormat formatterIn = new SimpleDateFormat("yyyy-MM-dd");
+    		SimpleDateFormat formatterOut = new SimpleDateFormat("HH:mm");
+    		return getJSONArrayFromUrl(SANGSTERBASEURL+ROUTES+SHORTS+shortName+"/"+HEADSIGNS+formatterIn.format(new Date())+"/"+formatterOut.format(new Date()));
         } catch (Exception e) {
             e.printStackTrace();
         }
