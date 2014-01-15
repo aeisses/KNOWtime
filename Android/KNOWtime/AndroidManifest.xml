@@ -27,8 +27,9 @@
         
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-              			android:value="IzaSyD7eMyBtby0GsgV-5IR8JlN_4Qwd9Nbh1c" />
-            <!--            android:value="AIzaSyD7eMyBtby0GsgV-5IR8JlN_4Qwd9Nbh1c" /> -->
+              			android:value="AIzaSyAHDFF10HO8CIG7d8n1ux50uakCUEU-ICk" />
+            <!--      adhoc      android:value="AIzaSyAHDFF10HO8CIG7d8n1ux50uakCUEU-ICk" /> -->
+            <!--      debug      android:value="AIzaSyD7eMyBtby0GsgV-5IR8JlN_4Qwd9Nbh1c" /> -->
            
         <meta-data
             android:name="com.google.android.gms.version"

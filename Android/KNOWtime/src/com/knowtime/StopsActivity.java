@@ -164,7 +164,7 @@ public class StopsActivity extends Activity {
                     				time1.setText(departTime);
                     				eta1.setText(minDiff/60000+" min");
                     			}
-                    			if (counter+1 < stopTimes.length() || counter != -1)
+                    			if (counter+1 < stopTimes.length() && counter != -1)
                     			{
                     				Date nextStopDate = getStopDate(stopTimes.getJSONObject(counter+1).getString("departure"),formatter,currentTimeFormatter);
                     				TextView time2 = (TextView)stopRow.findViewById(R.id.time2);

@@ -61,12 +61,20 @@
         android:id="@+id/imageButton1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/screenheader"
-        android:layout_marginLeft="147dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="68dp"
         android:background="@drawable/aboutbutton"
         android:contentDescription="@string/menu_about_button"
         android:onClick="touchAboutButton" />
+
+    <ProgressBar
+        android:id="@+id/menuProgressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/trackmybutton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="23dp" />
 
 </RelativeLayout>
