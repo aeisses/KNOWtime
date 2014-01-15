@@ -2,6 +2,6 @@
 <resources>
     <color name="colourwhite">#FFFFFF</color>
     <color name="colourblack">#000000</color>
-    <color name="colourstopred">#FF735F</color>
+    <color name="colourstopred">#FFFFFF</color>
     <color name="colourtextgrey">#AAAAAA</color>
 </resources>

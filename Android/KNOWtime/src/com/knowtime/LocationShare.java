@@ -26,7 +26,6 @@ public class LocationShare extends IntentService {
 	public Boolean isSharing = false;
 	private String locationUrl;
 	private int pollRate;
-//	private final Handler mHandler = new Handler();
 	Date startTime;
 
 	private static LocationShare sInstance;
@@ -51,8 +50,6 @@ public class LocationShare extends IntentService {
 	public void onDestroy()
 	{
 		super.onDestroy();
-//		sInstance = null;
-//		isSharing = false;
 	}
 	
 	private boolean isSendingLocations()

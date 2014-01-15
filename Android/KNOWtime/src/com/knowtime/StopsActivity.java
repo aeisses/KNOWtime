@@ -14,7 +14,9 @@ import com.flurry.android.FlurryAgent;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -31,7 +33,11 @@ public class StopsActivity extends Activity {
 	ProgressBar progressBar;
 	TableLayout stopTable;
 	Stop stop;
+	private final Handler mHandler = new Handler();
 	ImageButton favouriteButton;
+	View tableViews[];
+	JSONArray jsonArray;
+	Typeface type;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +57,16 @@ public class StopsActivity extends Activity {
 		// Determine if this is a favorite stop
 		favouriteButton = (ImageButton) findViewById(R.id.favouriteButton);
 		favouriteButton.setSelected(stop.getFavourite());
+		type = Typeface.createFromAsset(getAssets(),"FuturaStd-Bold.otf");
 		getStops();
 	}
+	
+	private final Runnable mUpdateUI = new Runnable() {
+		public void run() {
+			updateStops();
+			mHandler.postDelayed(mUpdateUI, 10000); 
+		}
+	};
 	
 	@Override
 	protected void onStart()
@@ -96,6 +110,23 @@ public class StopsActivity extends Activity {
 		return returnDate;
 	}
 	
+	private void updateStops()
+	{	
+		for (int i=0; i<jsonArray.length(); i++)
+		{
+			try 
+			{
+				View stopRow = tableViews[i];
+        		final JSONObject routeItem = jsonArray.getJSONObject(i);
+        		setStopTimes(stopRow,routeItem);
+			}
+			catch (JSONException e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	private void getStops()
 	{
         Thread thread = new Thread(new Runnable()
@@ -103,10 +134,11 @@ public class StopsActivity extends Activity {
             @Override
             public void run()
             {
-            	final JSONArray jsonArray = WebApiService.getRouteForIdent(Integer.parseInt(stopNumber));
+            	jsonArray = WebApiService.getRouteForIdent(Integer.parseInt(stopNumber));
         		runOnUiThread(new Runnable() {
         			@Override
         			public void run() {
+        				tableViews = new View[jsonArray.length()];
         				for (int i=0; i<jsonArray.length(); i++)
         				{
             				try 
@@ -114,6 +146,7 @@ public class StopsActivity extends Activity {
                         		final JSONObject routeItem = jsonArray.getJSONObject(i);
                     			LayoutInflater li = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                     			View stopRow = li.inflate(R.layout.stopscellview, null);
+                    			tableViews[i] = stopRow;
                     			final String routeId = routeItem.getString("routeId");
                     			final String routeNumber = routeItem.getString("shortName");
                     			stopRow.setOnTouchListener(new OnTouchListener()
@@ -135,51 +168,7 @@ public class StopsActivity extends Activity {
                     			routeNumberTextView.setText(routeNumber);
                     			TextView routeNameTextView = (TextView)stopRow.findViewById(R.id.routeName);
                     			routeNameTextView.setText(routeItem.getString("longName"));
-                    			
-                    			SimpleDateFormat displayFormatter = new SimpleDateFormat("h:mm", Locale.US);
-                    			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US);
-                    			SimpleDateFormat currentTimeFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-                    			
-                    			JSONArray stopTimes = routeItem.getJSONArray("stopTimes");
-                    			int counter = -1;
-                    			long minDiff = 0;
-                    			String departTime = "unknown";
-                				Date currentDate = new Date();
-                    			for (int j=0; j<stopTimes.length(); j++)
-                    			{
-                    				JSONObject stopItem = stopTimes.getJSONObject(j);
-                    				Date stopDate = getStopDate(stopItem.getString("departure"),formatter,currentTimeFormatter);
-                    				long diff = stopDate.getTime() - currentDate.getTime();
-                    				if (diff > 0 && (minDiff <= 0 || minDiff > diff))
-                    				{
-                    					minDiff = diff;
-                    					departTime = displayFormatter.format(stopDate);
-                    					counter = j;
-                    				}
-                    			}
-                    			if (minDiff != 0)
-                    			{
-                    				TextView time1 = (TextView)stopRow.findViewById(R.id.time1);
-                    				TextView eta1 = (TextView)stopRow.findViewById(R.id.eta1);
-                    				time1.setText(departTime);
-                    				eta1.setText(minDiff/60000+" min");
-                    			}
-                    			if (counter+1 < stopTimes.length() && counter != -1)
-                    			{
-                    				Date nextStopDate = getStopDate(stopTimes.getJSONObject(counter+1).getString("departure"),formatter,currentTimeFormatter);
-                    				TextView time2 = (TextView)stopRow.findViewById(R.id.time2);
-                    				TextView eta2 = (TextView)stopRow.findViewById(R.id.eta2);
-                    				time2.setText(displayFormatter.format(nextStopDate));
-                    				eta2.setText((nextStopDate.getTime()-currentDate.getTime())/60000+" min");
-                    				if (counter+2 < stopTimes.length())
-                    				{
-                        				Date nextNextStopDate = getStopDate(stopTimes.getJSONObject(counter+2).getString("departure"),formatter,currentTimeFormatter);
-                        				TextView time3 = (TextView)stopRow.findViewById(R.id.time3);
-                        				TextView eta3 = (TextView)stopRow.findViewById(R.id.eta3);
-                        				time3.setText(displayFormatter.format(nextNextStopDate));
-                        				eta3.setText((nextNextStopDate.getTime()-currentDate.getTime())/60000+" min");
-                    				}
-                    			}
+                    			setStopTimes(stopRow,routeItem);
             				}
             				catch (JSONException e)
             				{
@@ -187,11 +176,66 @@ public class StopsActivity extends Activity {
             				}
         				}
         				progressBar.setVisibility(View.INVISIBLE);
+        				mHandler.post(mUpdateUI);
             		}
         		});
             }
         });
         thread.start();
+	}
+	
+	private void setStopTimes(View stopRow, JSONObject routeItem) throws JSONException
+	{
+		SimpleDateFormat displayFormatter = new SimpleDateFormat("h:mm", Locale.US);
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US);
+		SimpleDateFormat currentTimeFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+		
+		JSONArray stopTimes = routeItem.getJSONArray("stopTimes");
+		int counter = -1;
+		long minDiff = 0;
+		String departTime = "unknown";
+		Date currentDate = new Date();
+		for (int j=0; j<stopTimes.length(); j++)
+		{
+			JSONObject stopItem = stopTimes.getJSONObject(j);
+			Date stopDate = getStopDate(stopItem.getString("departure"),formatter,currentTimeFormatter);
+			long diff = stopDate.getTime() - currentDate.getTime();
+			if (diff > 0 && (minDiff <= 0 || minDiff > diff))
+			{
+				minDiff = diff;
+				departTime = displayFormatter.format(stopDate);
+				counter = j;
+			}
+		}
+		if (minDiff != 0)
+		{
+			TextView time1 = (TextView)stopRow.findViewById(R.id.time1);
+//			time1.setTypeface(type);
+			TextView eta1 = (TextView)stopRow.findViewById(R.id.eta1);
+//			eta1.setTypeface(type);
+			time1.setText(departTime);
+			eta1.setText(minDiff/60000+" min");
+		}
+		if (counter+1 < stopTimes.length() && counter != -1)
+		{
+			Date nextStopDate = getStopDate(stopTimes.getJSONObject(counter+1).getString("departure"),formatter,currentTimeFormatter);
+			TextView time2 = (TextView)stopRow.findViewById(R.id.time2);
+//			time2.setTypeface(type);
+			TextView eta2 = (TextView)stopRow.findViewById(R.id.eta2);
+//			eta2.setTypeface(type);
+			time2.setText(displayFormatter.format(nextStopDate));
+			eta2.setText((nextStopDate.getTime()-currentDate.getTime())/60000+" min");
+			if (counter+2 < stopTimes.length())
+			{
+				Date nextNextStopDate = getStopDate(stopTimes.getJSONObject(counter+2).getString("departure"),formatter,currentTimeFormatter);
+				TextView time3 = (TextView)stopRow.findViewById(R.id.time3);
+//				time3.setTypeface(type);
+				TextView eta3 = (TextView)stopRow.findViewById(R.id.eta3);
+//				eta3.setTypeface(type);
+				time3.setText(displayFormatter.format(nextNextStopDate));
+				eta3.setText((nextNextStopDate.getTime()-currentDate.getTime())/60000+" min");
+			}
+		}
 	}
 	
 	public void touchFavouriteButton(View view)

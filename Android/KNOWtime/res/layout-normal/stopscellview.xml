@@ -11,10 +11,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="5dip"
+        android:layout_marginRight="10dip"
         android:layout_marginTop="5dip"
         android:text="@string/stopstabledefault"
-        android:textColor="@color/colourwhite"
+        android:textColor="@color/colourblack"
         android:textSize="13sp" />
 
     <TextView
@@ -23,9 +23,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/time1"
-        android:layout_marginRight="5dip"
+        android:layout_marginRight="10dip"
         android:text="@string/stopstabledefault"
-        android:textColor="@color/colourwhite"
+        android:textColor="@color/colourblack"
         android:textSize="13sp" />
 
     <TextView
@@ -60,7 +60,7 @@
         android:layout_alignParentLeft="true"
         android:text="@string/route_name"
 		android:textSize="18sp"
-        android:textColor="@color/colourwhite" />
+        android:textColor="@color/colourblack" />
 
     <TextView
         android:id="@+id/scheduletime"
@@ -103,9 +103,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/time2"
-        android:layout_marginRight="5dip"
+        android:layout_marginRight="10dip"
         android:text="@string/stopstabledefault"
-        android:textColor="@color/colourwhite"
+        android:textColor="@color/colourblack"
         android:textSize="13sp" />
 
 </RelativeLayout>

@@ -11,10 +11,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="5dip"
+        android:layout_marginRight="10dip"
         android:layout_marginTop="5dip"
         android:text="@string/stopstabledefault"
-        android:textColor="@color/colourwhite"
+        android:textColor="@color/colourblack"
         android:textSize="13sp" />
 
     <TextView
@@ -23,9 +23,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/time1"
-        android:layout_marginRight="5dip"
+        android:layout_marginRight="10dip"
         android:text="@string/stopstabledefault"
-        android:textColor="@color/colourwhite"
+        android:textColor="@color/colourblack"
         android:textSize="13sp" />
 
     <TextView
@@ -68,9 +68,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/time2"
-        android:layout_marginRight="5dip"
+        android:layout_marginRight="10dip"
         android:text="@string/stopstabledefault"
-        android:textColor="@color/colourwhite"
+        android:textColor="@color/colourblack"
         android:textSize="13sp" />
 
     <TextView
@@ -82,7 +82,7 @@
         android:layout_marginLeft="57dp"
         android:layout_toRightOf="@+id/routenumber"
         android:text="@string/route_name"
-        android:textColor="@color/colourwhite"
+        android:textColor="@color/colourblack"
         android:textSize="20sp" />
 
     <TextView
