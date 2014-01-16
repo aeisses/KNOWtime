@@ -5,7 +5,6 @@ import java.util.Date;
 import com.flurry.android.FlurryAgent;
 
 import android.app.Activity;
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -121,7 +120,6 @@ public class ShareMeActivity extends Activity
 	    	.setSmallIcon(R.drawable.ic_launcher)
 	    	.setContentIntent(contentIntent);
 
-//		locationShareIntent = LocationShare.getInstance();
 		if (LocationShare.getInstance() != null && LocationShare.getInstance().isSharing)
 		{
 			startSharing();
@@ -180,50 +178,7 @@ public class ShareMeActivity extends Activity
 		sendingLineImage.setImageResource(R.drawable.sendingline);
  	   	LocationShare.getInstance().isSharing = false;
 		mNotificationManager.cancel(notifyId);
-
-
-//		stopService();
 	}
-	
-//	private void createNewUser(final String route)
-//	{
-//		Thread thread = new Thread(new Runnable()
-//        {
-//            @Override
-//            public void run()
-//            {
-//    			locationUrl = WebApiService.createNewUser(Integer.parseInt(route));
-//    			if (!locationUrl.equals(""))
-//    			{
-//    				final JSONObject jsonPollRate = WebApiService.getPollRate();
-//    				try 
-//    				{
-//    	                 pollRate = jsonPollRate.getInt("rate");
-//    				}
-//    				catch (JSONException e)
-//    				{
-//    					e.printStackTrace();
-//    				}
-//    		    	startTime = new Date();
-//					mHandler.post(mUpdateUI);
-//    			}
-//    			else
-//    			{
-//    				stopSharing();
-//    			}
-//            }
-//        });
-//      	thread.start();
-//	}
-	
-//    private void shareMyLocation()
-//    {
-//    	Log.d("com.knowtime","Sharing location");
-//		LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-//		String locationProvider = LocationManager.NETWORK_PROVIDER;
-//		Location lastKnownLocation = locationManager.getLastKnownLocation(locationProvider);
-//		WebApiService.sendLocationToServer(locationUrl,lastKnownLocation);
-//    }
     
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
@@ -234,7 +189,6 @@ public class ShareMeActivity extends Activity
 			String routeNumber = data.getStringExtra("routeNumber");
     		if (Integer.parseInt(routeNumber) == -1)
     		{
-//    			stopSharing();
  	    	   LocationShare.getInstance().isSharing = false;
     		}
     		else
@@ -250,19 +204,19 @@ public class ShareMeActivity extends Activity
     
     public class ResponseReceiver extends BroadcastReceiver {
     	public static final String ACTION_RESP = "com.knowtime.RESPONSE";
-    	   @Override
-    	    public void onReceive(Context context, Intent intent) {
-    	       String text = intent.getStringExtra(LocationShare.PARAM_OUT_MSG);
-    	       if (text.equals("sendingLocations"))
-    	       {
-    	    	   startSharing();
-    	       }
-    	       else if (text.equals("notSendingLocation"))
-    	       {
-    	    	   LocationShare.getInstance().isSharing = false;
-//    	    	   stopSharing();
-    	       }
+    	
+    	@Override
+    	public void onReceive(Context context, Intent intent) {
+    		String text = intent.getStringExtra(LocationShare.PARAM_OUT_MSG);
+    	    if (text.equals("sendingLocations"))
+    	    {
+    	    	startSharing();
+    	    }
+    	    else if (text.equals("notSendingLocation"))
+    	    {
+    	    	LocationShare.getInstance().isSharing = false;
     	    }
     	}
+    }
 }
 

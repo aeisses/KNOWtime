@@ -14,7 +14,6 @@ import com.flurry.android.FlurryAgent;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -37,7 +36,6 @@ public class StopsActivity extends Activity {
 	ImageButton favouriteButton;
 	View tableViews[];
 	JSONArray jsonArray;
-	Typeface type;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +55,6 @@ public class StopsActivity extends Activity {
 		// Determine if this is a favorite stop
 		favouriteButton = (ImageButton) findViewById(R.id.favouriteButton);
 		favouriteButton.setSelected(stop.getFavourite());
-		type = Typeface.createFromAsset(getAssets(),"FuturaStd-Bold.otf");
 		getStops();
 	}
 	
@@ -210,9 +207,7 @@ public class StopsActivity extends Activity {
 		if (minDiff != 0)
 		{
 			TextView time1 = (TextView)stopRow.findViewById(R.id.time1);
-//			time1.setTypeface(type);
 			TextView eta1 = (TextView)stopRow.findViewById(R.id.eta1);
-//			eta1.setTypeface(type);
 			time1.setText(departTime);
 			eta1.setText(minDiff/60000+" min");
 		}
@@ -220,18 +215,14 @@ public class StopsActivity extends Activity {
 		{
 			Date nextStopDate = getStopDate(stopTimes.getJSONObject(counter+1).getString("departure"),formatter,currentTimeFormatter);
 			TextView time2 = (TextView)stopRow.findViewById(R.id.time2);
-//			time2.setTypeface(type);
 			TextView eta2 = (TextView)stopRow.findViewById(R.id.eta2);
-//			eta2.setTypeface(type);
 			time2.setText(displayFormatter.format(nextStopDate));
 			eta2.setText((nextStopDate.getTime()-currentDate.getTime())/60000+" min");
 			if (counter+2 < stopTimes.length())
 			{
 				Date nextNextStopDate = getStopDate(stopTimes.getJSONObject(counter+2).getString("departure"),formatter,currentTimeFormatter);
 				TextView time3 = (TextView)stopRow.findViewById(R.id.time3);
-//				time3.setTypeface(type);
 				TextView eta3 = (TextView)stopRow.findViewById(R.id.eta3);
-//				eta3.setTypeface(type);
 				time3.setText(displayFormatter.format(nextNextStopDate));
 				eta3.setText((nextNextStopDate.getTime()-currentDate.getTime())/60000+" min");
 			}
