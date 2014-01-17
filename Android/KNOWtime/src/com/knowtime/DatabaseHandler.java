@@ -64,10 +64,36 @@ public class DatabaseHandler extends SQLiteOpenHelper
 		onCreate(db);
 	}
 	
-	public synchronized void addAllStop(List<Stop> stops) {
-		for (Stop stop : stops) {
-			addStop(stop);
+	public String createStopInsertQuery(Stop stop)
+	{
+		int favourite = 0;
+		if (stop.getFavourite())
+		{
+			favourite = 1;
 		}
+		return "insert into "+TABLE_STOP+" ("+KEY_CODE+","+KEY_NAME+","+KEY_LATITUDE+","+KEY_LONGITUDE+","+KEY_FAVOURITE+") values ("+stop.getCode()+",\""+stop.getName()+"\","+stop.getLat()+","+stop.getLng()+","+favourite+")";
+	}
+	
+	public synchronized void addAllStop(List<Stop> stops) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		for (Stop stop : stops) {
+			ContentValues values = new ContentValues();
+			values.put(KEY_CODE, stop.getCode());
+			values.put(KEY_NAME, stop.getName());
+			values.put(KEY_LATITUDE, ""+stop.getLat());
+			values.put(KEY_LONGITUDE, ""+stop.getLng());
+			if (stop.getFavourite())
+			{
+				values.put(KEY_FAVOURITE, "1");
+			}
+			else
+			{
+				values.put(KEY_FAVOURITE, "0");
+			}
+			
+			db.insertWithOnConflict(TABLE_STOP, null, values, SQLiteDatabase.CONFLICT_IGNORE);
+		}
+		db.close();
 	}
 	
 	public void addStop(Stop stop)
@@ -95,7 +121,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
 	public void addRoute(Route route)
 	{
 		SQLiteDatabase db = this.getWritableDatabase();
-		
+
 		ContentValues values = new ContentValues();
 		values.put(KEY_SHORTNAME, route.getShortName());
 		values.put(KEY_LONGNAME, route.getLongName());
@@ -165,7 +191,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
 	{
 		List<Stop> stopList = new ArrayList<Stop>();
 		
-		SQLiteDatabase db = this.getWritableDatabase();
+		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.rawQuery(selectQuery, null);
 		if (cursor.moveToFirst()) 
 		{
@@ -207,7 +233,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
 	public List<Route> getRoutes(String selectQuery)
 	{
 		List<Route> routeList = new ArrayList<Route>();		
-		SQLiteDatabase db = this.getWritableDatabase();
+		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.rawQuery(selectQuery, null);
 		
 		if (cursor.moveToFirst())
@@ -311,17 +337,23 @@ public class DatabaseHandler extends SQLiteOpenHelper
 		db.close();
 	}
 
-	public int getStopsCount() {
+	public int getRouteCount()
+	{
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.rawQuery("SELECT count(*) from " + TABLE_ROUTE, null);
+		cursor.moveToFirst();
+		int count = cursor.getInt(0);
+		db.close();
+		return count;
+	}
+	
+	public int getStopsCount()
+	{
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.rawQuery("SELECT count(*) from " + TABLE_STOP, null);
-		int count = 0;
-		try {
-			cursor.moveToFirst();
-			count = cursor.getInt(0);
-		} catch (Exception e) {
-		} finally {
-			db.close();
-		}
+		cursor.moveToFirst();
+		int count = cursor.getInt(0);
+		db.close();
 		return count;
 	}
 }

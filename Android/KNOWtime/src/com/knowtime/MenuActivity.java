@@ -18,13 +18,19 @@ public class MenuActivity extends Activity {
 		DatabaseHandler.getInstance(this);
 		buttonsEnabled = false;
 		progressBar = (ProgressBar)findViewById(R.id.menuProgressBar);
-    	WebApiService.fetchAllRoutes();
         Thread thread = new Thread(new Runnable()
         {
             @Override
             public void run()
             {
-            	WebApiService.fetchAllStops();
+            	if (DatabaseHandler.getInstance().getRouteCount() == 0)
+            	{
+            		WebApiService.fetchAllRoutes();
+            	}
+            	if (DatabaseHandler.getInstance().getStopsCount() == 0)
+            	{
+            		WebApiService.fetchAllStops();
+            	}
             	buttonsEnabled = true;
 				runOnUiThread(new Runnable() {
 					@Override

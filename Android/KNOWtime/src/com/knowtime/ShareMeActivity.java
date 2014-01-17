@@ -166,7 +166,6 @@ public class ShareMeActivity extends Activity
 		sendingImage.setVisibility(View.VISIBLE);
 		loopCounter = 0;
 		mHandler.post(mUpdateUI);
-		mNotificationManager.notify(notifyId, mNotification.build());
 	}
 	
 	private void stopSharing()
@@ -197,6 +196,7 @@ public class ShareMeActivity extends Activity
     			locationShareIntent.putExtra(LocationShare.PARAM_IN_MSG, "start");
     			locationShareIntent.putExtra(LocationShare.ROUTE_IN_MSG, routeNumber);
     			this.startService(locationShareIntent);
+    			mNotificationManager.notify(notifyId, mNotification.build());
     			FlurryAgent.logEvent("Touched the tracking button for Route: "+routeNumber);
     		}
     	}

@@ -20,6 +20,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.HashMap;
+
 import com.flurry.android.FlurryAgent;
 
 public class MainActivity extends Activity implements GoogleMap.OnCameraChangeListener, LoaderManager.LoaderCallbacks<HashMap<String, MarkerOptions>> {
@@ -29,7 +30,6 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
     public static final LatLng DEFAULT_HALIFAX_LAT_LNG = new LatLng(44.67600, -63.60800);
     public static final int DEFAULT_HALIFAX_LAT_LNG_ZOOM = 15;
     private HashMap<String, Marker> busStopMarkers = new HashMap<String, Marker>();
-    //private SlidingMenu hamburgerMenu;
     private Boolean showStops;
     private ProgressBar mapMarkerProgressBar;
 	private TextView mapMarkerProgressBarText;
@@ -38,10 +38,8 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-//		DatabaseHandler.getInstance(this);
     	mapMarkerProgressBar = (ProgressBar) findViewById(R.id.mapMarkerProgressBar);
     	mapMarkerProgressBarText = (TextView) findViewById(R.id.mapMarkerProgressBarText);
-//    	WebApiService.fetchAllRoutes();
     	showStops = true;
 		mContext = getApplicationContext();
 
@@ -63,13 +61,6 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
 				mMap.setOnInfoWindowClickListener(getInfoWindowClickListener());
 			}
 		}
-//		hamburgerMenu = new SlidingMenu(this);
-//		hamburgerMenu.setMode(SlidingMenu.LEFT);
-//		hamburgerMenu.setBehindWidth(250);
-//		hamburgerMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
-//		hamburgerMenu.setMenu(R.layout.menu);
-
-		refreshBusStopMarkers(null);
 	}
 
 	@Override
@@ -85,13 +76,6 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
 		super.onStop();
 		FlurryAgent.onEndSession(this);
 	}
-	
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.main, menu);
-//        return true;
-//    }
 
     @Override
     public void onCameraChange(CameraPosition cameraPosition) {
@@ -159,7 +143,6 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
         b.putDouble("topLog", top.longitude);
         b.putFloat("zoom", zoom);
         b.putBoolean("showStops", showStops);
-
         getLoaderManager().restartLoader(0, b, this).forceLoad();
     }
     

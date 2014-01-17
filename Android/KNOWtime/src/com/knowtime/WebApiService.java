@@ -1,5 +1,6 @@
 package com.knowtime;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -51,11 +52,11 @@ public class WebApiService {
     
     public static void fetchAllRoutes()
     {
-        Thread thread = new Thread(new Runnable()
-        {
-            @Override
-            public void run()
-            {
+//        Thread thread = new Thread(new Runnable()
+//        {
+//            @Override
+//            public void run()
+//            {
                 try
                 {
                 	JSONArray routesJSONArray = getJSONArrayFromUrl(SANGSTERBASEURL + ROUTES + NAMES);
@@ -72,15 +73,17 @@ public class WebApiService {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            }
-        });
-        thread.start();
+//            }
+//        });
+//        thread.start();
     }
-
+	
 	public static List<Stop> fetchAllStops() {
 		List<Stop> stopList = new ArrayList<Stop>();
+		SQLiteDatabase db = DatabaseHandler.getInstance().getWritableDatabase();
 		try {
 			stopsJSONArray = getJSONArrayFromUrl(SANGSTERBASEURL + STOPS);
+			db.beginTransaction();
 			for (int i = 0; i < stopsJSONArray.length(); i++) {
 				JSONObject stopJSON = stopsJSONArray.getJSONObject(i);
 				JSONObject locationJSON = stopJSON.getJSONObject("location");
@@ -90,9 +93,13 @@ public class WebApiService {
             			Double.parseDouble(locationJSON.getString("lat")),
             			Double.parseDouble(locationJSON.getString("lng")));
             	stopList.add(stop);
+            	db.execSQL(DatabaseHandler.getInstance().createStopInsertQuery(stop));
 			}
+			db.setTransactionSuccessful();
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			db.endTransaction();
 		}
 		Log.d("com.knowtime", "Loaded stops");
 		return stopList;

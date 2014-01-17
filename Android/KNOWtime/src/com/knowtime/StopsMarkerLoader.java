@@ -19,7 +19,6 @@ public class StopsMarkerLoader extends AsyncTaskLoader<HashMap<String, MarkerOpt
     private double topLng;
     private float zoom;
     private boolean showStops;
-	private DatabaseHandler db;
     private static HashMap<String, MarkerOptions> storedStopMarkers = new HashMap<String, MarkerOptions>();
 
     public StopsMarkerLoader(Context context, double bottomLat, double bottomLng, double topLat, double topLng, float zoom, boolean showStops) {
@@ -30,24 +29,20 @@ public class StopsMarkerLoader extends AsyncTaskLoader<HashMap<String, MarkerOpt
         this.topLng = topLng;
         this.zoom = zoom;
         this.showStops = showStops;
-        db = DatabaseHandler.getInstance();
-
     }
 
 	@Override
 	public HashMap<String, MarkerOptions> loadInBackground() {
 		if (storedStopMarkers.size() == 0) {
 			List<Stop> stops;
-			if (db.getStopsCount() > 0) {
-				 stops =  db.getAllStops();
+			if (DatabaseHandler.getInstance().getStopsCount() > 0) {
+				 stops =  DatabaseHandler.getInstance().getAllStops();
 				storedStopMarkers = createStopMarker(stops);
 				Log.d(getClass().getCanonicalName(), "DB Stop Size:"+stops.size());
 			} else {
 				stops =  WebApiService.fetchAllStops();
 				storedStopMarkers = createStopMarker(stops);
-				
 				//adding to Database on a background thread
-				addStop(stops);
 				Log.d(getClass().getCanonicalName(), "External DB Stop Size:"+stops.size());
 			}
 		}
@@ -106,13 +101,5 @@ public class StopsMarkerLoader extends AsyncTaskLoader<HashMap<String, MarkerOpt
 
 		}
 		return hashMap;
-	}
-	
-	private void addStop(final List<Stop> stops) {
-		new Thread(new Runnable() {
-	        public void run() {
-	        	db.addAllStop(stops);
-	        }
-	    }).start();
 	}
 }

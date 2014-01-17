@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -29,6 +30,7 @@ public class RoutePickerActivity extends Activity {
             @Override
             public void run()
             {
+            	Log.d("com.knwotime","Getting routes");
             	getRoutes();
             }
         });
@@ -52,6 +54,7 @@ public class RoutePickerActivity extends Activity {
 	private void getRoutes()
 	{
 		final Object[] routes = WebApiService.getRoutesArray();
+		Log.d("com.timeplay","Gotten routes");
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
@@ -62,8 +65,10 @@ public class RoutePickerActivity extends Activity {
 	
 	private void parseRoutes(Object[] routes)
 	{
+		Log.d("com.knowtime","Routes Number: "+routes.length);
 		for (int i=0; i<routes.length; i+=6)
 		{
+			Log.d("com.knowtime","Adding View");
 			LayoutInflater li = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);	
 			View routeRow = li.inflate(R.layout.routeselectorcell, null);
 			routeSelectionTable.addView(routeRow,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -159,13 +164,5 @@ public class RoutePickerActivity extends Activity {
 				return false;
 			}
 		});
-	}
-	
-	public void touchBackButton(View view)
-	{
-		Intent resultIntent = new Intent();
-		resultIntent.putExtra("routeNumber","-1");
-		setResult(Activity.RESULT_OK,resultIntent);
-		this.finish();
 	}
 }
