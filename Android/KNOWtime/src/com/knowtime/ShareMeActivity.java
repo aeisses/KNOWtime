@@ -35,7 +35,7 @@ public class ShareMeActivity extends Activity
 	private Context mContext;
 	private NotificationManager mNotificationManager;
 	private NotificationCompat.Builder mNotification;
-	private int notifyId = 1;
+	private static int notifyId = 1;
 	
 	private boolean isSendingLocations()
 	{
@@ -109,16 +109,28 @@ public class ShareMeActivity extends Activity
 				return false;
 			}
 		});
-
+		
+		Bundle bundle = getIntent().getExtras();
+		if(bundle != null)
+			if(bundle.getString("stop").equals("stop")){
+				stopSharing();
+				finish();
+			}
+		
 		//Adding Sharing me notification
 		Intent notificationIntent = new Intent(mContext, ShareMeActivity.class);
+		notificationIntent.putExtra("stop", "stop");
 		notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		PendingIntent contentIntent = PendingIntent.getActivity(mContext, 0, notificationIntent, 0);
+		PendingIntent contentIntent = PendingIntent.getActivity(mContext, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);		
+//		PendingIntent contentIntent = PendingIntent.getActivity(mContext, 0, notificationIntent, 0);		
 
 		mNotification = new NotificationCompat.Builder(this)
 	    	.setContentTitle("Sharing My Ride")
+	    	.setContentText("Click to Stop sending")
 	    	.setSmallIcon(R.drawable.ic_launcher)
-	    	.setContentIntent(contentIntent);
+	    	.setContentIntent(contentIntent)
+//	    	.addAction(R.drawable.aboutbutton, "Stop Sharing", contentIntent)
+	    	.setPriority(NotificationCompat.PRIORITY_HIGH);
 
 		if (LocationShare.getInstance() != null && LocationShare.getInstance().isSharing)
 		{
