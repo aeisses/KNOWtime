@@ -52,7 +52,8 @@ public class MainActivity extends Activity implements GoogleMap.OnCameraChangeLi
 				LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 				String locationProvider = LocationManager.NETWORK_PROVIDER;
 				Location lastKnownLocation = locationManager.getLastKnownLocation(locationProvider);
-				mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+				if (lastKnownLocation != null)
+					mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
 						new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude()),
 						DEFAULT_HALIFAX_LAT_LNG_ZOOM));
 
