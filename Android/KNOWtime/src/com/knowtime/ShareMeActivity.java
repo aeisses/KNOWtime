@@ -5,12 +5,14 @@ import java.util.Date;
 import com.flurry.android.FlurryAgent;
 
 import android.app.Activity;
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.NotificationCompat;
@@ -120,7 +122,7 @@ public class ShareMeActivity extends Activity
 		//Adding Sharing me notification
 		Intent notificationIntent = new Intent(mContext, ShareMeActivity.class);
 		notificationIntent.putExtra("stop", "stop");
-		notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//		notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		PendingIntent contentIntent = PendingIntent.getActivity(mContext, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);		
 //		PendingIntent contentIntent = PendingIntent.getActivity(mContext, 0, notificationIntent, 0);		
 
@@ -204,13 +206,22 @@ public class ShareMeActivity extends Activity
     		}
     		else
     		{
-    			locationShareIntent = new Intent(this, LocationShare.class);
-    			locationShareIntent.putExtra(LocationShare.PARAM_IN_MSG, "start");
-    			locationShareIntent.putExtra(LocationShare.ROUTE_IN_MSG, routeNumber);
-    			this.startService(locationShareIntent);
-    			mNotificationManager.notify(notifyId, mNotification.build());
-    			FlurryAgent.logEvent("Touched the tracking button for Route: "+routeNumber);
-    		}
+				locationShareIntent = new Intent(this, LocationShare.class);
+				locationShareIntent.putExtra(LocationShare.PARAM_IN_MSG, "start");
+				locationShareIntent.putExtra(LocationShare.ROUTE_IN_MSG, routeNumber);
+				this.startService(locationShareIntent);
+				Notification n;
+				if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
+					// Api 16 +
+					n = mNotification.build();
+				} else {
+					// Api 15 and below
+					n = mNotification.getNotification();
+				}
+				n.flags |= Notification.FLAG_ONGOING_EVENT | Notification.FLAG_NO_CLEAR;
+				mNotificationManager.notify(notifyId, n);
+				FlurryAgent.logEvent("Touched the tracking button for Route: " + routeNumber);
+			}
     	}
     }
     
