@@ -116,15 +116,13 @@ public class ShareMeActivity extends Activity
 		if(bundle != null)
 			if(bundle.getString("stop").equals("stop")){
 				stopSharing();
-				finish();
 			}
 		
 		//Adding Sharing me notification
 		Intent notificationIntent = new Intent(mContext, ShareMeActivity.class);
 		notificationIntent.putExtra("stop", "stop");
-//		notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		PendingIntent contentIntent = PendingIntent.getActivity(mContext, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);		
-//		PendingIntent contentIntent = PendingIntent.getActivity(mContext, 0, notificationIntent, 0);		
+		notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+		PendingIntent contentIntent = PendingIntent.getActivity(mContext, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT);		
 
 		mNotification = new NotificationCompat.Builder(this)
 	    	.setContentTitle("Sharing My Ride")
