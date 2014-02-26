@@ -1,5 +1,7 @@
 package com.knowtime;
 
+import java.util.ArrayList;
+
 import com.flurry.android.FlurryAgent;
 
 import android.app.Activity;
@@ -17,7 +19,9 @@ import android.widget.TableLayout;
 
 public class RoutePickerActivity extends Activity {
 
+	private final static String liveRouteStr = "liveRoute";
 	TableLayout routeSelectionTable;
+	ArrayList<Integer> liveRoute = new ArrayList<Integer>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -25,6 +29,12 @@ public class RoutePickerActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_route_picker);
 		routeSelectionTable = (TableLayout) findViewById(R.id.routePickerTable);
+		
+		//Getting Active routes 
+		if (liveRoute.size() == 0 && getIntent().hasExtra(liveRouteStr)){
+			liveRoute = getIntent().getExtras().getIntegerArrayList(liveRouteStr);
+		}
+
 		Thread thread = new Thread(new Runnable()
         {
             @Override
@@ -149,6 +159,9 @@ public class RoutePickerActivity extends Activity {
 	
 	private void createButton(Button stopButton, final String routeNumber)
 	{
+		if (liveRoute.size() > 0 && liveRoute.contains(Integer.parseInt(routeNumber))) {
+			stopButton.setBackgroundResource(R.drawable.cellbackground_green);
+		}
 		stopButton.setText(routeNumber);
 		stopButton.setOnTouchListener(new OnTouchListener()
 		{

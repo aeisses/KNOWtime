@@ -1,5 +1,12 @@
 package com.knowtime;
 
+import java.util.ArrayList;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
 import com.flurry.android.FlurryAgent;
 
 import android.app.Activity;
@@ -9,16 +16,41 @@ import android.view.View;
 import android.widget.TextView;
 
 public class RouteSelectActivity extends Activity {
-
+	ExecutorService thread = Executors.newSingleThreadExecutor();
+	Future<ArrayList<Integer>> futureResultRoutes;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_routeselect);
+		
+		 futureResultRoutes= thread.submit(new Callable<ArrayList<Integer>>() {
+			@Override
+			public ArrayList<Integer> call() throws Exception {
+				ArrayList<Integer> ListRoutes = WebApiService.fetchAllLiveRoutes();
+				return ListRoutes;
+			}
+		});		
+		
+//		new Thread(new Runnable() {
+//
+//			@Override
+//			public void run() {
+//        		activeRoute = WebApiService.fetchAllLiveRoutes();
+//			}
+//		}).start();
 	}
 	
 	public void touchRouteButton(View view)
 	{
-		Intent intent = new Intent(RouteSelectActivity.this,RoutePickerActivity.class);
+		Intent intent = new Intent(RouteSelectActivity.this, RoutePickerActivity.class);
+		try {
+			intent.putIntegerArrayListExtra("liveRoute", futureResultRoutes.get());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}
 		startActivityForResult(intent,1);
 	}
 	

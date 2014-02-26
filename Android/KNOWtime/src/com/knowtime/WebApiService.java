@@ -26,7 +26,9 @@ import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.Vector;
 
 /**
@@ -46,9 +48,28 @@ public class WebApiService {
     private static final String NEW             = "new/";
     private static final String ESTIMATE        = "estimates/";
     private static final String POLLRATE        = "pollrate";
+    private static final String ACTIVELINES     = "activelines?";
+    private static final String DURATION1       = "duration=1";
+
 
     private static JSONArray stopsJSONArray;
 //    private static Thread locationsThread;
+    
+    public static ArrayList<Integer> fetchAllLiveRoutes(){
+    	ArrayList<Integer> activeRoutes = new ArrayList<Integer>();
+    	 try
+         {
+         	JSONArray routesJSONArray = getJSONArrayFromUrl(SANGSTERBASEURL + ESTIMATE + ACTIVELINES + DURATION1);
+         	for (int i=0; i<routesJSONArray.length(); i++)
+             {
+         		activeRoutes.add(routesJSONArray.getInt(i));
+             }
+             Log.d("com.knowtime","Routes Loaded");
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+    	 return activeRoutes;
+    }
     
     public static void fetchAllRoutes()
     {
