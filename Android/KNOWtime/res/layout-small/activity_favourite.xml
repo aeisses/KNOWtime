@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:scrollbars="none"
+    android:layout_weight="1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/screenheader"
+            android:layout_width="fill_parent"
+            android:layout_height="65dip"
+            android:background="@drawable/uptodownbutton"
+            android:contentDescription="@string/screen_header" />
+
+        <ImageView
+            android:id="@+id/stopsHeader"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/stopstableheader"
+            android:contentDescription="@string/stops_table_header" />
+
+        <TableLayout
+            android:id="@+id/stopsTable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TableRow
+                android:id="@+id/stopsTableRow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+            </TableRow>
+        </TableLayout>
+
+        <ImageView
+            android:id="@+id/routesHeader"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/routestableheader"
+            android:contentDescription="@string/routes_table_header" />
+
+        <TableLayout
+            android:id="@+id/routesTable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TableRow
+                android:id="@+id/routesTableRow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+
+</ScrollView>
