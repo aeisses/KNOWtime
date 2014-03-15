@@ -338,7 +338,7 @@ public class RouteMapActivity extends Activity {
 		mHandler.removeCallbacks(mUpdateUI);
 		AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
 		alertDialog.setTitle("Alert");
-		alertDialog.setMessage("No buses can currently be found. This can be because no one is sending a signal or a server issue.");
+		alertDialog.setMessage("Sorry, no one is sharing their ride for this route. Share yours and be a transit hero!");
 		alertDialog.setNegativeButton("ok",new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog,int id) {
 				dialog.cancel();
