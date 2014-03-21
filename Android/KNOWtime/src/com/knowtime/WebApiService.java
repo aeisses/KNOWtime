@@ -363,18 +363,40 @@ public class WebApiService {
     	return true;
     }
     
+    public static Vector<String> sort(Vector<Integer> sort) {
+        Vector<String> v = new Vector<String>();
+        for(int count = 0; count < sort.size(); count++) {
+            Integer s = sort.elementAt(count).intValue();
+            int i = 0;
+            for (i = 0; i < v.size(); i++) {
+                if (s < Integer.parseInt((String) v.elementAt(i)))
+                {
+                	v.insertElementAt(s+"", i);
+                    break;
+                } else if (s == Integer.parseInt((String) v.elementAt(i))) {
+                    break;
+                }
+            }
+            if (i >= v.size()) {
+                v.addElement(s+"");
+            }
+        }
+        return v;
+    }
+    
     public static Object[] getRoutesArray() {
-		Vector<String> returnVector = new Vector<String>();
+		Vector<Integer> returnVector = new Vector<Integer>();
 		List<Route> routes = DatabaseHandler.getInstance().getAllRoutes();
     	for (int i=0; i<routes.size(); i++)
     	{
     		Route route = (Route)routes.get(i);
     		if (WebApiService.isStringInt(route.getShortName()))
     		{
-    			returnVector.add(routes.get(i).getShortName());
+    			returnVector.add(Integer.parseInt(routes.get(i).getShortName()));
     		}
-    	}	
-    	return returnVector.toArray();
+    	}
+    	Vector<String> myReturnVector = WebApiService.sort(returnVector);
+    	return myReturnVector.toArray();
     }
     
     public static List<Stop> getStopsList() {
