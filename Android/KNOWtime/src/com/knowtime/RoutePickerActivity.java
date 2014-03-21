@@ -160,7 +160,7 @@ public class RoutePickerActivity extends Activity {
 	private void createButton(Button stopButton, final String routeNumber)
 	{
 		if (liveRoute.size() > 0 && liveRoute.contains(Integer.parseInt(routeNumber))) {
-			stopButton.setBackgroundResource(R.drawable.cellbackground_green);
+			stopButton.setBackgroundResource(R.drawable.cellbackgroundselected);
 		}
 		stopButton.setText(routeNumber);
 		stopButton.setOnTouchListener(new OnTouchListener()
