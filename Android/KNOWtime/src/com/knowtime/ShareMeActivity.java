@@ -191,7 +191,8 @@ public class ShareMeActivity extends Activity
 		mNotificationManager.cancel(notifyId);
 	}
     
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
     	super.onActivityResult(requestCode, resultCode, data);
