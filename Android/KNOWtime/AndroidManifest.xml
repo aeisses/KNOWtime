@@ -40,11 +40,7 @@
             android:name=".LocationShare"
             android:exported="false"/>
             -->
-        <service android:name=".service.LocationShare" android:enabled="true">
-        	<intent-filter android:label="@string/location_service" >
-            	<action android:name="com.knowtime.locationservice"/>
-        	</intent-filter>
-    	</service>
+
         
         <activity
             android:name="com.knowtime.MenuActivity"
