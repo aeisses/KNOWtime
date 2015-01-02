@@ -5,20 +5,20 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>88A14EA7-2615-40EE-A5CE-569F5E9A26C9</string>
+	<string>6AA99203-4A93-4071-96F4-9180B85B2100</string>
 	<key>IDESourceControlProjectName</key>
-	<string>KNOWtime</string>
+	<string>KNOWTime</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>0983A90DCAACA079119D331EE0FAA99700847549</key>
 		<string>https://github.com/aeisses/KNOWtime.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>IOS/KNOWtime.xcodeproj/project.xcworkspace</string>
+	<string>IOS/2.0/KNOWTime/KNOWTime.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>0983A90DCAACA079119D331EE0FAA99700847549</key>
-		<string>../../..</string>
+		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/aeisses/KNOWtime.git</string>

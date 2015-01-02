@@ -101,6 +101,8 @@ public class LocationShare extends IntentService {
     					shareMyLocation();
     		            SystemClock.sleep(pollRate*1000);
     				}
+    				broadcastIntent.putExtra(PARAM_OUT_MSG, "notSendingLocation");	
+    				sendBroadcast(broadcastIntent);
     			}
     			else
     			{
@@ -150,6 +152,8 @@ public class LocationShare extends IntentService {
 			if (isSendingLocations())
 			{
 				broadcastIntent.putExtra(PARAM_OUT_MSG, "sendingLocations");
+				// Set the timer
+				
 			}
 			else
 			{
