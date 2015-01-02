@@ -1,0 +1,523 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		04D633651A54554700D611CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D633641A54554700D611CB /* AppDelegate.swift */; };
+		04D6336A1A54554700D611CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04D633681A54554700D611CB /* Main.storyboard */; };
+		04D6336C1A54554700D611CB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04D6336B1A54554700D611CB /* Images.xcassets */; };
+		04D6336F1A54554700D611CB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D6336D1A54554700D611CB /* LaunchScreen.xib */; };
+		04D6337B1A54554700D611CB /* KNOWTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D6337A1A54554700D611CB /* KNOWTimeTests.swift */; };
+		04D633DD1A54831800D611CB /* KNOWTime.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 04D633D81A54831800D611CB /* KNOWTime.xcdatamodeld */; };
+		04D633DE1A54831800D611CB /* MapInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D633DA1A54831800D611CB /* MapInterface.swift */; };
+		04D633DF1A54831800D611CB /* MapKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D633DB1A54831800D611CB /* MapKitViewController.swift */; };
+		04D633E01A54831800D611CB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D633DC1A54831800D611CB /* ViewController.swift */; };
+		04D633E21A54836F00D611CB /* WebSocketClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D633E11A54836F00D611CB /* WebSocketClient.swift */; };
+		04D633E71A5496CC00D611CB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D633E61A5496CC00D611CB /* MapKit.framework */; };
+		BC8700F51F9C6141DA9BFCB9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C165208FEFB266044EF9CF65 /* libPods.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		04D633751A54554700D611CB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04D633571A54554700D611CB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 04D6335E1A54554700D611CB;
+			remoteInfo = KNOWTime;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		04D6335F1A54554700D611CB /* KNOWTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KNOWTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		04D633631A54554700D611CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04D633641A54554700D611CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		04D633691A54554700D611CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		04D6336B1A54554700D611CB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		04D6336E1A54554700D611CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		04D633741A54554700D611CB /* KNOWTimeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KNOWTimeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		04D633791A54554700D611CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04D6337A1A54554700D611CB /* KNOWTimeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KNOWTimeTests.swift; sourceTree = "<group>"; };
+		04D633D91A54831800D611CB /* KNOWTime.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KNOWTime.xcdatamodel; sourceTree = "<group>"; };
+		04D633DA1A54831800D611CB /* MapInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapInterface.swift; sourceTree = "<group>"; };
+		04D633DB1A54831800D611CB /* MapKitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapKitViewController.swift; sourceTree = "<group>"; };
+		04D633DC1A54831800D611CB /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		04D633E11A54836F00D611CB /* WebSocketClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocketClient.swift; sourceTree = "<group>"; };
+		04D633E31A54859700D611CB /* KNOWTime-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KNOWTime-Bridging-Header.h"; sourceTree = "<group>"; };
+		04D633E61A5496CC00D611CB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		3E3A917A38D4BD859FA67709 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		C165208FEFB266044EF9CF65 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6F94DD12B9D704A4244DE28 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		04D6335C1A54554700D611CB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04D633E71A5496CC00D611CB /* MapKit.framework in Frameworks */,
+				BC8700F51F9C6141DA9BFCB9 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04D633711A54554700D611CB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		04D633561A54554700D611CB = {
+			isa = PBXGroup;
+			children = (
+				04D633611A54554700D611CB /* KNOWTime */,
+				04D633771A54554700D611CB /* KNOWTimeTests */,
+				04D633601A54554700D611CB /* Products */,
+				26A7FA706AA90DAA2DF76F4D /* Pods */,
+				B8C603587D1F81E8416606ED /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		04D633601A54554700D611CB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				04D6335F1A54554700D611CB /* KNOWTime.app */,
+				04D633741A54554700D611CB /* KNOWTimeTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		04D633611A54554700D611CB /* KNOWTime */ = {
+			isa = PBXGroup;
+			children = (
+				04D633E11A54836F00D611CB /* WebSocketClient.swift */,
+				04D633D81A54831800D611CB /* KNOWTime.xcdatamodeld */,
+				04D633DA1A54831800D611CB /* MapInterface.swift */,
+				04D633DB1A54831800D611CB /* MapKitViewController.swift */,
+				04D633DC1A54831800D611CB /* ViewController.swift */,
+				04D633641A54554700D611CB /* AppDelegate.swift */,
+				04D633681A54554700D611CB /* Main.storyboard */,
+				04D6336B1A54554700D611CB /* Images.xcassets */,
+				04D6336D1A54554700D611CB /* LaunchScreen.xib */,
+				04D633621A54554700D611CB /* Supporting Files */,
+				04D633E31A54859700D611CB /* KNOWTime-Bridging-Header.h */,
+			);
+			path = KNOWTime;
+			sourceTree = "<group>";
+		};
+		04D633621A54554700D611CB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				04D633631A54554700D611CB /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		04D633771A54554700D611CB /* KNOWTimeTests */ = {
+			isa = PBXGroup;
+			children = (
+				04D6337A1A54554700D611CB /* KNOWTimeTests.swift */,
+				04D633781A54554700D611CB /* Supporting Files */,
+			);
+			path = KNOWTimeTests;
+			sourceTree = "<group>";
+		};
+		04D633781A54554700D611CB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				04D633791A54554700D611CB /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		26A7FA706AA90DAA2DF76F4D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D6F94DD12B9D704A4244DE28 /* Pods.debug.xcconfig */,
+				3E3A917A38D4BD859FA67709 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		B8C603587D1F81E8416606ED /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				04D633E61A5496CC00D611CB /* MapKit.framework */,
+				C165208FEFB266044EF9CF65 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		04D6335E1A54554700D611CB /* KNOWTime */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04D6337E1A54554700D611CB /* Build configuration list for PBXNativeTarget "KNOWTime" */;
+			buildPhases = (
+				98AC7B655DB9057224150E8D /* Check Pods Manifest.lock */,
+				04D6335B1A54554700D611CB /* Sources */,
+				04D6335C1A54554700D611CB /* Frameworks */,
+				04D6335D1A54554700D611CB /* Resources */,
+				806575F617CC91E7377EE26B /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KNOWTime;
+			productName = KNOWTime;
+			productReference = 04D6335F1A54554700D611CB /* KNOWTime.app */;
+			productType = "com.apple.product-type.application";
+		};
+		04D633731A54554700D611CB /* KNOWTimeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04D633811A54554700D611CB /* Build configuration list for PBXNativeTarget "KNOWTimeTests" */;
+			buildPhases = (
+				04D633701A54554700D611CB /* Sources */,
+				04D633711A54554700D611CB /* Frameworks */,
+				04D633721A54554700D611CB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				04D633761A54554700D611CB /* PBXTargetDependency */,
+			);
+			name = KNOWTimeTests;
+			productName = KNOWTimeTests;
+			productReference = 04D633741A54554700D611CB /* KNOWTimeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		04D633571A54554700D611CB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = KNOWTime;
+				TargetAttributes = {
+					04D6335E1A54554700D611CB = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					04D633731A54554700D611CB = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = 04D6335E1A54554700D611CB;
+					};
+				};
+			};
+			buildConfigurationList = 04D6335A1A54554700D611CB /* Build configuration list for PBXProject "KNOWTime" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 04D633561A54554700D611CB;
+			productRefGroup = 04D633601A54554700D611CB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				04D6335E1A54554700D611CB /* KNOWTime */,
+				04D633731A54554700D611CB /* KNOWTimeTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		04D6335D1A54554700D611CB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04D6336A1A54554700D611CB /* Main.storyboard in Resources */,
+				04D6336F1A54554700D611CB /* LaunchScreen.xib in Resources */,
+				04D6336C1A54554700D611CB /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04D633721A54554700D611CB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		806575F617CC91E7377EE26B /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		98AC7B655DB9057224150E8D /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		04D6335B1A54554700D611CB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04D633E01A54831800D611CB /* ViewController.swift in Sources */,
+				04D633DE1A54831800D611CB /* MapInterface.swift in Sources */,
+				04D633E21A54836F00D611CB /* WebSocketClient.swift in Sources */,
+				04D633DF1A54831800D611CB /* MapKitViewController.swift in Sources */,
+				04D633651A54554700D611CB /* AppDelegate.swift in Sources */,
+				04D633DD1A54831800D611CB /* KNOWTime.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04D633701A54554700D611CB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04D6337B1A54554700D611CB /* KNOWTimeTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		04D633761A54554700D611CB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 04D6335E1A54554700D611CB /* KNOWTime */;
+			targetProxy = 04D633751A54554700D611CB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		04D633681A54554700D611CB /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04D633691A54554700D611CB /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		04D6336D1A54554700D611CB /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04D6336E1A54554700D611CB /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		04D6337C1A54554700D611CB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		04D6337D1A54554700D611CB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		04D6337F1A54554700D611CB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D6F94DD12B9D704A4244DE28 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = KNOWTime/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "KNOWTime/KNOWTime-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		04D633801A54554700D611CB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E3A917A38D4BD859FA67709 /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = KNOWTime/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "KNOWTime/KNOWTime-Bridging-Header.h";
+			};
+			name = Release;
+		};
+		04D633821A54554700D611CB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = KNOWTimeTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KNOWTime.app/KNOWTime";
+			};
+			name = Debug;
+		};
+		04D633831A54554700D611CB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = KNOWTimeTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KNOWTime.app/KNOWTime";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		04D6335A1A54554700D611CB /* Build configuration list for PBXProject "KNOWTime" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04D6337C1A54554700D611CB /* Debug */,
+				04D6337D1A54554700D611CB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		04D6337E1A54554700D611CB /* Build configuration list for PBXNativeTarget "KNOWTime" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04D6337F1A54554700D611CB /* Debug */,
+				04D633801A54554700D611CB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		04D633811A54554700D611CB /* Build configuration list for PBXNativeTarget "KNOWTimeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04D633821A54554700D611CB /* Debug */,
+				04D633831A54554700D611CB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		04D633D81A54831800D611CB /* KNOWTime.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				04D633D91A54831800D611CB /* KNOWTime.xcdatamodel */,
+			);
+			currentVersion = 04D633D91A54831800D611CB /* KNOWTime.xcdatamodel */;
+			path = KNOWTime.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 04D633571A54554700D611CB /* Project object */;
+}
